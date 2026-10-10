@@ -548,3 +548,22 @@ textarea.field { resize: vertical; line-height: 1.5; }
 
 .info-head { flex-wrap: wrap; }
 .info-skills { flex: 1 1 100%; padding-top: 4px; border-top: 1px solid var(--line-2); }
+
+.mm-ver { margin: 0; font-size: .8rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+/* official tile pictures on face-up tiles; labels and markers sit on small light chips so they stay readable */
+.tsq.pic { background-size: cover; background-position: center; background-repeat: no-repeat; }
+.tsq.pic .tid { position: absolute; left: 2px; top: 2px; background: rgba(255, 255, 255, .9); border-radius: 5px; padding: 0 3px; font-size: .7rem; line-height: 1.35; }
+.tsq.pic .tbar.top { left: auto; right: 1px; max-width: 58%; justify-content: flex-end; }
+.tsq.pic .unexp-ico { position: absolute; left: 2px; bottom: 2px; }
+.tsq.pic .mk { background: rgba(255, 255, 255, .9); border-radius: 50%; padding: 1px; }
+.tsq.pic.revl { filter: saturate(.55); }
+.map-zoom { display: flex; width: max-content; margin: 0 0 8px auto; }
+.map-zoom button { min-width: 44px; }
+.tile-big { display: block; width: 100%; max-width: 320px; aspect-ratio: 1; object-fit: cover; margin: 0 auto 10px; border-radius: 10px; }
+
+.photo { position: relative; }
+.photo.card img { object-position: 50% 12%; }
+.photo-plus { position: absolute; right: 2px; bottom: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: .9rem; line-height: 20px; text-align: center; }
+.photo-big.card { max-height: 62vh; width: auto; }
+.sel-portrait { display: block; width: 150px; max-width: 60%; aspect-ratio: 484 / 744; object-fit: cover; border-radius: 10px; margin: 4px auto 8px; }
