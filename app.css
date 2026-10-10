@@ -186,13 +186,18 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .pack-steps { padding-left: 1.3em; }
 
 /* campaign list */
-.camp-item { display: flex; align-items: stretch; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--r); margin-bottom: 10px; }
+.camp-item { position: relative; display: flex; align-items: stretch; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--r); margin-bottom: 10px; }
 .camp-main { flex: 1; text-align: left; background: none; border: 0; padding: 12px; cursor: pointer; min-width: 0; }
-.camp-title { font-family: var(--serif); font-weight: 700; font-size: 1.12rem; overflow-wrap: anywhere; }
+.camp-title { font-family: var(--serif); font-weight: 700; font-size: 1.12rem; overflow-wrap: anywhere; padding-right: 40px; }
+.camp-item > .btn-ico.del { position: absolute; top: 4px; right: 4px; }
 .camp-meta { font-size: .86rem; color: var(--ink-2); margin: 2px 0 8px; }
-.camp-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
-.cs { display: inline-flex; align-items: center; gap: 4px; font-variant-numeric: tabular-nums; font-weight: 700; }
-.cs-ico { width: 20px; height: 20px; }
+.camp-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px 8px; max-width: 480px; }
+/* four stats per row need about 20em of card width; narrower cards (small phones, large text size) use two */
+.camp-main { container-type: inline-size; }
+@container (max-width: 20em) { .camp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cs { display: inline-flex; align-items: center; gap: 2px; font-variant-numeric: tabular-nums; font-weight: 700; font-size: .88rem; white-space: nowrap; min-width: 0; }
+.cs-ico { width: 16px; height: 16px; }
+.cs-lbl { font-size: .72rem; margin-right: 2px; font-weight: 400; color: var(--ink-2); white-space: nowrap; }
 .player-row { display: flex; gap: 8px; align-items: center; margin: 4px 0; }
 .player-row > .mini { flex: none; min-width: 3.5em; }
 .player-row > .field { flex: 1; }
@@ -231,6 +236,10 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .skillbar { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; }
 .sk { display: flex; flex-direction: column; align-items: center; gap: 2px; font-variant-numeric: tabular-nums; }
 .sk-ico { width: 26px; height: 26px; }
+.sk-name { font-size: .74rem; color: var(--ink-2); line-height: 1.1; white-space: nowrap; }
+.sk-tag { display: inline-flex; align-items: center; gap: 2px; margin-right: 6px; font-size: .82rem; color: var(--ink-2); white-space: nowrap; }
+.sk-tag .sk-ico { width: 22px; height: 22px; }
+.mn-sk, .fm-sk { display: inline-flex; align-items: center; flex-wrap: wrap; }
 .tri-row { display: flex; align-items: center; justify-content: space-around; gap: 6px; }
 .tri { display: flex; flex-direction: column; align-items: center; touch-action: none; }
 .tri-btn { width: 52px; min-height: 34px; border: 1px solid var(--line); background: var(--ground); border-radius: 8px; cursor: pointer; font-size: .8rem; }
