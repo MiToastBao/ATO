@@ -1,6 +1,6 @@
 // Offline cache for the app shell. Data lives in IndexedDB, not here.
-const CACHE = 'ato-web-1.0.1-27fc26f6';
-const SHELL = ['./', './index.html', './app.js?v=1.0.1-27fc26f6', './app.css?v=1.0.1-27fc26f6', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-512.png'];
+const CACHE = 'ato-web-1.0.2-ff49a00f';
+const SHELL = ['./', './index.html', './app.js?v=1.0.2-ff49a00f', './app.css?v=1.0.2-ff49a00f', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-512.png'];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
 });
