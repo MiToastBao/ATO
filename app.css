@@ -413,6 +413,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 
 /* tech & armory */
 .search-bar { position: sticky; top: calc(var(--tbh, 58px) + 45px); z-index: 17; background: var(--ground); padding: 6px 0 8px; border-bottom: 1px solid var(--line-2); margin-bottom: 6px; }
+.search-bar.no-tabs { top: var(--tbh, 58px); }
 .sb-row { display: flex; gap: 8px; }
 .sb-more { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
 .tg { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
@@ -567,3 +568,4 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .photo-plus { position: absolute; right: 2px; bottom: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: .9rem; line-height: 20px; text-align: center; }
 .photo-big.card { max-height: 62vh; width: auto; }
 .sel-portrait { display: block; width: 150px; max-width: 60%; aspect-ratio: 484 / 744; object-fit: cover; border-radius: 10px; margin: 4px auto 8px; }
+.lo-count { flex: none; font-size: .8rem; color: var(--accent); font-weight: 700; white-space: nowrap; }
