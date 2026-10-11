@@ -864,6 +864,30 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* new campaign: confirm greyed out until the form is complete (official look) */
 .btn-ico.dimmed { opacity: .3; }
 
+/* music.css */
+/* 修正清單 #114: background music in the official 背景音樂 (QR) panel */
+.mu-ico { width: 20px; height: 20px; display: block; flex: none; }
+.mu-btn { display: inline-flex; align-items: center; gap: 6px; flex: none; }
+.mu-now { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; margin: 4px 0 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.mu-now.on { border-color: var(--accent); background: var(--accent-soft); }
+.mu-now-txt { flex: 1 1 100%; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.mu-now-name { font-weight: 700; font-size: 1.05rem; color: var(--ink); overflow-wrap: anywhere; }
+.mu-now-st { font-size: .82rem; color: var(--ink-2); }
+.mu-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px; margin: 8px 0 16px; }
+.mu-row { display: flex; align-items: center; gap: 10px; min-height: var(--tap); padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); text-align: left; cursor: pointer; }
+.mu-row-ico { color: var(--ink-2); display: flex; }
+.mu-row-name { flex: 1; min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+.mu-row-dur { flex: none; font-size: .8rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.mu-row.on { border-color: var(--accent); background: var(--accent-soft); }
+.mu-row.on .mu-row-ico { color: var(--accent); }
+.mu-row.playing { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.mu-row.playing .mu-row-ico, .mu-row.playing .mu-row-dur { color: var(--accent-ink); }
+.mu-row:disabled { opacity: .6; cursor: progress; }
+.mu-h2 { font-size: 1.05rem; margin: 18px 0 4px; }
+.mu-hit { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0; color: var(--accent); font-weight: 600; }
+.mu-hit span { flex: 1 1 10em; }
+.mu-pack { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line-2); }
+
 /* photos.css */
 /* 修正清單 #96 / #97: the photo area (照片區) and the full-screen photo viewer */
 .cam-ico { width: 28px; height: 28px; display: block; flex: none; }
