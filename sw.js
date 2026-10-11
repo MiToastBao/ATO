@@ -1,6 +1,6 @@
 // Offline cache for the app shell. Data lives in IndexedDB, not here.
-const CACHE = 'ato-web-1.0.7-59413050';
-const SHELL = ['./', './index.html', './app.js?v=1.0.7-59413050', './app.css?v=1.0.7-59413050', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-512.png'];
+const CACHE = 'ato-web-1.0.8-430f764b';
+const SHELL = ['./', './index.html', './app.js?v=1.0.8-430f764b', './app.css?v=1.0.8-430f764b', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-512.png'];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
 });
@@ -10,6 +10,7 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  if (new URL(req.url).searchParams.has('check')) return; // update check (修正清單 #64): always the network, never cached
   if (req.mode === 'navigate') {
     // network first for the page so updates arrive; fall back to cache offline
     e.respondWith(fetch(req).then((r) => { const cp = r.clone(); caches.open(CACHE).then((c) => c.put('./index.html', cp)); return r; })
