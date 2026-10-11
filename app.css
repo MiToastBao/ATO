@@ -31,7 +31,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px
 .screen { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 .panel { flex: 1; display: flex; flex-direction: column; min-height: 0; width: 100%; max-width: 920px; margin: 0 auto; }
 .content { flex: 1; padding: 12px 16px 24px; }
-.app.with-bb .content { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+.app.with-bb .content { padding-bottom: max(calc(96px + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + 32px)); } /* 修正清單 #101: --bbh = real bottom-bar height */
 .boot { margin: auto; color: var(--ink-2); }
 .fine { font-size: .82rem; color: var(--ink-2); line-height: 1.5; }
 .center { text-align: center; }
@@ -418,7 +418,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tbar.top { top: 1px; } .tbar.bot { bottom: 1px; }
 .mk { width: 16px; height: 16px; }
 .tbar .ico-fb { min-width: 0; height: 15px; font-size: .5rem; padding: 0 2px; }
-.map-actions { position: sticky; bottom: calc(80px + env(safe-area-inset-bottom)); z-index: 25; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 16px; background: var(--ground); border-top: 1px solid var(--line); }
+.map-actions { position: sticky; bottom: max(calc(80px + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + 20px)); /* 修正清單 #101 (the helm stands 18px above the bar) */ z-index: 25; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 16px; background: var(--ground); border-top: 1px solid var(--line); }
 .btn.act { flex-direction: column; gap: 0; line-height: 1.25; min-height: 58px; }
 .btn.act small { font-weight: 400; font-size: .74rem; opacity: .9; }
 .goto { display: inline-flex; gap: 4px; margin-top: 2px; }
@@ -800,6 +800,34 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .goto-btn { display: inline-flex; align-items: center; justify-content: center; padding: 0 4px; border-color: var(--line); background: var(--panel); }
 .goto-btn .goto-tile { height: 30px; }
 
+/* 修正清單 #103 (user ruling 2026-10-11 18:14): tiles join into one big map like the official app — no gaps, no rounded
+   corners; face-up tile pictures meet edge to edge, other tiles are split by one thin shared line; the selection is
+   drawn inside the tile so it never covers a neighbour. Ids and markers always stay inside their tile. */
+.map-grid { gap: 0; padding: 1px; }
+.tsq { border: 0; border-radius: 0; box-shadow: 0 0 0 .5px #AEB7BC; }
+.tsq.hidden { box-shadow: none; }
+.tsq.down, .tsq.expl { border: 0; }
+.tsq.pic { box-shadow: none; }
+.tsq.sel { outline: 3px solid var(--cyc); outline-offset: -3px; z-index: 1; }
+.tsq .tid { max-width: calc(100% - 4px); flex-wrap: wrap; justify-content: center; }
+.tsq.pic .tid { font-size: min(.7rem, calc(var(--tile) * .16)); max-width: calc(100% - 4px); justify-content: flex-start; }
+.tid .tl-ico { width: min(14px, calc(var(--tile) * .19)); height: min(14px, calc(var(--tile) * .19)); }
+/* tile content in rows: [id + alt/note] [top markers] … [bottom markers, at most 2 rows]; marker size follows the tile size
+   (64 px tile: 12 px, 96: 18 px, 136: 20 px), so 4 / 4 / 6 fit in a row */
+.tsq { justify-content: space-between; padding: 2px; gap: 1px; }
+.tsq:not(.pic) .tid { margin: auto 0; }
+.tsq .tbar { position: static; left: auto; right: auto; max-width: none; width: 100%; justify-content: center; flex-wrap: wrap; gap: 1px; }
+.tsq.pic .tid { position: static; align-self: flex-start; }
+.tsq.pic .tbar.top { justify-content: flex-end; }
+.tsq.pic .tbar.bot { margin-top: auto; }
+.tsq .mk { width: calc(var(--tile) * .19); height: calc(var(--tile) * .19); max-width: 20px; max-height: 20px; flex: none; }
+.tsq .tbar .ico-fb { height: calc(var(--tile) * .19); font-size: .45rem; }
+.tsq .mk.more { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--ink); color: #fff; font-size: calc(var(--tile) * .11); font-weight: 700; line-height: 1; }
+.tsq.pic .unexp-ico { position: static; }
+.tsq:not(.pic) .tid { font-size: min(.95rem, calc(var(--tile) * .22)); line-height: 1.15; }
+.tsq.pic .tbar.top { max-width: none; left: auto; right: auto; }
+.tsq.pic .mk { box-sizing: border-box; }
+
 /* menu-save-nav.css */
 /* main menu, host game, new campaign, save panel, bottom bar, navigation sheet (official icons) */
 
@@ -835,6 +863,58 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .nav-lbl { display: block; text-align: center; }
 /* new campaign: confirm greyed out until the form is complete (official look) */
 .btn-ico.dimmed { opacity: .3; }
+
+/* photos.css */
+/* 修正清單 #96 / #97: the photo area (照片區) and the full-screen photo viewer */
+.cam-ico { width: 28px; height: 28px; display: block; flex: none; }
+.nav-btn .cam-ico.nav-ico { width: 32px; height: 32px; color: #F2F4F3; }
+.tut-nav-row .cam-ico { width: 32px; height: 32px; color: var(--ink); }
+.photos-panel .content > .fine { margin: 4px 0 12px; }
+.ph-group { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px 12px; margin: 0 0 12px; }
+.ph-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.ph-head h2 { flex: 1; margin: 0; font-size: 1.05rem; }
+.ph-head .ph-name { flex: 1; min-width: 0; font-weight: 700; }
+.ph-count { flex: none; font-size: .82rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.ph-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; }
+.ph-thumb { aspect-ratio: 1; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--ground); overflow: hidden; cursor: pointer; }
+.ph-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph-thumb.add { border: 1.5px dashed var(--accent); color: var(--accent); background: var(--panel); font: inherit; font-size: .82rem; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; line-height: 1.2; padding: 4px; }
+.ph-group .btn-row { margin-top: 10px; }
+.ph-cell { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.ph-date { font-size: .74rem; color: var(--ink-2); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.ph-thumb.add { align-self: start; }
+
+.overlay.full { padding: 0; background: #000; align-items: stretch; }
+.pop-wrap.full { max-width: none; max-height: none; height: 100dvh; }
+.pv { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; background: #000; color: #fff; }
+.pv-top { display: flex; align-items: center; gap: 8px; padding: calc(6px + env(safe-area-inset-top)) 8px 6px 16px; background: rgba(0, 0, 0, .6); z-index: 2; }
+.pv-title { flex: 1; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.pv-cap { display: block; font-weight: 400; font-size: .8rem; color: #D7DCDF; overflow: hidden; text-overflow: ellipsis; }
+.pv-close { width: var(--tap); height: var(--tap); border: 0; border-radius: 50%; background: rgba(255, 255, 255, .16); color: #fff; font-size: 1.2rem; cursor: pointer; }
+.pv-box { flex: 1; min-height: 0; overflow: hidden; touch-action: none; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+.pv-box img { max-width: 100%; max-height: 100%; object-fit: contain; transform-origin: center center; will-change: transform; pointer-events: none; }
+.pv-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 64px; border: 0; border-radius: 10px; background: rgba(0, 0, 0, .55); color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; z-index: 2; }
+.pv-nav.prev { left: 8px; } .pv-nav.next { right: 8px; }
+.pv-nav:disabled { opacity: .25; cursor: default; }
+.pv-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(0, 0, 0, .6); z-index: 2; }
+.pv-hint { flex: 1 1 100%; font-size: .78rem; color: #C9CFD2; }
+@media (min-width: 640px) { .pv-hint { flex: 1; } }
+.pv-bar .btn { background: #fff; color: var(--ink); }
+
+/* pwa.css */
+/* 修正清單 #109: opened from the home screen, iPhone draws the status bar (white clock / battery) over the top of the page.
+   That strip is painted dark crimson so the white text stays readable, and nothing of the app is placed under it. */
+:root { --sat: env(safe-area-inset-top, 0px); }
+.sb-fill { position: fixed; top: 0; left: 0; right: 0; height: var(--sat); background: #3A0A0E; z-index: 160; pointer-events: none; }
+.save-err { padding-top: calc(10px + var(--sat)); }
+.overlay { padding-top: max(12px, calc(var(--sat) + 8px)); }
+.pop-wrap, .pop, .nav-sheet { max-height: calc(100dvh - 24px - var(--sat)); }
+.overlay.full { padding-top: 0; }
+.pop-wrap.full { max-height: none; }
+.main-menu { padding-top: calc(24px + var(--sat)); }
+.pack-screen { padding-top: calc(20px + var(--sat)); }
+.tab-blocked > .content { padding-top: calc(16px + var(--sat)); }
+.boot { padding-top: var(--sat); }
 
 /* tech.css */
 /* technology + armory panels: official icons (tech.jsx) */
@@ -986,3 +1066,7 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 /* another tab took over (修正清單 #81) */
 .tab-lost { position: fixed; inset: 0; z-index: 140; background: rgba(20, 30, 36, .6); display: flex; align-items: center; justify-content: center; padding: 16px; }
 .tab-lost .pop { max-width: 480px; }
+/* blocked tab: why taking over did not happen (修正清單 #98) */
+.note-box { margin: 12px 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); }
+.note-box.warn { border-color: var(--alert); background: #FBEDEC; }
+.note-box p { margin: 0 0 6px; } .note-box p:last-child { margin-bottom: 0; }
