@@ -384,6 +384,13 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .mcell.sel { outline: 3px solid var(--cyc); outline-offset: 0; position: relative; z-index: 1; }
 .mcell.has-note { box-shadow: inset 0 -3px 0 var(--accent); }
 @media (min-width: 640px) { .mcell { font-size: .78rem; min-height: 40px; } }
+/* 修正清單 #93: labels must fit a 1/12-width cell at any text size — the font is capped by the cell width
+   (cell content ≈ (row − 33px) / 12 − 2px; measured: 3 characters ≈ 2.0em, 4 characters or M10/W10 ≈ 2.65em) */
+.mrow { container-type: inline-size; }
+.mcell { font-size: min(.64rem, max(9px, calc(3.9cqw - 2.4px))); line-height: 1.05; }
+.mcell.l4 { font-size: min(.64rem, max(9px, calc(2.95cqw - 1.8px))); letter-spacing: -.02em; }
+@media (min-width: 640px) { .mcell { font-size: min(.78rem, max(9px, calc(3.9cqw - 2.4px))); } .mcell.l4 { font-size: min(.78rem, max(9px, calc(2.95cqw - 1.8px))); } }
+/* never below 9px: on a very narrow phone the label breaks between the letters and the number (CC / 10) instead */
 
 /* fated */
 .fated-tools { padding: 8px 16px; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid var(--line); }
