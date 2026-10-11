@@ -609,6 +609,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .cores-h .res-ico { width: 26px; height: 26px; }
 .btn-ico.remains { display: inline-flex; align-items: center; gap: 4px; padding: 0 6px; border: 1px solid var(--line); }
 .remains-cyc { font-family: var(--serif); font-weight: 700; }
+.tri-btn:disabled { opacity: .25; cursor: default; } /* 修正清單 #88 */
 
 /* cryptic.css */
 /* ===== cryptic languages (修正清單 #63) =====
@@ -879,6 +880,7 @@ button.req { width: 100%; background: none; border: 0; padding: 0; font: inherit
 /* loadouts: the title row itself unrolls (no arrow on the loadout, ico_arrow_unroll on titans) */
 button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: left; font-size: 1rem; color: var(--ink); cursor: pointer; min-height: 44px; min-width: 0; overflow-wrap: anywhere; }
 .gear-row .stepper .st-val { min-width: 2.2em; }
+.tr-go.undo { gap: 2px; padding: 0 8px; } .tr-go .undo-t { font-size: .8rem; font-weight: 700; } /* 修正清單 #87 */
 
 /* trackers.css */
 /* trackers: official icons in timeline, mnestis, diplomacy, adventures, titans, godforms, notes, matrix, fated */
@@ -974,3 +976,6 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
   background: var(--panel); color: var(--ink); border: 2px solid var(--accent); border-radius: 12px; padding: 10px 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, .25); max-width: 640px; margin: 0 auto; }
 .upd-bar span { flex: 1 1 14em; font-weight: 700; }
 .upd-bar .btn { flex: none; }
+/* another tab took over (修正清單 #81) */
+.tab-lost { position: fixed; inset: 0; z-index: 140; background: rgba(20, 30, 36, .6); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.tab-lost .pop { max-width: 480px; }
