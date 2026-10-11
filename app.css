@@ -44,7 +44,7 @@ hr { border: 0; border-top: 1px solid var(--line-2); margin: 10px 0; }
 
 /* official icons drawn white for a dark UI: inverted on light surfaces, kept white on dark ones */
 .lt { filter: invert(1); }
-:is(.bbar, .nav-sheet, .cyc-sep, .btn.primary, .btn.danger, .chip.on, .pick-btn.on, .seg .on, .tloop.on, .obol-back, .check.on .box, .exp-btn.on, .mode-btn.on, .deck-tg.on, .feather, .toast, .siren-editor) .lt { filter: none; }
+:is(.bbar, .nav-sheet, .cyc-sep, .btn.primary, .btn.danger, .chip.on, .pick-btn.on, .seg .on, .tloop.on, .obol-back, .check.on .box, .exp-btn.on, .mode-btn.on, .deck-tg.on, .feather.edit, .toast, .siren-editor) .lt { filter: none; }
 
 /* top bar */
 .topbar { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: minmax(44px, auto) 1fr auto; align-items: center; gap: 8px;
@@ -123,10 +123,10 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .ck-ico { width: 26px; height: 26px; vertical-align: middle; margin-right: 6px; }
 
 /* icons */
-.ico { width: 24px; height: 24px; object-fit: contain; vertical-align: middle; flex: none; }
-.ico.sm { width: 18px; height: 18px; }
+.ico { width: 28px; height: 28px; object-fit: contain; vertical-align: middle; flex: none; }
+.ico.sm { width: 22px; height: 22px; }
 .ico-fb { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; padding: 0 4px; border: 1px solid var(--line); border-radius: 5px; font-size: .7rem; color: var(--ink-2); background: var(--panel); flex: none; }
-.rich img.ri, img.ri { height: 1.2em; width: auto; vertical-align: -0.22em; }
+.rich img.ri, img.ri { height: 1.5em; width: auto; vertical-align: -0.38em; }
 .ri-fb { color: var(--accent); font-size: .85em; }
 .mspace { letter-spacing: .5em; }
 .rich b { font-weight: 800; }
@@ -287,12 +287,14 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tl-top { display: flex; align-items: center; gap: 10px; }
 .tl-day { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; min-width: 3em; }
 .tl-icons { display: inline-flex; gap: 6px; align-items: center; }
-.tl-ic img, .tl-ic .ico { height: 24px; width: auto; }
+.ico.tl-ic { width: 44px; height: 44px; }
+.ico-fb.tl-ic { height: 32px; font-size: .8rem; }
 .tloop { margin-left: auto; min-width: 40px; min-height: 40px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); cursor: pointer; opacity: .55; }
 .tloop.on { opacity: 1; background: var(--ink); }
 .tl-spe { font-size: .92rem; color: var(--cyc); font-weight: 600; }
 .tl-acc { font-size: .9rem; background: var(--panel); border: 1px solid var(--line-2); border-radius: 8px; padding: 6px 8px; overflow-wrap: anywhere; }
 .acc-arrow { margin: 0 6px; color: var(--accent); font-weight: 700; }
+.ico.acc-arrow { width: 28px; height: 18px; object-fit: contain; }
 .tl-note { font-size: .92rem; }
 .tl-end { margin: 18px 0; padding: 14px; text-align: center; border: 1px dashed var(--line); border-radius: var(--r); }
 .steps { display: flex; flex-direction: column; gap: 8px; }
@@ -424,7 +426,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tech-row, .gear-row { display: flex; align-items: center; gap: 6px; padding: 6px 0; border-bottom: 1px solid var(--line-2); flex-wrap: wrap; }
 .tech-main, .gear-main { flex: 1 1 14em; min-width: 0; display: flex; align-items: center; gap: 10px; background: none; border: 0; text-align: left; padding: 6px 0; cursor: pointer; }
 .tech-ic, .gear-ic { display: inline-flex; align-items: center; gap: 4px; flex: none; }
-.ti, .gi { width: 26px; height: 26px; }
+.ti, .gi { width: 32px; height: 32px; }
 .cyc-badge { font-family: var(--serif); font-weight: 700; min-width: 2.2em; text-align: center; padding: 1px 4px; border: 1px solid var(--line); border-radius: 5px; font-size: .82rem; background: var(--panel); }
 .cyc-badge small { font-size: .66rem; font-weight: 400; }
 .tech-names, .gear-names { display: flex; flex-direction: column; min-width: 0; }
@@ -471,6 +473,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .gear-note { flex: 1 1 100%; }
 .loadout, .titan-lo { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 8px; margin: 8px 0; }
 .titan-lo { background: var(--ground); }
+.loadout > :not(:first-child), .titan-lo > :not(:first-child) { margin-top: 8px; }
 .lo-head { display: flex; align-items: center; gap: 4px; }
 .lo-head .field { flex: 1; }
 .lo-title { flex: 1; font-family: var(--serif); font-weight: 700; }
@@ -484,8 +487,10 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .babel, .babyl-big .babel { font-family: "Babelian Cypher"; font-size: 1.8em; line-height: 1; }
 .babyl-big { font-size: 2rem; }
 .kb { background: var(--ink); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
-.feather { align-self: flex-start; min-height: 40px; padding: 4px 12px; border-radius: 20px; border: 1px solid #5D6B75; background: #323232; color: #E4E4E4; cursor: pointer; }
-.feather.edit { background: #E4E4E4; color: #323232; }
+/* official: black feather = add (input) mode, white feather = edit mode (lbl_tut_cryptic6) */
+.feather { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 14px 4px 8px; border-radius: 22px; border: 1px solid #5D6B75; background: #F4F4F4; color: #323232; cursor: pointer; font-weight: 600; }
+.feather .bi { width: 30px; height: 30px; }
+.feather.edit { background: #323232; color: #F4F4F4; }
 .kb-keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 6px; }
 .kb-key { min-height: 64px; border-radius: 8px; border: 1px solid #3A4954; background: #F4F4F4; color: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer; padding: 4px; }
 .kb-key.add { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
@@ -502,7 +507,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .centy-big { font-size: 2.4rem; }
 .strokes { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin: 8px 0; }
 .stroke { display: flex; flex-direction: column; align-items: center; gap: 4px; border: 1px solid var(--line-2); border-radius: 10px; padding: 6px; }
-.stroke-img { height: 54px; width: auto; }
+.stroke-img { height: 54px; width: auto; max-width: 100%; object-fit: contain; }
 .siren-editor { background: var(--ink); border: 1px solid var(--ink); border-radius: 12px; padding: 6px; }
 .spiral { width: 100%; max-width: 560px; display: block; margin: 0 auto; touch-action: none; }
 .spiral.small { width: 84px; height: 84px; }
@@ -518,7 +523,8 @@ textarea.field { resize: vertical; line-height: 1.5; }
 
 /* truth machine / qr / tutorial */
 .obol-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line-2); }
-.obol-text { flex: 1; min-width: 0; }
+.obol-text { flex: 1; min-width: 0; text-align: left; background: none; border: 0; padding: 4px 0; color: inherit; font: inherit; cursor: pointer; }
+.obol-card { width: min(78vw, 340px); height: auto; border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
 .obol-ico { width: 34px; height: 34px; } .obol-ico.sm { width: 26px; height: 26px; }
 .obol-draw { padding: 24px; align-items: center; cursor: pointer; }
 .obol-back, .obol-face { width: 220px; min-height: 300px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 16px; }
@@ -569,3 +575,266 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .photo-big.card { max-height: 62vh; width: auto; }
 .sel-portrait { display: block; width: 150px; max-width: 60%; aspect-ratio: 484 / 744; object-fit: cover; border-radius: 10px; margin: 4px auto 8px; }
 .lo-count { flex: none; font-size: .8rem; color: var(--accent); font-weight: 700; white-space: nowrap; }
+/* official button icons (修正清單 #51) */
+.bi { width: 24px; height: 24px; object-fit: contain; vertical-align: middle; pointer-events: none; }
+.bi.flip { transform: scaleX(-1); }
+.bi.rot90 { transform: rotate(90deg); }
+.bi-fb { pointer-events: none; }
+.st-btn .bi { width: 16px; height: 22px; }
+.box .bi { width: 18px; height: 18px; }
+.btn .bi { width: 20px; height: 20px; margin-right: 4px; }
+.btn-ico .bi { width: 24px; height: 24px; }
+/* cryptic (修正清單 #52/#53) */
+.kb { display: flex; flex-direction: column; gap: 8px; }
+.cr-btns { display: flex; justify-content: flex-end; gap: 6px; }
+.cr-btns .btn-ico { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); width: 48px; height: 44px; }
+.cr-btns .bi { width: 28px; height: 28px; }
+.cr-def { display: flex; align-items: center; gap: 10px; }
+.cr-def .field { flex: 1; min-width: 0; font-size: 1.2rem; text-align: center; }
+.cr-def .bi { width: 30px; height: 20px; flex: none; }
+.cr-cur { min-width: 2.2em; text-align: center; font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.kb-key.add .bi { width: 30px; height: 30px; }
+.kb-key.wide { grid-column: span 2; }
+.kb-key.space { grid-column: span 2; font-weight: 700; }
+.kb-key .bi { width: 26px; height: 26px; }
+.kb-stack { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.kb-stack .kb-img { width: 46px; height: 46px; filter: invert(1); opacity: .55; }
+.kb-stack .bi { position: absolute; width: 24px; height: 24px; }
+.kb-swap { display: inline-flex; align-items: center; gap: 4px; }
+.kb-img.sm { width: 28px; height: 28px; }
+.babyl-big.babel { font-size: 3rem; }
+.kb-top.babel { font-size: 1.6rem; }
+/* glossary (修正清單 #54) */
+.tut-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 6px 0 12px; }
+.tut-ic { display: flex; align-items: center; gap: 8px; font-size: .92rem; background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px; padding: 6px 8px; }
+.ico.tut-ico { width: 36px; height: 36px; }
+.tut-nav-list { display: flex; flex-direction: column; gap: 6px; margin: 8px 0; }
+.tut-nav-row { display: flex; align-items: flex-start; gap: 10px; }
+.tut-nav-row .tut-p { margin: 0; }
+.ico.tut-nav-ico { width: 34px; height: 34px; margin-top: 2px; }
+
+
+/* argonauts.css */
+/* argonauts / argo / cargo panels: official icon placements */
+
+/* triskelion reset: official btn_reset is a dark tile with the white reset_triskelion_F4F4F4 icon */
+.tri-reset { min-width: 52px; min-height: 52px; background: #444444; border-color: #444444; border-radius: 8px; }
+.tri-reset:hover { border-color: var(--ink); }
+.tri-reset .lt { filter: none; }
+.tri-reset .bi { width: 30px; height: 30px; }
+.tri-reset .bi-fb { color: #F4F4F4; font-size: 1.2rem; }
+
+/* echo track: node III carries the cargo_echoes_of_recollection icon (dark sprite; lightened on the filled node) */
+.echo-trk .node { display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.echo-ico { width: 26px; height: 26px; pointer-events: none; }
+.echo-trk .node.on .echo-ico { filter: invert(1); }
+
+/* argonaut select: ico_player in the 'played by' field */
+.pl-field { display: flex; align-items: center; gap: 8px; }
+.pl-ico { width: 22px; height: 22px; flex: none; }
+
+/* argonaut info: ico_edit (feather) before 'played by' */
+.link .pb-edit { width: 16px; height: 18px; margin-right: 4px; }
+.link:disabled .pb-edit { display: none; }
+
+/* fated mnemos resolved tick (img_complete = ico_confirm) */
+.fm-done { width: 18px; height: 18px; margin-left: 4px; vertical-align: middle; }
+
+/* dead argonaut info: katharsis framed by ico_katharsis_bracket */
+.kath-wrap { display: flex; align-items: center; gap: 6px; }
+.kath-wrap .field, .kath-wrap > :not(.kath-br) { flex: 1 1 auto; min-width: 0; }
+.kath-br { width: 14px; height: 34px; flex: none; object-fit: contain; }
+.kath-br.flip { transform: scaleX(-1); }
+
+/* argo stats: expansion toggle is a plain square (no sprite), #444 on / #E2E2E2 off */
+.exp-btn.sq { display: inline-flex; align-items: center; justify-content: center; padding: 0; background: var(--panel); }
+.exp-btn.sq.on { background: var(--panel); }
+.exp-sq { display: block; width: 20px; height: 20px; border-radius: 3px; background: #E2E2E2; border: 1px solid #A9B2B7; }
+.exp-btn.sq.on .exp-sq { background: #444444; border-color: #444444; }
+span.stat-ico, span.res-ico { display: inline-block; flex: none; }
+.stat-row .st-btn.off .bi { opacity: .45; }
+
+/* cargo: ±5 buttons use ico_next, cores heading carries cargo_cores */
+.res-row .st-btn.small .bi { width: 20px; height: 22px; }
+.cores-h { display: flex; align-items: center; gap: 8px; }
+.cores-h .res-ico { width: 26px; height: 26px; }
+.btn-ico.remains { display: inline-flex; align-items: center; gap: 4px; padding: 0 6px; border: 1px solid var(--line); }
+.remains-cyc { font-family: var(--serif); font-weight: 700; }
+
+/* map.css */
+/* map panel: official map icons (map.jsx) */
+
+/* "go to tile" marker: map_goto_tile(_w) = arrow + square, the tile number sits on the square (right two thirds) */
+.goto-tile { position: relative; display: inline-flex; align-items: center; height: 28px; flex: none; color: inherit; }
+.goto-tile img.bi { width: auto; height: 100%; margin: 0; }
+.goto-tile .gt-num { position: absolute; left: 34%; right: 2%; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center;
+  font-size: .72rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+.goto { align-items: center; }
+.btn.act .goto-tile { height: 24px; }
+.btn.act .goto-tile .gt-num { font-size: .66rem; }
+
+/* explore / reveal / tile-info icons on the two map action buttons (official: map_ico_explored_w, map_ico_unexplored_w, map_ico_tile_info_w) */
+.btn.act { position: relative; padding-left: 38px; }
+.btn.act .act-ico { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; }
+
+/* per-cycle alt / note markers next to the tile id */
+.tid .tl-ico { width: 14px; height: 14px; margin-left: 1px; }
+.tsq.pic .tid .tl-ico { background: none; padding: 0; }
+
+/* layers button: map_layers is an opaque light tile, never inverted */
+.map-layers-btn { padding: 2px; }
+.map-layers-btn .lt { filter: none; }
+.map-layers-btn img.bi { width: 34px; height: 34px; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
+
+/* tile notes list */
+.map-notes-h { display: flex; align-items: center; gap: 6px; }
+.goto-btn { display: inline-flex; align-items: center; justify-content: center; padding: 0 4px; border-color: var(--line); background: var(--panel); }
+.goto-btn .goto-tile { height: 30px; }
+
+/* menu-save-nav.css */
+/* main menu, host game, new campaign, save panel, bottom bar, navigation sheet (official icons) */
+
+/* main menu buttons: official image + label */
+.mm-btns .btn .bi.mm-ico { width: 28px; height: 28px; margin-right: 10px; }
+
+/* add rows (itm_add_game, add_player): icons before the label */
+.add-row.ico-row { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.add-row.ico-row .bi { width: 20px; height: 20px; }
+.add-row.ico-row .ico.pl-ico { width: 22px; height: 22px; }
+
+/* player rows: official ico_player beside the name field */
+.ico.pl-ico { width: 24px; height: 24px; flex: none; object-fit: contain; }
+.player-row > .ico.pl-ico { margin: 0 2px; }
+
+/* save panel: ico_edit before the campaign name label */
+.ico.save-edit-ico { width: 18px; height: 18px; object-fit: contain; vertical-align: -3px; margin-right: 6px; }
+
+/* save & quit popup title with the "?" glossary button */
+.pop-title-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pop-btns .btn .bi { width: 20px; height: 20px; }
+
+/* official widget_menu image in place of the drawn helm; same size and position */
+.helm.wm { background: none; padding: 0; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, .35); }
+.helm.wm img { display: block; width: 100%; height: 100%; pointer-events: none; }
+
+/* navigation sheet: official icon above each label, "?" at the top right */
+.nav-head { display: flex; justify-content: flex-end; margin: -4px -4px 8px; }
+.nav-sheet .btn-ico.help { color: #F2F4F3; border-color: #5D6B75; }
+.nav-sheet .btn-ico.help:hover { border-color: #F2F4F3; }
+.nav-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav-btn .bi.nav-ico { width: 32px; height: 32px; }
+.nav-lbl { display: block; text-align: center; }
+
+/* tech.css */
+/* technology + armory panels: official icons (tech.jsx) */
+
+/* search bar: ico_search inside the field, SortingPanel ("a-z"/"id" + ico_arrow_up) beside it */
+.sb-input { position: relative; flex: 1 1 auto; min-width: 0; display: flex; }
+.sb-input .field { padding-left: 38px; }
+.sb-input .sb-ico { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; pointer-events: none; }
+.sort-btn { display: inline-flex; align-items: center; gap: 2px; flex: none; font-variant-numeric: tabular-nums; }
+.sort-btn .bi { width: 18px; height: 18px; }
+.bi.rot180 { transform: rotate(180deg); }
+.bi.rot270 { transform: rotate(270deg); }
+.bi-fb.rot180 { display: inline-block; transform: rotate(180deg); }
+.bi-fb.rot90 { display: inline-block; transform: rotate(90deg); }
+.bi-fb.rot270 { display: inline-block; transform: rotate(270deg); }
+
+/* filter toggles with official icons */
+.chip.ico-chip { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; }
+.chip .chip-ico { width: 26px; height: 26px; }
+.chip.cat { padding-right: 12px; }
+/* "production unable" is a white anvil with a red sign: give it a dark disc so the anvil stays visible on light chips */
+.dkbg { background: var(--ink); border-radius: 50%; padding: 1px; }
+
+/* researched toggle: ico_tech_researched (tech deck) / ico_tech_unresearched (projects) */
+.deck-tg { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; padding: 0 8px; }
+.deck-tg .bi { width: 28px; height: 28px; }
+.deck-tg:disabled { cursor: default; opacity: .55; }
+
+/* leads are informative only (PanelLeads passes no click) */
+.lead.static { cursor: default; }
+
+/* requirement items: an undecided one is a button until confirmed */
+button.req { width: 100%; background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.req.st2, .req.st0, .req.st4 { cursor: default; }
+
+/* ability / trade descriptions: clamped until tapped, one open at a time */
+.abil-desc-wrap { cursor: pointer; padding: 0 0 10px; }
+.abil-desc-wrap:not(.open) .abil-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.abil-desc-wrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.abil-head.static { cursor: default; }
+.trade-head { border-top: 1px solid var(--line-2); padding-top: 4px; }
+.tr-dir { display: inline-flex; flex-direction: column; align-items: center; }
+.tr-dir .bi { width: 20px; height: 20px; }
+.tr-go { min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+
+/* production items: SimpleGearCardItem / ItemTitan + facility + costs */
+.prod-target-row { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+.prod-item.dis { cursor: default; opacity: .7; }
+
+/* loadouts: the title row itself unrolls (no arrow on the loadout, ico_arrow_unroll on titans) */
+button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: left; font-size: 1rem; color: var(--ink); cursor: pointer; min-height: 44px; min-width: 0; overflow-wrap: anywhere; }
+.gear-row .stepper .st-val { min-width: 2.2em; }
+
+/* trackers.css */
+/* trackers: official icons in timeline, mnestis, diplomacy, adventures, titans, godforms, notes, matrix, fated */
+
+/* timeline btn_check (ico_confirm): faint when open, white on the dark tile when completed */
+.tl-check { display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.tl-check .bi { width: 26px; height: 26px; opacity: .28; }
+.tl-row.done .tl-check .bi { opacity: 1; }
+.tl-row.done .tl-check .lt { filter: none; }
+.tloop .ico { width: 30px; height: 30px; }
+
+/* icon + text headers (mnestis hold groups, knockout track, titan / summon limit rows) */
+.sub-ico { display: flex; align-items: center; gap: 8px; }
+.ico.sub-ico-img { width: 26px; height: 26px; }
+.add-row.with-ico { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.ico.add-ico { width: 26px; height: 26px; }
+.ico.blp-ko { width: 28px; height: 28px; }
+
+/* diplomacy track picture (diplomacy_track_01 / _02) */
+.ico.diplo-img { display: block; width: 100%; max-width: 520px; height: auto; margin: 0 auto 10px; }
+
+/* adventures */
+.ico.adv-mark { width: 30px; height: 30px; }
+.ring .bi { width: 18px; height: 18px; }
+.card-back .ico.adv-mark { width: 28px; height: 28px; }
+.adv-name .btn-ico .bi { width: 20px; height: 20px; }
+.fbox2 { flex: none; min-width: var(--tap); min-height: var(--tap); display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.fb-sq { width: 32px; height: 32px; border: 2px solid var(--ink-2); border-radius: 6px; background: var(--panel); display: inline-flex; align-items: center; justify-content: center; }
+.fbox2.on .fb-sq { background: #444444; border-color: #444444; }
+.fb-sq .bi { width: 22px; height: 22px; }
+.fbox2.on .lt { filter: none; }
+
+/* titans: pygmalion stone on node 3 (white on the filled node, dark on the empty one) */
+.pyg-trk .node { display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.ico.pyg-ico { width: 24px; height: 24px; }
+.pyg-trk .node.on .lt { filter: none; }
+.lim-val { min-width: 4.5em; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* icon toggles: itm_titan check_crippled, itm_godform / itm_summon btn_check */
+.ico-tg { flex: none; width: var(--tap); height: var(--tap); display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); cursor: pointer; }
+.ico-tg .bi { width: 28px; height: 28px; opacity: .28; }
+.ico-tg.on { background: var(--ink); border-color: var(--ink); }
+.ico-tg.on .bi { opacity: 1; }
+.ico-tg.on .lt { filter: none; }
+.ico-tg .bi-fb { font-weight: 800; }
+.ico-tg.on .bi-fb { color: #fff; }
+
+/* matrix btn_state (ico_confirm) */
+.md-state .hold-in { display: inline-flex; align-items: center; justify-content: center; }
+.md-state .bi { width: 34px; height: 34px; opacity: .28; }
+.md-state.on .bi { opacity: 1; }
+.md-state.on .lt { filter: none; }
+
+/* fated events: search icon, checkbox mark */
+.fated-search { position: relative; }
+.ico.fs-ico { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; opacity: .7; }
+.fated-search .field { padding-left: 38px; }
+.fi-boxes .box3 { display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.fi-boxes .box3 .bi { width: 22px; height: 22px; }
+.fi-boxes .box3.on .lt { filter: none; }
+.fi-boxes .box3 .bi-fb { color: #fff; font-weight: 800; }
+.ico.dim-ico { opacity: .4; }
