@@ -508,8 +508,6 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .obol-face { border: 3px solid var(--ink); background: var(--panel); }
 .obol-face.died { border-color: var(--alert); }
 .obol-name { font-family: var(--serif); font-weight: 800; font-size: 1.15rem; }
-.qr-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: .9rem; }
-.qr-table th, .qr-table td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line-2); vertical-align: top; overflow-wrap: anywhere; }
 .tut-p { line-height: 1.75; margin: 10px 0; }
 .web-note { background: var(--accent-soft); border-radius: 10px; padding: 10px 12px; line-height: 1.6; font-size: .94rem; }
 .tut-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
@@ -883,9 +881,6 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .mu-row.playing { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .mu-row.playing .mu-row-ico, .mu-row.playing .mu-row-dur { color: var(--accent-ink); }
 .mu-row:disabled { opacity: .6; cursor: progress; }
-.mu-h2 { font-size: 1.05rem; margin: 18px 0 4px; }
-.mu-hit { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0; color: var(--accent); font-weight: 600; }
-.mu-hit span { flex: 1 1 10em; }
 .mu-pack { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line-2); }
 
 /* photos.css */
