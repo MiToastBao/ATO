@@ -935,6 +935,56 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tab-blocked > .content { padding-top: calc(16px + var(--sat)); }
 .boot { padding-top: var(--sat); }
 
+/* storycards.css */
+/* 修正清單 #130: the 劇情卡 / 末日卡 / 駭物 panels (web only) */
+.nav-btn .bi.nav-ico.web-ico { filter: invert(1) brightness(1.35); }
+.sc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 6px; }
+.sc-chip { display: inline-flex; align-items: center; gap: 6px; min-height: var(--tap); padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.sc-chip-n { font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+.sc-chip-n small { font-size: .9rem; font-weight: 600; color: var(--ink-2); }
+.sc-chip.hit { background: #FBEDEC; border: 2px solid var(--alert); color: var(--alert); }
+.sc-chip.hit .sc-chip-n small { color: var(--alert); }
+.sc-chip-hit { font-size: .8rem; }
+.sc-mark { width: 22px; height: 22px; flex: none; }
+.sc-mark.big { width: 30px; height: 30px; }
+.sc-track { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: 10px 12px 12px; margin: 10px 0 14px; scroll-margin-top: calc(var(--tbh, 58px) + 8px); /* 修正清單 #133: below the (two-line) top bar */ }
+.sc-track.hit { border: 2px solid var(--alert); box-shadow: 0 0 0 3px #FBEDEC; }
+.sc-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-bottom: 8px; }
+.sc-head h2 { margin: 0; font-size: 1.1rem; }
+.sc-face { margin-left: 8px; padding: 1px 8px; border-radius: 6px; background: var(--ink); color: #fff; font-size: .85rem; vertical-align: 2px; }
+.sc-hitnote { color: var(--alert); font-weight: 700; font-size: .9rem; }
+.sc-img { display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #1E2A33; cursor: zoom-in; }
+.sc-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.sc-loading { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 120px; color: #E8ECEE; }
+.sc-back { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 150px; border: 2px dashed var(--line); border-radius: 8px; background: var(--ground); color: var(--ink-2); text-align: center; padding: 12px; }
+.sc-back span { font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+.sc-count { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+.sc-count-l { font-weight: 700; }
+.sc-step { min-width: var(--tap); padding: 0; font-size: 1.25rem; }
+.sc-n { min-width: 2.2em; text-align: center; font-size: 1.45rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.sc-max { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+.sc-prims { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+.sc-prim { min-height: var(--tap); padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.sc-prim.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.sc-seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+.sc-seg button { min-height: var(--tap); padding: 6px 14px; border: 0; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.sc-seg button + button { border-left: 1px solid var(--line); }
+.sc-seg button.on { background: var(--accent); color: var(--accent-ink); }
+.sc-boards { display: flex; flex-direction: column; gap: 12px; }
+.sc-board { margin: 0; }
+.sc-board figcaption { text-align: center; font-size: .82rem; color: var(--ink-2); margin-top: 4px; }
+.panel.prim-panel { max-width: 1600px; } /* the boards are wide: use the screen (a TV) */
+.sc-pack { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line-2); }
+/* a whole board fits on one screen (tablet / TV): as wide as the screen allows, but never taller than the space left */
+/* 修正清單 #133: never narrower than 360px (a phone held sideways): then the page scrolls, and a tap still opens it full screen */
+.prim-panel .sc-board .sc-img { width: max(min(100%, 360px), min(100%, calc((100dvh - var(--bbh, 68px) - 225px) * var(--ar, 1.45)))); margin: 0 auto; }
+@media (max-width: 600px) { .prim-panel .sc-board .sc-img { width: 100%; } }
+.sc-stepper { display: inline-flex; align-items: center; gap: 8px; flex: none; }
+.sc-know { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-2); }
+.sc-know.hit { margin: 10px -6px 0; padding: 10px 6px 8px; border: 2px solid var(--alert); border-radius: 10px; background: #FBEDEC; }
+.sc-max .field.num.sc-max-in { width: 4.2em; text-align: center; }
+.sc-bad .btn { margin: 4px 0; }
+
 /* tech.css */
 /* technology + armory panels: official icons (tech.jsx) */
 
