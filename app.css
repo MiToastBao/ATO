@@ -1057,6 +1057,7 @@ button.req { width: 100%; background: none; border: 0; padding: 0; font: inherit
 button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: left; font-size: 1rem; color: var(--ink); cursor: pointer; min-height: 44px; min-width: 0; overflow-wrap: anywhere; }
 .gear-row .stepper .st-val { min-width: 2.2em; }
 .tr-go.undo { gap: 2px; padding: 0 8px; } .tr-go .undo-t { font-size: .8rem; font-weight: 700; } /* 修正清單 #87 */
+.multi-hint { margin: 8px 0 4px; } .multi-hint .btn-row { flex-wrap: wrap; gap: 6px; }
 
 /* trackers.css */
 /* trackers: official icons in timeline, mnestis, diplomacy, adventures, titans, godforms, notes, matrix, fated */
