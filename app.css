@@ -768,6 +768,34 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* official help pictures (Tutorial Page5_2 / Page5_3) */
 .tut-pic { display: block; max-width: min(100%, 420px); height: auto; margin: 8px auto 14px; border: 1px solid var(--line); }
 
+/* keywords.css */
+/* 修正清單 #154 / #157: 關鍵詞 (web only) */
+.kw-bar { position: sticky; top: var(--tbh, 58px); z-index: 17; background: var(--ground); padding: 8px 16px 6px; border-bottom: 1px solid var(--line-2); }
+.kw-row { display: flex; gap: 8px; align-items: stretch; }
+.kw-search { display: flex; flex: 1 1 auto; min-width: 0; }
+.kw-ixbtn { flex: 0 0 auto; padding: 0 12px; white-space: nowrap; }
+.kw-search .field { width: 100%; }
+.kw-index { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.kw-ix { min-width: 34px; min-height: 34px; padding: 0 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.kw-count { margin: 4px 0 8px; }
+.kw-sec-h { display: inline-block; margin: 14px 0 6px; padding: 2px 10px; border-radius: 6px; background: var(--ink); color: #fff; font-size: 1rem; }
+.kw-sec-h.kw-more { background: var(--ink-2); }
+.kw-entry { border-bottom: 1px solid var(--line-2); padding: 8px 0 10px; overflow: hidden; }
+.kw-name { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 0 0 4px; font-size: 1.02rem; }
+.kw-en { font-weight: 600; color: var(--ink-2); }
+.kw-from { margin-left: auto; padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; font-size: .75rem; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+.kw-lead { width: 22px; height: 22px; border-radius: 4px; }
+.kw-p, .kw-li, .kw-label { margin: 3px 0; line-height: 1.6; }
+.kw-li { padding-left: 1.1em; text-indent: -1.1em; }
+.kw-li::before { content: '•'; display: inline-block; width: 1.1em; text-indent: 0; }
+.kw-label { color: var(--ink-2); font-size: .92rem; }
+.kw-ico { height: 1.2em; width: auto; vertical-align: -0.25em; margin: 0 1px; }
+.kw-fig { float: right; margin: 2px 0 4px 10px; width: 76px; text-align: center; }
+.kw-fig img { width: 76px; height: auto; }
+.kw-fig figcaption { font-size: .7rem; color: var(--ink-2); }
+.kw-ver.multi { margin: 6px 0; padding: 6px 10px; border-left: 3px solid var(--accent); background: var(--panel); border-radius: 0 8px 8px 0; overflow: hidden; }
+.kw-ver-h { font-size: .8rem; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+
 /* map.css */
 /* map panel: official map icons (map.jsx) */
 
@@ -1004,6 +1032,13 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sc-prim-group .sc-prim-h { margin: 4px 0; flex: none; }
 .sc-prim-group .sc-prims { margin: 4px 0; }
 .sc-fit .sc-img { margin: 0 auto; }
+/* 修正清單 #165: earlier story collections, each folded under its own tab */
+.sc-prev { margin: 6px 0 10px; padding-top: 8px; border-top: 1px solid var(--line-2); }
+.sc-prev-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 6px; }
+.sc-prev-tab { min-height: var(--tap); padding: 6px 14px; border: 1px dashed var(--line); border-radius: 10px; background: transparent; color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.sc-prev-tab.on { border-style: solid; background: var(--panel); }
+.sc-prev-group h3.sc-prim-h { font-size: .9rem; }
+
 
 /* tech.css */
 /* technology + armory panels: official icons (tech.jsx) */
