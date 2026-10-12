@@ -970,6 +970,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* storycards.css */
 /* 修正清單 #130: the 劇情卡 / 末日卡 / 駭物 panels (web only) */
 .nav-btn .bi.nav-ico.web-ico { filter: invert(1) brightness(1.35); }
+.nav-btn .bi.nav-ico.web-ico.lt { filter: brightness(1.35); } /* 修正清單 #185: a sprite that is white already (ico_search, 關鍵詞) stays white (light grey sprite brightened to white) */
 .sc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 6px; }
 .sc-chip { display: inline-flex; align-items: center; gap: 6px; min-height: var(--tap); padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
 .sc-chip-n { font-size: 1.1rem; font-variant-numeric: tabular-nums; }
@@ -1039,6 +1040,46 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sc-prev-tab.on { border-style: solid; background: var(--panel); }
 .sc-prev-group h3.sc-prim-h { font-size: .9rem; }
 
+/* 修正清單 #137 / #139 / #151 / #152 / #166 / #167: the primordial's cards under its board */
+.pc-kinds { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 10px 0 4px; }
+.pc-kind { min-height: var(--tap); padding: 6px 14px; border: 1px solid var(--ink-2); border-radius: 10px; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.pc-kind.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+.pc-open { scroll-margin-top: calc(var(--tbh, 58px) + 8px); margin: 8px 0 12px; padding: 10px 12px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.pc-open .sc-seg.pc-lv { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; width: 100%; max-width: 30em; } /* one row; narrow screens wrap inside each button */
+.pc-open .sc-seg.pc-lv button { padding: 6px 6px; line-height: 1.25; }
+.pc-names { margin: 4px 0 8px; }
+.pc-name small { font-weight: 600; color: var(--ink-2); margin-left: 2px; }
+.sc-prim.pc-name.on small { color: var(--accent-ink); }
+.pc-none { text-align: center; margin: 8px 0 0; }
+.pc-loc { margin: 8px 0 10px; }
+.pc-pic .sc-loading { color: var(--ink-2); } /* 修正清單 #175: on the white panel */
+.pc-pic .sc-img { width: max(min(100%, 220px), min(100%, 420px, calc((100dvh - var(--bbh, 68px) - var(--tbh, 58px) - 330px) * var(--ar, .72)))); margin: 0 auto; background: transparent; border: 0; } /* card, choices and 確定 on one screen */
+.pc-opts { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 6px; }
+.pc-opt { display: inline-flex; align-items: center; gap: 8px; min-height: var(--tap); font-weight: 700; cursor: pointer; }
+.pc-opt input, .pc-optn input { width: 22px; height: 22px; accent-color: var(--accent); flex: none; }
+.pc-optn { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.pc-optn .sc-stepper { gap: 4px; }
+.pc-optn label { display: inline-flex; align-items: center; gap: 8px; min-height: var(--tap); font-weight: 700; cursor: pointer; }
+.sc-n.pc-n { font-size: 1.2rem; min-width: 1.8em; }
+.pc-pile { margin-top: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--ground); }
+.pc-pile.hit, .pc-mini.hit { border: 2px solid var(--alert); background: #FBEDEC; }
+.pc-pile .fine { margin: 2px 0 6px; }
+.pc-total { margin: 0; font-size: 1.15rem; }
+.pc-total b { font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+.pc-pile.hit .pc-total { color: var(--alert); }
+.pc-hp { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 6px 0; font-weight: 700; }
+.pc-hp .field.num.pc-hp-in { width: 4.6em; text-align: center; }
+.pc-pilelist { list-style: none; margin: 6px 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pc-pilelist li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.pc-extra { display: flex; flex-direction: column; gap: 4px; margin: 6px 0; }
+.pc-extra .pc-optn > span:first-child { font-weight: 700; min-width: 6em; }
+.pc-other { margin: 6px 0; }
+.pc-mini { margin: 6px auto 0; padding: 6px 10px; width: fit-content; max-width: 100%; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); text-align: center; }
+.pc-mini.hit { color: var(--alert); }
+.pc-set { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line-2); }
+.pc-checks { display: flex; flex-direction: column; gap: 2px; }
+.pc-checks .fine { margin-left: 4px; }
+.pc-checks input { width: 22px; height: 22px; accent-color: var(--accent); }
 
 /* tech.css */
 /* technology + armory panels: official icons (tech.jsx) */
@@ -1195,3 +1236,11 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .note-box { margin: 12px 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); }
 .note-box.warn { border-color: var(--alert); background: #FBEDEC; }
 .note-box p { margin: 0 0 6px; } .note-box p:last-child { margin-bottom: 0; }
+/* 修正清單 #170: a pack on this device is older than the one this version was made with */
+.mm-packs { margin: 0; width: 100%; max-width: 380px; border-color: var(--accent); background: var(--accent-soft); }
+.mm-pk { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 4px 0; }
+.mm-pk + .mm-pk { border-top: 1px solid var(--line); padding-top: 8px; }
+.mm-pk p { flex: 1 1 12em; margin: 0; font-weight: 700; }
+.mm-pk .btn, .mm-pk-close .btn { flex: none; }
+.mm-pk-close { display: flex; justify-content: flex-end; margin-top: 6px; }
+.sect[id], .mu-pack[id] { scroll-margin-top: calc(var(--tbh, 58px) + 8px); } /* 修正清單 #170: 前往匯入 lands below the top bar */
