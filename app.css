@@ -906,19 +906,23 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .overlay.full { padding: 0; background: #000; align-items: stretch; }
 .pop-wrap.full { max-width: none; max-height: none; height: 100dvh; }
 .pv { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; background: #000; color: #fff; }
-.pv-top { display: flex; align-items: center; gap: 8px; padding: calc(6px + env(safe-area-inset-top)) 8px 6px 16px; background: rgba(0, 0, 0, .6); z-index: 2; }
+.pv-top { display: flex; align-items: center; gap: 8px; padding: calc(6px + env(safe-area-inset-top)) calc(8px + env(safe-area-inset-right)) 6px calc(16px + env(safe-area-inset-left)); background: rgba(0, 0, 0, .6); z-index: 2; }
 .pv-title { flex: 1; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .pv-cap { display: block; font-weight: 400; font-size: .8rem; color: #D7DCDF; overflow: hidden; text-overflow: ellipsis; }
-.pv-close { width: var(--tap); height: var(--tap); border: 0; border-radius: 50%; background: rgba(255, 255, 255, .16); color: #fff; font-size: 1.2rem; cursor: pointer; }
+/* 修正清單 #139: a large, clearly visible close button */
+.pv-close { flex: none; min-width: calc(var(--tap) + 40px); height: var(--tap); padding: 0 16px; border: 0; border-radius: 999px; background: #fff; color: #1E2A33; font: inherit; font-size: 1.05rem; font-weight: 800; cursor: pointer; box-shadow: 0 0 0 2px rgba(0, 0, 0, .35); }
+.pv-close span { font-size: 1.15rem; margin-right: 2px; }
 .pv-box { flex: 1; min-height: 0; overflow: hidden; touch-action: none; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
 .pv-box img { max-width: 100%; max-height: 100%; object-fit: contain; transform-origin: center center; will-change: transform; pointer-events: none; }
 .pv-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 64px; border: 0; border-radius: 10px; background: rgba(0, 0, 0, .55); color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; z-index: 2; }
-.pv-nav.prev { left: 8px; } .pv-nav.next { right: 8px; }
+.pv-nav.prev { left: calc(8px + env(safe-area-inset-left)); } .pv-nav.next { right: calc(8px + env(safe-area-inset-right)); } /* 修正清單 #144 ④ */
 .pv-nav:disabled { opacity: .25; cursor: default; }
-.pv-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(0, 0, 0, .6); z-index: 2; }
+.pv-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding: 8px calc(12px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left)); background: rgba(0, 0, 0, .6); z-index: 2; }
 .pv-hint { flex: 1 1 100%; font-size: .78rem; color: #C9CFD2; }
 @media (min-width: 640px) { .pv-hint { flex: 1; } }
 .pv-bar .btn { background: #fff; color: var(--ink); }
+/* 修正清單 #144 ⑨: a focus ring that shows on the black viewer */
+.pv button:focus-visible { outline: 3px solid #FFD54A; outline-offset: 2px; }
 
 /* pwa.css */
 /* 修正清單 #109: opened from the home screen, iPhone draws the status bar (white clock / battery) over the top of the page.
@@ -977,13 +981,29 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sc-pack { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line-2); }
 /* a whole board fits on one screen (tablet / TV): as wide as the screen allows, but never taller than the space left */
 /* 修正清單 #133: never narrower than 360px (a phone held sideways): then the page scrolls, and a tap still opens it full screen */
-.prim-panel .sc-board .sc-img { width: max(min(100%, 360px), min(100%, calc((100dvh - var(--bbh, 68px) - 225px) * var(--ar, 1.45)))); margin: 0 auto; }
+.prim-panel .sc-board .sc-img { width: max(min(100%, 360px), min(100%, calc((100dvh - var(--bbh, 68px) - 225px) * var(--ar, 1.45)))); margin: 0 auto; } /* first paint; FitBoard then measures (修正清單 #141) */
 @media (max-width: 600px) { .prim-panel .sc-board .sc-img { width: 100%; } }
 .sc-stepper { display: inline-flex; align-items: center; gap: 8px; flex: none; }
 .sc-know { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-2); }
 .sc-know.hit { margin: 10px -6px 0; padding: 10px 6px 8px; border: 2px solid var(--alert); border-radius: 10px; background: #FBEDEC; }
 .sc-max .field.num.sc-max-in { width: 4.2em; text-align: center; }
 .sc-bad .btn { margin: 4px 0; }
+/* 修正清單 #140 / #141 */
+.sc-mode { margin: 4px 0 6px; }
+.sc-mode-note { margin: 0 0 6px; }
+.sc-prim-h { margin: 8px 0 2px; font-size: .95rem; font-weight: 700; color: var(--ink-2); }
+.sc-prim-group .sc-prims { margin-top: 4px; }
+.sc-onwards { margin-top: 8px; }
+/* 修正清單 #142: 劇情卡／內部之旅 switch; the one at its limit stays red (white on red when selected) */
+.sc-tracksel { margin: 2px 0 2px; }
+.sc-tracksel button { min-width: 7.5em; }
+.sc-seg button.hit { color: var(--alert); background: #FBEDEC; }
+.sc-seg button.on.hit { color: #fff; background: var(--alert); }
+.sc-seg-hit { margin-left: 6px; font-size: .78rem; font-weight: 700; }
+.sc-prim-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0 10px; }
+.sc-prim-group .sc-prim-h { margin: 4px 0; flex: none; }
+.sc-prim-group .sc-prims { margin: 4px 0; }
+.sc-fit .sc-img { margin: 0 auto; }
 
 /* tech.css */
 /* technology + armory panels: official icons (tech.jsx) */
