@@ -1134,6 +1134,8 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .gear-row .stepper .st-val { min-width: 2.2em; }
 .tr-go.undo { gap: 2px; padding: 0 8px; } .tr-go .undo-t { font-size: .8rem; font-weight: 700; } /* 修正清單 #87 */
 .multi-hint { margin: 8px 0 4px; } .multi-hint .btn-row { flex-wrap: wrap; gap: 6px; }
+/* 修正清單 #184: the photographed gear card */
+.gear-row .btn.gear-pic { flex: none; min-height: 36px; padding: 4px 10px; font-size: .9rem; }
 
 /* trackers.css */
 /* trackers: official icons in timeline, mnestis, diplomacy, adventures, titans, godforms, notes, matrix, fated */
@@ -1244,3 +1246,6 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .mm-pk .btn, .mm-pk-close .btn { flex: none; }
 .mm-pk-close { display: flex; justify-content: flex-end; margin-top: 6px; }
 .sect[id], .mu-pack[id] { scroll-margin-top: calc(var(--tbh, 58px) + 8px); } /* 修正清單 #170: 前往匯入 lands below the top bar */
+/* 修正清單 #200: the clearing buttons in 設置 — red outline, red text on the light panel */
+.btn.danger-out { border-color: var(--alert); color: var(--alert); background: var(--panel); }
+#set-data > .btn + .btn { margin-left: 8px; }
