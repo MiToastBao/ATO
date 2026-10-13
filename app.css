@@ -211,6 +211,11 @@ textarea.field { resize: vertical; line-height: 1.5; }
 /* save */
 .save-grid { display: flex; flex-direction: column; gap: 2px; }
 .save-row { display: grid; grid-template-columns: minmax(7em, 34%) 1fr; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line-2); }
+/* 修正清單 #247: 「保存並退出」 in plain sight at the end of the campaign tab */
+.save-quit { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.save-quit .btn { min-height: 48px; font-size: 1.02rem; }
+.save-quit .fine { margin: 0; }
+.save-quit .inline-ico { width: 1.25em; height: 1.25em; vertical-align: -0.3em; }
 .save-lbl { font-weight: 600; }
 .pair { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
 .pair > div { flex: 1 1 7em; }
@@ -576,6 +581,11 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tut-nav-row .tut-p { margin: 0; }
 .ico.tut-nav-ico { width: 34px; height: 34px; margin-top: 2px; }
 
+/* 修正清單 #250: 「回到目前天數」 — floats above the bottom bar, left of the helm, while the current day is out of sight */
+.tl-back-cur { position: fixed; right: 92px; bottom: calc(var(--bbh, 64px) + 12px); z-index: 29; min-height: 44px; padding: 0 16px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0, 0, 0, .3); }
+/* 修正清單 #256: the bottom bar's numbers are one button (opens the stats with ＋／－) */
+button.bb-stats { border: 0; background: transparent; color: inherit; font: inherit; padding: 4px 2px; margin: 0; text-align: left; cursor: pointer; border-radius: 8px; }
+button.bb-stats:active, button.bb-stats:focus-visible { background: rgba(255, 255, 255, .1); outline: none; }
 
 /* argonauts.css */
 /* argonauts / argo / cargo panels: official icon placements */
@@ -640,6 +650,10 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .cx-pic { display: block; width: 100%; max-width: 760px; margin: 0 auto; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: #fff; cursor: zoom-in; overflow: hidden; }
 .cx-pic img { display: block; width: 100%; height: auto; }
 .cx-src { text-align: center; margin-top: 8px; }
+/* 修正清單 #246: 重點摘要 — wider contents items with the card's main points under the title */
+.cx-note { margin: -4px 0 10px; }
+.cx-pts .cx-toc { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.cx-toc-pts { font-size: .82rem; line-height: 1.45; color: var(--ink); opacity: .85; overflow-wrap: anywhere; }
 
 /* cryptic.css */
 /* ===== cryptic languages (修正清單 #63) =====
@@ -825,6 +839,19 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kw-fig figcaption { font-size: .7rem; color: var(--ink-2); }
 .kw-ver.multi { margin: 6px 0; padding: 6px 10px; border-left: 3px solid var(--accent); background: var(--panel); border-radius: 0 8px 8px 0; overflow: hidden; }
 .kw-ver-h { font-size: .8rem; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+/* 修正清單 #245: the source of each version (官方彙整 filled, 國外玩家彙整 outlined) and the old name under the name */
+.kw-ver-h { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.kw-src { display: inline-block; padding: 0 7px; border-radius: 4px; font-size: .72rem; font-weight: 700; line-height: 1.6; white-space: nowrap; }
+.kw-src.o { background: var(--ink); color: #fff; border: 1px solid var(--ink); }
+.kw-src.f { background: transparent; color: var(--ink-2); border: 1px solid var(--line); }
+.kw-ver.multi.src-o { border-left-color: var(--ink); }
+.kw-ver.multi.src-f { border-left-color: var(--line); }
+.kw-alias { margin: -2px 0 4px; font-size: .8rem; color: var(--ink-2); }
+/* 修正清單 #255: a keyword inside a card text — dotted underline, tap for its entry */
+.kw-link { text-decoration: underline dotted; text-decoration-thickness: 1.5px; text-underline-offset: 3px; cursor: pointer; border-radius: 3px; }
+.kw-link:hover, .kw-link:focus-visible { background: color-mix(in srgb, var(--accent) 14%, transparent); outline: none; }
+.kw-pop { max-height: 60vh; overflow-y: auto; }
+.kw-pop .kw-entry { border-bottom: 0; padding-top: 0; }
 
 /* map.css */
 /* map panel: official map icons (map.jsx) */
@@ -1167,6 +1194,33 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .multi-hint { margin: 8px 0 4px; } .multi-hint .btn-row { flex-wrap: wrap; gap: 6px; }
 /* 修正清單 #184: the photographed gear card */
 .gear-row .btn.gear-pic { flex: none; min-height: 36px; padding: 4px 10px; font-size: .9rem; }
+/* 修正清單 #252: the gear list in groups by equipment slot — a row of groups under the search box (scrolls sideways on a
+   phone), and a header per group (official icon, name, how many; tap to fold) */
+.slot-jump { display: flex; gap: 6px; margin-top: 8px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; }
+.slot-jump .chip { flex: 0 0 auto; white-space: nowrap; }
+.slot-chip .slot-n { font-size: .78rem; font-weight: 700; color: var(--ink-2); }
+.slot-sec { margin-top: 10px; }
+.slot-h { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 48px; margin: 6px 0; padding: 6px 12px; border: 1px solid var(--line); border-left: 4px solid var(--ink); border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.slot-h .slot-ico { width: 30px; height: 30px; flex: none; }
+.slot-h .slot-name { font-family: var(--serif); font-weight: 700; font-size: 1.08rem; }
+.slot-h .slot-n { margin-left: auto; font-size: .85rem; font-weight: 600; color: var(--ink-2); }
+.slot-h .slot-arr { width: 1.2em; text-align: center; color: var(--ink-2); }
+.slot-h.shut { border-left-color: var(--line); }
+/* 修正清單 #254: 戰鬥科技 parts (生產, 阿爾戈能力 …) and their smaller jump buttons; the abilities' quick filters */
+.slot-sub { display: flex; align-items: center; gap: 8px; margin: 12px 0 4px; padding: 4px 10px; border-bottom: 2px solid var(--ink); font-weight: 700; font-family: var(--serif); }
+.slot-sub .slot-n { margin-left: auto; font-size: .82rem; font-weight: 600; color: var(--ink-2); font-family: var(--sans); }
+.slot-chip.sub { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; font-size: .8rem; border-style: dashed; }
+.abil-quick .chip { flex: 0 0 auto; white-space: nowrap; }
+/* 修正清單 #259: on a phone turned sideways (short screen) the search box with its row of groups / quick filters stayed on
+   top and left about 125px for the list — there it scrolls away with the list (scroll up to use it again) */
+@media (max-height: 500px) { .search-bar { position: static; } }
+/* 修正清單 #260 (使用者 22:4x 決定保留): on a phone the search box takes the whole first line and the buttons (排序、顯示篩選項) the second, so
+   none of them is squeezed into a tall column of single characters */
+@media (max-width: 520px) {
+  .search-bar .sb-row { flex-wrap: wrap; }
+  .search-bar .sb-row .sb-input { flex: 1 1 100%; }
+  .search-bar .sb-row > .btn { flex: 1 1 0; min-height: 40px; white-space: nowrap; }
+}
 
 /* trackers.css */
 /* trackers: official icons in timeline, mnestis, diplomacy, adventures, titans, godforms, notes, matrix, fated */
