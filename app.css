@@ -400,7 +400,10 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .cyc-sep { margin: 18px 0 6px; padding: 6px 10px; background: var(--ink); color: #fff; border-radius: 8px; font-family: var(--serif); font-weight: 700; }
 .fated-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line-2); }
 .fi-name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-.fi-boxes { display: inline-flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+/* 修正清單 #235: next to many boxes the name keeps its own width (up to 45%) and the boxes take a second row instead */
+.fated-item.many .fi-name { flex: 0 0 auto; max-width: 45%; }
+.fated-item.many .fi-boxes { flex: 1 1 0; }
+.fi-boxes { display: inline-flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; min-width: 0; flex: 0 1 auto; }
 
 /* map */
 .map-panel { max-width: none; }
@@ -618,6 +621,19 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .btn-ico.remains { display: inline-flex; align-items: center; gap: 4px; padding: 0 6px; border: 1px solid var(--line); }
 .remains-cyc { font-family: var(--serif); font-weight: 700; }
 .tri-btn:disabled { opacity: .25; cursor: default; } /* 修正清單 #88 */
+
+/* codex.css */
+/* 修正清單 #232: 孤本聖典 — a scrolling row of page titles under the top bar, the page picture below */
+.cx-tabs { display: flex; gap: 2px; padding: 0 8px; background: var(--ground); border-bottom: 1px solid var(--line); position: sticky; top: var(--tbh, 58px); z-index: 19; overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+.cx-tab { flex: 0 0 auto; min-height: var(--tap); padding: 8px 12px; background: none; border: 0; border-bottom: 3px solid transparent; color: var(--ink-2); font-weight: 600; cursor: pointer; white-space: nowrap; }
+.cx-tab.on { color: var(--ink); border-bottom-color: var(--cyc); }
+.cx-content { padding-top: 10px; }
+.cx-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.cx-title { font-family: var(--serif); font-size: 1.15rem; margin: 0; }
+.cx-seg button { min-width: 48px; font-weight: 700; }
+.cx-pic { display: block; width: 100%; max-width: 760px; margin: 0 auto; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: #fff; cursor: zoom-in; overflow: hidden; }
+.cx-pic img { display: block; width: 100%; height: auto; }
+.cx-src { text-align: center; margin-top: 8px; }
 
 /* cryptic.css */
 /* ===== cryptic languages (修正清單 #63) =====
@@ -1228,6 +1244,14 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 
 /* 修正清單 #71: fated box sits between the name and ›, kept apart from the arrow */
 .adv-slot .browse .fbox2 { margin-right: 14px; }
+/* 修正清單 #233: 定數事件 titles fold */
+.fated-head { margin-bottom: 0; padding-bottom: 0; }
+.fated-toggle { flex: 1; display: flex; align-items: center; gap: 8px; min-height: var(--tap); padding: 4px 0; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.fated-toggle:disabled { cursor: default; color: inherit; opacity: 1; }
+.ft-chev { width: 1em; color: var(--ink-2); }
+.ft-name { flex: 1; min-width: 0; overflow-wrap: anywhere; } /* 修正清單 #236 */
+.ft-count { font-family: var(--sans, inherit); font-size: .82rem; font-weight: 600; color: var(--ink-2); }
+.fated-sec.open .fated-head { margin-bottom: 4px; }
 
 /* update.css */
 /* update banner (修正清單 #64) */
