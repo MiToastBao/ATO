@@ -583,8 +583,9 @@ textarea.field { resize: vertical; line-height: 1.5; }
 
 /* 修正清單 #250: 「回到目前天數」 — floats above the bottom bar, left of the helm, while the current day is out of sight */
 .tl-back-cur { position: fixed; right: 92px; bottom: calc(var(--bbh, 64px) + 12px); z-index: 29; min-height: 44px; padding: 0 16px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0, 0, 0, .3); }
-/* 修正清單 #266: the page behind an open popup stays still (scroll position kept); a scroll inside the popup does not run on */
-html.pop-open, html.pop-open body { overflow: hidden; }
+/* 修正清單 #266 / #278: the page behind an open popup stays still — not by switching the page's overflow off (on iOS that left the
+   bottom bar above the screen's bottom edge, #278) but by holding its scroll position (app.jsx); a scroll inside the popup does not run on */
+.pop-body, .nav-sheet { overscroll-behavior: contain; }
 .overlay { overscroll-behavior: contain; touch-action: none; }
 .overlay .pop-wrap, .overlay .pop-wrap * { touch-action: auto; }
 
@@ -1211,7 +1212,6 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .slot-sub { display: flex; align-items: center; gap: 8px; margin: 12px 0 4px; padding: 4px 10px; border-bottom: 2px solid var(--ink); font-weight: 700; font-family: var(--serif); }
 .slot-sub .slot-n { margin-left: auto; font-size: .82rem; font-weight: 600; color: var(--ink-2); font-family: var(--sans); }
 .slot-chip.sub { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; font-size: .8rem; border-style: dashed; }
-.abil-quick .chip { flex: 0 0 auto; white-space: nowrap; }
 /* 修正清單 #259: on a phone turned sideways (short screen) the search box with its row of groups / quick filters stayed on
    top and left about 125px for the list — there it scrolls away with the list (scroll up to use it again) */
 @media (max-height: 500px) { .search-bar { position: static; } }
