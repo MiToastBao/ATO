@@ -315,6 +315,22 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .step.on .step-dot { background: var(--cyc); border-color: var(--cyc); }
 .step-name { font-weight: 700; }
 .step-desc { font-size: .88rem; color: var(--ink-2); line-height: 1.5; }
+/* 修正清單 #284: events waiting at a round step — tucked under its step card, indented to the step's text */
+.sn-hint { margin: 0 0 4px; font-size: .9rem; line-height: 1.55; }
+.step-wrap { display: flex; flex-direction: column; }
+.step-notes { display: flex; flex-direction: column; gap: 4px; margin: 4px 0 0 22px; padding-left: 10px; border-left: 2px solid var(--line); }
+.sn-h { display: flex; align-items: center; gap: 10px; min-height: 36px; padding: 2px 4px; background: none; border: 0; cursor: pointer; text-align: left; font-weight: 700; color: var(--ink); }
+.sn-h-n { flex: 1; }
+.sn-h-done { font-weight: 400; font-size: .85rem; color: var(--ink-2); white-space: nowrap; }
+.sn-h .slot-arr { width: 1.2em; text-align: center; color: var(--ink-2); }
+.sn-item { display: flex; align-items: flex-start; gap: 6px; padding: 4px 4px 4px 2px; border: 1px solid var(--line-2); border-radius: 8px; background: var(--panel); }
+.sn-check { flex: none; padding: 4px; min-height: 0; }
+.sn-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; padding-top: 2px; }
+.sn-text { width: 100%; min-width: 0; overflow-wrap: anywhere; field-sizing: content; min-height: 2.8em; } /* grows with the text where the browser can */
+.sn-day { font-size: .78rem; color: var(--ink-2); }
+.sn-item.done .sn-text { color: var(--ink-2); text-decoration: line-through; }
+.sn-item > .btn-ico.del { flex: none; }
+.sn-add { align-self: flex-start; min-height: 36px; padding: 4px 12px; font-size: .9rem; }
 
 /* evolution — official layout (user screenshot 2026-10-11, 修正清單 #56): label, big number between two bars, name below;
    graph nodes are diamonds: light grey when not marked, dark when marked, white roman numeral; grey "timeline battles" band */
@@ -506,6 +522,10 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .loadout > :not(:first-child), .titan-lo > :not(:first-child) { margin-top: 8px; }
 .lo-head { display: flex; align-items: center; gap: 4px; }
 .lo-head .field { flex: 1; }
+/* 修正清單 #288: a loadout slot whose titan was removed from the titans page */
+.lo-head .lo-titan { min-width: 0; }
+.lo-titan.gone { border-color: var(--alert); color: var(--alert); }
+.lo-gone { margin: 2px 4px 6px 44px; font-size: .88rem; line-height: 1.5; color: var(--alert); }
 .lo-title { flex: 1; font-family: var(--serif); font-weight: 700; }
 
 /* cryptic: see static/parts/cryptic.css (修正清單 #63) */
