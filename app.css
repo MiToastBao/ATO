@@ -85,8 +85,12 @@ hr { border: 0; border-top: 1px solid var(--line-2); margin: 10px 0; }
 .tabs { display: flex; gap: 2px; padding: 0 12px; background: var(--ground); border-bottom: 1px solid var(--line); position: sticky; top: var(--tbh, 58px); z-index: 19; overflow-x: auto; }
 .tab { flex: 1 0 auto; min-height: var(--tap); padding: 8px 12px; background: none; border: 0; border-bottom: 3px solid transparent; color: var(--ink-2); font-weight: 600; cursor: pointer; white-space: nowrap; }
 .tab.on { color: var(--ink); border-bottom-color: var(--cyc); }
+/* 修正清單 #301: how many booked production options can be paid, beside 「生產」 */
+.tab-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 1.35em; height: 1.35em; margin-left: 4px; padding: 0 4px; border-radius: 999px; background: var(--accent); color: #fff; font-size: .78rem; font-weight: 800; line-height: 1; vertical-align: 1px; }
 /* 修正清單 #241: on a narrow phone the tabs share the width and a long name takes two lines — none is pushed off the screen */
 @media (max-width: 360px) { .tab { flex: 1 1 0; min-width: 0; white-space: normal; padding: 6px 4px; line-height: 1.25; overflow-wrap: anywhere; } }
+/* 修正清單 #297 (使用者 16:55): on a narrow screen the argonauts page's 「清零」 keeps only its icon, so the title fits on one line */
+@media (max-width: 360px) { .arg-reset .btn-txt { display: none; } .arg-reset { padding-left: 10px; padding-right: 10px; } }
 /* 修正清單 #292 / #293: a short and a long tab name (泰坦｜獨佔裝備／樣式卡牌) share the row by their length */
 @media (max-width: 360px) { .tabs.fit .tab { flex: 1 1 auto; } }
 
@@ -151,7 +155,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .choice { min-height: var(--tap); padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); text-align: left; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
 .choice.on { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
 .choice-right { color: var(--ink-2); font-family: var(--serif); }
-.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(110px + env(safe-area-inset-bottom)); z-index: 120; background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 22px; font-size: .95rem; max-width: 90vw; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(110px + env(safe-area-inset-bottom)); z-index: 120; background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 22px; font-size: .95rem; width: max-content; max-width: min(90vw, 480px); } /* 修正清單 #300: as wide as its text (left: 50% alone left it half the screen to wrap in) */
 .save-err { position: fixed; top: 0; left: 0; right: 0; z-index: 130; background: var(--alert); color: #fff; padding: 10px 16px; font-size: .9rem; }
 /* 修正清單 #226: on a screen with a top bar the line is the bar's first row (the bar's buttons stay visible and pressable) */
 .save-err.in-bar { position: static; grid-column: 1 / -1; contain: inline-size; overflow-wrap: anywhere; margin: calc(-6px - env(safe-area-inset-top)) -12px 0; padding: calc(8px + env(safe-area-inset-top)) 16px 8px; line-height: 1.45; }
