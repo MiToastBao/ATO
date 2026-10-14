@@ -87,6 +87,8 @@ hr { border: 0; border-top: 1px solid var(--line-2); margin: 10px 0; }
 .tab.on { color: var(--ink); border-bottom-color: var(--cyc); }
 /* 修正清單 #241: on a narrow phone the tabs share the width and a long name takes two lines — none is pushed off the screen */
 @media (max-width: 360px) { .tab { flex: 1 1 0; min-width: 0; white-space: normal; padding: 6px 4px; line-height: 1.25; overflow-wrap: anywhere; } }
+/* 修正清單 #292 / #293: a short and a long tab name (泰坦｜獨佔裝備／樣式卡牌) share the row by their length */
+@media (max-width: 360px) { .tabs.fit .tab { flex: 1 1 auto; } }
 
 /* fields */
 .field { width: 100%; min-height: var(--tap); padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); color: var(--ink); font: inherit; }
@@ -315,6 +317,12 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .step.on .step-dot { background: var(--cyc); border-color: var(--cyc); }
 .step-name { font-weight: 700; }
 .step-desc { font-size: .88rem; color: var(--ink-2); line-height: 1.5; }
+/* 修正清單 #295: a step before the current one, folded to one line */
+.step.mini { grid-template-columns: 28px 1fr auto auto; align-items: center; padding: 8px 12px; background: var(--ground); }
+.step.mini .step-dot { grid-row: auto; margin-top: 0; width: 18px; height: 18px; border-color: var(--ink-2); }
+.step.mini .step-name { font-weight: 600; color: var(--ink-2); }
+.step-mini-n { font-size: .82rem; color: var(--accent); font-weight: 700; white-space: nowrap; }
+.step.mini .slot-arr { width: 1.2em; text-align: center; color: var(--ink-2); }
 /* 修正清單 #284: events waiting at a round step — tucked under its step card, indented to the step's text */
 .sn-hint { margin: 0 0 4px; font-size: .9rem; line-height: 1.55; }
 .step-wrap { display: flex; flex-direction: column; }
@@ -526,6 +534,33 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .lo-head .lo-titan { min-width: 0; }
 .lo-titan.gone { border-color: var(--alert); color: var(--alert); }
 .lo-gone { margin: 2px 4px 6px 44px; font-size: .88rem; line-height: 1.5; color: var(--alert); }
+/* 修正清單 #292 / #293: who controls the titan, cards bound to titan or argonaut */
+.lo-hero { display: flex; align-items: center; gap: 8px; margin-left: 44px; }
+.lo-hero-l { flex: none; font-size: .88rem; color: var(--ink-2); }
+.lo-hero-s { flex: 1; min-width: 0; }
+.lo-hero-s.gone { border-color: var(--alert); color: var(--alert); }
+.lo-miss { display: flex; align-items: center; gap: 8px; margin-left: 44px; font-size: .88rem; line-height: 1.5; color: var(--alert); }
+.lo-miss span { flex: 1; min-width: 0; }
+.lo-miss .btn { flex: none; min-height: 36px; padding: 4px 12px; }
+.bind-tag { display: inline-block; align-self: flex-start; margin-top: 4px; padding: 1px 8px; border-radius: 10px; border: 1px solid var(--accent); color: var(--accent); font-size: .78rem; line-height: 1.5; font-weight: 700; }
+.bind-tag.warn-tag { border-color: var(--alert); color: var(--alert); }
+.titan-own { margin: 2px 0 8px 12px; padding-left: 10px; border-left: 2px solid var(--line); }
+.own-h { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 36px; padding: 2px 4px; background: none; border: 0; cursor: pointer; text-align: left; font-weight: 700; color: var(--ink); }
+.own-h > span:first-child { flex: 1; }
+.own-h .slot-arr { width: 1.2em; text-align: center; color: var(--ink-2); }
+.own-hint { margin: 4px 0 8px; line-height: 1.55; }
+.own-grp { margin: 8px 0; }
+.own-gh { display: flex; align-items: baseline; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--line); }
+.own-gt { flex: 1; font-weight: 700; }
+.own-row { display: flex; flex-direction: column; gap: 4px; padding: 8px 0; border-bottom: 1px solid var(--line-2); }
+.own-top { display: flex; align-items: center; gap: 8px; min-height: 36px; }
+.own-name { flex: 1; min-width: 0; overflow-wrap: anywhere; font-weight: 700; }
+.own-sel { display: flex; align-items: center; gap: 8px; }
+.own-sel > span { flex: none; font-size: .88rem; color: var(--ink-2); }
+.own-sel .field { flex: 1; min-width: 0; }
+.own-row .btn.gear-pic { flex: none; min-height: 36px; padding: 4px 10px; font-size: .9rem; }
+.own-empty { padding: 6px 0; }
+.own-add { margin-top: 6px; }
 .lo-title { flex: 1; font-family: var(--serif); font-weight: 700; }
 
 /* cryptic: see static/parts/cryptic.css (修正清單 #63) */
