@@ -583,9 +583,10 @@ textarea.field { resize: vertical; line-height: 1.5; }
 
 /* 修正清單 #250: 「回到目前天數」 — floats above the bottom bar, left of the helm, while the current day is out of sight */
 .tl-back-cur { position: fixed; right: 92px; bottom: calc(var(--bbh, 64px) + 12px); z-index: 29; min-height: 44px; padding: 0 16px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0, 0, 0, .3); }
-/* 修正清單 #256: the bottom bar's numbers are one button (opens the stats with ＋／－) */
-button.bb-stats { border: 0; background: transparent; color: inherit; font: inherit; padding: 4px 2px; margin: 0; text-align: left; cursor: pointer; border-radius: 8px; }
-button.bb-stats:active, button.bb-stats:focus-visible { background: rgba(255, 255, 255, .1); outline: none; }
+/* 修正清單 #266: the page behind an open popup stays still (scroll position kept); a scroll inside the popup does not run on */
+html.pop-open, html.pop-open body { overflow: hidden; }
+.overlay { overscroll-behavior: contain; touch-action: none; }
+.overlay .pop-wrap, .overlay .pop-wrap * { touch-action: auto; }
 
 /* argonauts.css */
 /* argonauts / argo / cargo panels: official icon placements */
