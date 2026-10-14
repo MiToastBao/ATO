@@ -584,6 +584,13 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tut-p { line-height: 1.75; margin: 10px 0; }
 .web-note { background: var(--accent-soft); border-radius: 10px; padding: 10px 12px; line-height: 1.6; font-size: .94rem; }
 .tut-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+/* 修正清單 #315: help pages in short pieces — headings, points, numbered steps, buttons to the related help pages */
+.tut-h { font-family: var(--serif); font-size: 1.08rem; margin: 20px 0 6px; padding-bottom: 4px; border-bottom: 1px solid var(--line-2); }
+.tut-list, .tut-steps { margin: 6px 0 12px; padding-left: 1.5em; line-height: 1.7; }
+.tut-list li, .tut-steps li { margin: 4px 0; padding-left: .2em; }
+.tut-steps li::marker { font-weight: 700; color: var(--accent); }
+.tut-see { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; }
+.tut-see-b { justify-content: space-between; text-align: left; }
 
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
 
@@ -747,6 +754,21 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .bt-table { border-collapse: collapse; width: 100%; font-size: .92rem; line-height: 1.5; background: var(--panel); }
 .bt-table th, .bt-table td { border: 1px solid var(--line); padding: 6px 8px; vertical-align: top; text-align: left; }
 .bt-table th { background: var(--line-2); }
+.bt-cov { display: none; } /* 修正清單 #312: the merged text again, shown only on cards */
+/* 修正清單 #312 (使用者 23:09 / 23:37): where the table does not fit — a text column under 21em of its own text size (phones up to
+   about 360 px, or larger text) — every row is a card: the column name above each part; the heading row is not needed then.
+   Wider screens keep the table as it is. */
+.bt-tw { container-type: inline-size; }
+@container (max-width: 21em) {
+  .bt-table, .bt-table tbody, .bt-table tr, .bt-table td { display: block; width: auto; }
+  .bt-table { background: none; border: 0; }
+  .bt-table tr:first-child { display: none; }
+  .bt-table tr { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); margin: 0 0 10px; padding: 4px 0; }
+  .bt-table td { border: 0; padding: 6px 12px; }
+  .bt-table td + td { border-top: 1px solid var(--line-2); }
+  .bt-table td::before { content: attr(data-h); display: block; font-size: .8rem; font-weight: 700; color: var(--ink-2); margin-bottom: 2px; }
+  .bt-same { display: block; font-size: .8rem; color: var(--ink-2); margin-top: 2px; }
+}
 .bt-fig { margin: .6em auto 1.1em; text-align: center; }
 .bt-fig-b { display: inline-block; padding: 0; border: 0; background: none; cursor: zoom-in; max-width: 100%; }
 .bt-fig-b img { display: block; max-width: min(100%, 420px); max-height: 360px; height: auto; margin: 0 auto; border-radius: 4px; }
@@ -764,6 +786,22 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
   .cx-go { order: 4; flex: 0 1 calc(50% - 5px); max-width: none; justify-content: flex-start; }
   .cx-next { justify-content: flex-end; }
 }
+/* 修正清單 #316: searching the book — a box above the contents, results as a list of page + the line with the words marked */
+.cx-search { margin: 2px 0 12px; }
+.cx-results { display: flex; flex-direction: column; gap: 8px; }
+.cx-count { margin: 0; }
+.cx-hit { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 10px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+.cx-hit-t { font-weight: 700; line-height: 1.35; }
+.cx-hit-pg { font-weight: 400; font-size: .8rem; color: var(--ink-2); margin-left: .6em; }
+.cx-hit-s { font-size: .9rem; line-height: 1.55; overflow-wrap: anywhere; }
+.cx-hit-s mark, .bt-hit mark { background: var(--mark, #f2d675); color: inherit; padding: 0 1px; border-radius: 2px; }
+.cx-hit.cx-hit-pg { border-color: var(--accent); }
+.bt-hit { animation: bt-hit 2.5s ease-out; border-radius: 4px; }
+@keyframes bt-hit { 0%, 40% { background: var(--mark, #f2d675); } 100% { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .bt-hit { animation: none; outline: 2px solid var(--accent); } }
+/* 「參見第 N 頁」 that opens the page: underlined like a link */
+.pg-link { color: var(--accent-strong, var(--accent)); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
 
 /* cryptic.css */
 /* ===== cryptic languages (修正清單 #63) =====
