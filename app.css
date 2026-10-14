@@ -656,6 +656,37 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .cx-note { margin: -4px 0 10px; }
 .cx-pts .cx-toc { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 .cx-toc-pts { font-size: .82rem; line-height: 1.45; color: var(--ink); opacity: .85; overflow-wrap: anywhere; }
+/* 修正清單 #279: the pages as text — a reading column on the page colour, the book's boxes and ribbons in the app's bronze */
+.cx-text { max-width: 760px; margin: 0 auto; }
+.cx-tools { justify-content: flex-end; margin: 0 0 6px; }
+.bt { font-size: 1rem; line-height: 1.75; color: var(--ink); overflow-wrap: anywhere; }
+.bt p { margin: 0 0 .7em; }
+.bt-h2 { font-family: var(--serif); font-size: 1.12rem; line-height: 1.4; color: var(--bronze-2); margin: 1.2em 0 .45em; }
+.bt-h3 { font-size: 1rem; line-height: 1.4; color: var(--bronze-2); margin: 1em 0 .35em; }
+.bt > .bt-h2:first-child, .bt-box > .bt-h2:first-of-type { margin-top: .2em; }
+.bt-small { font-size: .88rem; line-height: 1.6; color: var(--ink-2); }
+.bt-l1 { padding-left: 1.1em; text-indent: -1.1em; }
+.bt-l2 { padding-left: 2.2em; text-indent: -1.1em; }
+.bt-l3 { padding-left: 3.3em; text-indent: -1.1em; }
+.bt-ico { display: inline-block; height: 1.25em; width: auto; max-width: 2.6em; vertical-align: -.27em; margin: 0 .08em; object-fit: contain; }
+.bt-box, .bt-note { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 14px 4px; margin: 1.4em 0 1em; }
+.bt-note { border: 1.5px solid var(--bronze-1); }
+.bt-box-t, .bt-note-t { display: table; margin: -26px auto 8px; padding: 1px 14px; background: var(--bronze-2); color: #fff; font-weight: 700; font-size: .92rem; line-height: 1.6; border-radius: 4px; text-align: center; }
+.bt-box .bt-ico, .bt-note .bt-ico { vertical-align: -.27em; }
+.bt-grid { display: grid; gap: 6px 16px; margin: .3em 0 .9em; }
+.bt-c1 { grid-template-columns: 1fr; }
+.bt-c2, .bt-c3, .bt-c4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 560px) { .bt-c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .bt-c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.bt-gi { line-height: 1.4; }
+.bt-gi .bt-ico { height: 1.8em; max-width: 3em; vertical-align: middle; margin-right: .35em; }
+.bt-tw { overflow-x: auto; margin: .3em 0 1em; }
+.bt-table { border-collapse: collapse; width: 100%; font-size: .92rem; line-height: 1.5; background: var(--panel); }
+.bt-table th, .bt-table td { border: 1px solid var(--line); padding: 6px 8px; vertical-align: top; text-align: left; }
+.bt-table th { background: var(--line-2); }
+.bt-fig { margin: .6em auto 1.1em; text-align: center; }
+.bt-fig-b { display: inline-block; padding: 0; border: 0; background: none; cursor: zoom-in; max-width: 100%; }
+.bt-fig-b img { display: block; max-width: min(100%, 420px); max-height: 360px; height: auto; margin: 0 auto; border-radius: 4px; }
+.bt-fig figcaption { font-size: .86rem; color: var(--ink-2); margin-top: 4px; }
 
 /* cryptic.css */
 /* ===== cryptic languages (修正清單 #63) =====
@@ -1222,6 +1253,22 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
   .search-bar .sb-row .sb-input { flex: 1 1 100%; }
   .search-bar .sb-row > .btn { flex: 1 1 0; min-height: 40px; white-space: nowrap; }
 }
+/* 修正清單 #281 / #283: 「卡圖」 and 「預約」 inside the card, on the line of the gear's name (使用者 10:21, as drawn); on a narrow
+   phone (the name would be squeezed to one character a line) they sit at the bottom of the card instead. The card frame is
+   the row, so the buttons are inside it either way */
+.prod-row { position: relative; margin: 6px 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); }
+.prod-row .prod-item { margin: 0; border: 0; background: transparent; }
+.prod-row.has-tools .prod-target-row, .prod-row.has-tools .prod-item > .tn-front:first-child { padding-right: 150px; }
+.prod-tools { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; }
+.prod-tools .btn { min-height: 36px; padding: 4px 10px; font-size: .9rem; white-space: nowrap; }
+@media (max-width: 440px) {
+  .prod-row.has-tools .prod-target-row, .prod-row.has-tools .prod-item > .tn-front:first-child { padding-right: 0; }
+  .prod-tools { position: static; justify-content: flex-end; padding: 0 10px 10px; margin-top: -4px; }
+}
+.prod-res.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.prod-ready { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .82rem; font-weight: 700; }
+.slot-note { flex: none; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .78rem; font-weight: 700; white-space: nowrap; }
+.slot-h .slot-name, .slot-h .slot-n { white-space: nowrap; }
 
 /* trackers.css */
 /* trackers: official icons in timeline, mnestis, diplomacy, adventures, titans, godforms, notes, matrix, fated */
