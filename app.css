@@ -429,6 +429,9 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .mcell { font-size: min(.64rem, max(9px, calc(3.9cqw - 2.4px))); line-height: 1.05; }
 .mcell.l4 { font-size: min(.64rem, max(9px, calc(2.95cqw - 1.8px))); letter-spacing: -.02em; }
 @media (min-width: 640px) { .mcell { font-size: min(.78rem, max(9px, calc(3.9cqw - 2.4px))); } .mcell.l4 { font-size: min(.78rem, max(9px, calc(2.95cqw - 1.8px))); } }
+/* 修正清單 #318 (最後檢查, 320 px): below a 343 px row the long labels (W10, M10, AA10 …) no longer fit on one line even at 9 px;
+   they broke wherever the browser chose (only the W ones did), so every long label now takes two lines: letters, then the number */
+@container (max-width: 343px) { .mcell.l4 .mc-r, .mcell.l4 .mc-n { display: block; } .mcell.l4 { letter-spacing: 0; } }
 /* never below 9px: on a very narrow phone the label breaks between the letters and the number (CC / 10) instead */
 
 /* fated */
