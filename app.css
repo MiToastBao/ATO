@@ -1168,6 +1168,9 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* 修正清單 #322: one page at a time — 大地圖 and the four seats as buttons (a number when the page has photos), then a note.
    Five tabs in one row cut the names short on a phone (and at 130 % type), so they are buttons that wrap onto a second row */
 .tabs.ph-tabs { flex-wrap: wrap; gap: 6px; padding: 8px 12px; overflow: visible; }
+/* 修正清單 #327 (GPT 複查 v1.0.45 R45-01, 使用者 2026-10-15 21:4x): the buttons scroll away with the page instead of staying
+   on top — with long names on a low screen (a phone on its side) they took the whole screen and hid the photos and the note */
+.tabs.ph-tabs { position: static; }
 .tabs.ph-tabs .tab { flex: 0 1 auto; min-width: 0; max-width: 100%; min-height: 40px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 20px; background: var(--panel); color: var(--ink); white-space: normal; }
 .tabs.ph-tabs .tab.on { background: var(--ink); border-color: var(--ink); color: #fff; }
 .ph-tab { display: inline-flex; align-items: center; gap: 6px; min-width: 0; max-width: 100%; }
