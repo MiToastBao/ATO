@@ -1533,3 +1533,61 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 /* 修正清單 #200: the clearing buttons in 設置 — red outline, red text on the light panel */
 .btn.danger-out { border-color: var(--alert); color: var(--alert); background: var(--panel); }
 #set-data > .btn + .btn { margin-left: 8px; }
+
+/* xcards.css */
+/* 修正清單 #331–#336: the photographed supplement cards — names that open the card, traits, ability texts with the
+   printed symbols, the 舊憶 level checkboxes, the 神之形態 attack column and bottom row */
+.x-name { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; min-height: var(--tap); padding: 4px 0; background: none; border: 0;
+  font: inherit; color: inherit; text-align: left; cursor: pointer; min-width: 0; }
+.x-name .x-name-t { font-weight: 700; color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.x-traits { font-weight: 400; font-size: .85rem; color: var(--ink-2); white-space: nowrap; } /* 命運－眾神－詛咒 stays on one line (it moves under the name when there is no room) */
+.gf-name { flex: 1 1 auto; }
+.x-text { line-height: 1.6; overflow-wrap: anywhere; }
+.x-text img.ri { height: 1.35em; vertical-align: -0.32em; }
+.x-text img.xi-card { height: 1.25em; vertical-align: -0.28em; }
+/* the red box in front of a 舊憶 ability: the 兇險 icon and the number (printed red with white on the card) */
+.x-req { display: inline-flex; align-items: stretch; margin-right: 3px; vertical-align: -0.28em; height: 1.35em; border-radius: 4px; overflow: hidden; background: #8E2A22; color: #fff; font-weight: 700; font-size: .92em; }
+.x-req-i { display: inline-flex; align-items: center; padding: 0 3px 0 4px; border-right: 1px solid rgba(255,255,255,.55); }
+.x-req-i img.ri { height: 1.05em; vertical-align: 0; }
+.x-req-n { display: inline-flex; align-items: center; padding: 0 5px 0 4px; line-height: 1; }
+/* the 能力 tab: a block per card, folding to its title */
+.x-abilities { margin-bottom: 4px; }
+.x-fold { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); margin: 8px 0; }
+.x-fold-h { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; width: 100%; min-height: var(--tap); padding: 8px 10px; background: none; border: 0;
+  font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.x-fold-arrow { flex: none; width: 1em; color: var(--ink-2); }
+.x-fold-t { font-weight: 700; }
+.x-fold-b { padding: 0 10px 8px; }
+.x-lv { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-top: 1px solid var(--line-2); }
+.x-lv .check { min-height: 0; padding: 2px; }
+.x-lv .check:disabled { cursor: default; }
+.x-lv.locked .check .box { border-style: dashed; background: var(--line-2); }
+.x-lv.locked .x-lv-b { color: var(--ink-2); }
+.x-lv-b { flex: 1; min-width: 0; }
+.x-lv-n { display: block; font-weight: 700; font-size: .9rem; }
+.x-lv-n small { font-weight: 400; color: var(--ink-2); margin-left: 4px; }
+.x-ab { padding: 6px 0; }
+.x-ab + .x-ab { border-top: 1px solid var(--line-2); }
+.x-ab-n { display: block; font-size: .9rem; color: var(--accent); }
+/* 神之形態與召喚: a card's row with its texts under it */
+.gf-adds { display: flex; gap: 8px; flex-wrap: wrap; }
+.gf-adds .add-row { flex: 1 1 10em; width: auto; }
+.gf-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); margin: 8px 0; }
+.gf-card > .titan-row { border: 0; margin: 0; background: none; }
+.gf-card.used { border-color: var(--ink-2); }
+.gf-body { padding: 0 10px 8px; border-top: 1px solid var(--line-2); }
+.gf-miss { padding: 0 10px 8px; margin: 0; }
+.x-sub { padding-top: 6px; color: var(--ink-2); font-size: .9rem; }
+.x-atk { display: flex; gap: 10px; align-items: flex-start; }
+.x-atk-col { flex: none; display: inline-flex; flex-direction: column; align-items: center; gap: 4px; padding: 4px 6px; background: var(--line-2); border-radius: 6px; }
+.x-hit { display: inline-flex; align-items: center; justify-content: center; width: 1.7em; height: 1.7em; color: #fff; font-weight: 700; position: relative; z-index: 0; }
+.x-hit::before { content: ''; position: absolute; inset: 12%; background: #2D5F6E; transform: rotate(45deg); border-radius: 3px; z-index: -1; }
+.x-bonus { font-weight: 700; }
+.x-dice { display: inline-flex; gap: 1px; }
+.x-dice img.ri { height: 1.3em; vertical-align: 0; }
+.x-atk .x-text { flex: 1; min-width: 0; }
+.x-bottom { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; padding: 6px; background: var(--line-2); border-radius: 6px; }
+.x-bt { display: inline-flex; align-items: center; gap: 2px; padding: 2px 8px; background: var(--panel); border-radius: 999px; font-weight: 700; }
+.x-bt img.ri { height: 1.4em; vertical-align: 0; }
+.choice:disabled { opacity: .55; cursor: default; }
+.x-nw { white-space: nowrap; }
