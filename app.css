@@ -1010,6 +1010,9 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kw-src.f { background: transparent; color: var(--ink-2); border: 1px solid var(--line); }
 .kw-ver.multi.src-o { border-left-color: var(--ink); }
 .kw-ver.multi.src-f { border-left-color: var(--line); }
+/* 修正清單 #354: 大陸群友彙整 — a dashed tag, unlike the other two */
+.kw-src.c { background: transparent; color: var(--ink-2); border: 1px dashed var(--ink-2); }
+.kw-ver.multi.src-c { border-left-color: var(--ink-2); border-left-style: dashed; }
 .kw-alias { margin: -2px 0 4px; font-size: .8rem; color: var(--ink-2); }
 /* 修正清單 #255: a keyword inside a card text — dotted underline, tap for its entry */
 .kw-link { text-decoration: underline dotted; text-decoration-thickness: 1.5px; text-underline-offset: 3px; cursor: pointer; border-radius: 3px; }
@@ -1209,6 +1212,77 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pack-screen { padding-top: calc(20px + var(--sat)); }
 .tab-blocked > .content { padding-top: calc(16px + var(--sat)); }
 .boot { padding-top: var(--sat); }
+
+/* storybook.css */
+/* 修正清單 #343 / #349: 劇情書 (web only) */
+.panel.sb-panel { max-width: 1100px; }
+/* the books: one row of equal keys; two rows of two on a phone (four keys need about 370 px; 修正清單 #355) (never one key left alone on a row) */
+.sc-seg.sb-books { display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); width: 100%; }
+.sb-books button { padding: 6px 4px; white-space: nowrap; }
+.sb-books button + button { border-left: 1px solid var(--line); }
+@media (max-width: 429px) { .sc-seg.sb-books.n4 { grid-template-columns: repeat(2, 1fr); } .sb-books.n4 button:nth-child(3) { border-left: 0; } .sb-books.n4 button:nth-child(n+3) { border-top: 1px solid var(--line); } }
+.sb-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 12px; }
+.sb-tab { min-height: var(--tap); padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.sb-tab.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.sb-find { display: flex; gap: 8px; align-items: stretch; margin: 4px 0 6px; }
+.sb-num { flex: 1; min-width: 0; min-height: 52px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink);
+  font-family: var(--serif); font-size: 1.6rem; text-align: center; letter-spacing: .08em; }
+.sb-find .btn { flex: none; min-width: 80px; font-size: 1.05rem; }
+.sb-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 12px; }
+.sb-item { min-height: var(--tap); padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.sb-item.on { border: 2px solid var(--accent); }
+.sb-item.sb-grp { font-weight: 700; font-family: var(--serif); font-size: 1.05rem; }
+.sb-grp-h { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 4px 0 8px; }
+.sb-grp-h h2 { margin: 0; font-family: var(--serif); font-size: 1.2rem; }
+.sb-tools { display: flex; gap: 8px; margin: 12px 0 10px; }
+.sb-tools .btn { flex: 1; padding: 0 6px; }
+/* the card: the book's paper colour, the number large in the story collection's colour */
+.sb-sec { background: #FBF8F1; border: 1px solid #D9CFBC; border-radius: 10px; padding: 14px 16px 16px; margin-bottom: 14px; color: #1E2A33;
+  scroll-margin-top: calc(var(--tbh, 58px) + 8px); }
+.sb-sec-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; margin-bottom: 4px; }
+.sb-no { font-family: var(--serif); font-weight: 900; font-size: 2.3rem; line-height: 1.05; color: var(--cyc); }
+.sb-lbl { font-family: var(--serif); font-weight: 800; font-size: 1.3rem; color: var(--cyc); }
+.sb-title { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; }
+.sb-tag { font-size: .85rem; padding: 1px 8px; border-radius: 6px; background: #EFE6D3; color: #5A4A2C; }
+.sb-p { font-family: var(--serif); line-height: 1.8; margin: .65em 0; text-indent: 2em; overflow-wrap: anywhere; }
+.sb-h { font-weight: 800; margin: .9em 0 .3em; }
+.sb-box { background: #fff; border: 1px solid #E3D9C6; border-radius: 8px; padding: 10px 12px; margin: .8em 0; line-height: 1.75; overflow-wrap: anywhere; }
+.sb-table { width: 100%; border-collapse: collapse; margin: .8em 0; background: #fff; }
+.sb-table td { border: 1px solid #E3D9C6; padding: 6px 8px; vertical-align: top; line-height: 1.5; }
+.sb-sec img.ri { height: 1.3em; vertical-align: -0.3em; }
+.sb-go { display: inline; padding: 0 2px; margin: 0; border: 0; background: none; color: var(--accent); font: inherit; font-weight: 800;
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer; white-space: nowrap; }
+.sb-note { display: inline; padding: 0 4px; margin: 0; border: 0; border-radius: 4px; background: #EFE6D3; color: #5A4A2C; font: inherit; font-weight: 800; cursor: pointer; }
+/* full screen: dark page, large text — read together on a television */
+.sb-full { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; background: #14191D; color: #E8E4DA; }
+.sb-full-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: calc(8px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
+  border-bottom: 1px solid #2A3338; }
+.sb-full-where { flex: 1 1 200px; color: #AEB7BC; font-size: 1.05rem; }
+.sb-full-bar .btn { background: transparent; color: #E8E4DA; border-color: #4A565D; }
+.sb-full-bar .btn:disabled { opacity: .45; }
+.sb-full-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 18px calc(16px + env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left)); }
+.sb-sec.big { max-width: 1320px; margin: 0 auto; background: transparent; border: 0; padding: 0 2vw; color: #E8E4DA; }
+.sb-sec.big .sb-no { font-size: clamp(2.6rem, 6vw, 4.5rem); color: #D9A25E; }
+.sb-sec.big .sb-lbl { font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: #D9A25E; }
+.sb-sec.big .sb-title { font-size: clamp(1.4rem, 3vw, 2.2rem); }
+.sb-sec.big .sb-tag { background: #2A3338; color: #E8E4DA; }
+.sb-sec.big .sb-p, .sb-sec.big .sb-box, .sb-sec.big .sb-h, .sb-sec.big .sb-table td { font-size: clamp(1.15rem, 2.3vw, 2rem); line-height: 1.7; }
+.sb-sec.big .sb-box, .sb-sec.big .sb-table { background: #1E262B; border-color: #34404A; color: #E8E4DA; }
+.sb-sec.big .sb-table td { border-color: #34404A; }
+.sb-sec.big .sb-go { color: #8FD0C8; }
+.sb-sec.big .sb-note { background: #2A3338; color: #E8E4DA; }
+.sb-sec.big .lt { filter: none; } /* the white symbols stay white on the dark page */
+.sb-sec.big img.ri:not(.lt) { filter: invert(1); }
+/* 修正清單 #347: a sealed primordial (S 信封) */
+.sc-prim.sc-sealed { border-style: dashed; color: var(--ink-2); }
+.sc-sealed-note { margin: -4px 0 10px; }
+/* 修正清單 #348: a trait's text (烈日角逐) */
+.pc-tx { background: #FBF8F1; border: 1px solid #D9CFBC; border-radius: 10px; padding: 12px 14px; margin: 8px 0 12px; line-height: 1.9; font-family: var(--serif); }
+.pc-tx h3 { margin: 0 0 6px; font-size: 1.1rem; }
+/* 修正清單 #352: 專屬規則 — the pages as printed */
+.sb-pages { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 12px; }
+.sb-pages .fine { margin: 0; }
+.sb-page { min-height: var(--tap); padding: 0 12px; }
 
 /* storycards.css */
 /* 修正清單 #130: the 劇情卡 / 末日卡 / 駭物 panels (web only) */
