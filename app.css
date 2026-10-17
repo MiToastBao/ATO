@@ -141,13 +141,15 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .rich b { font-weight: 800; }
 
 /* popups */
-.overlay { position: fixed; inset: 0; z-index: 100; background: rgba(20, 30, 36, .48); display: flex; align-items: flex-end; justify-content: center; padding: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+/* 修正清單 #339: the popup's height is the overlay's room (top and bottom padding taken off, the iPhone's home bar too) —
+   it used to be 100dvh − 24px, which is taller than that room on an iPhone, so a long list pushed its title off the top */
+.overlay { --ovt: 12px; --ovb: calc(12px + env(safe-area-inset-bottom)); position: fixed; inset: 0; z-index: 100; background: rgba(20, 30, 36, .48); display: flex; align-items: flex-end; justify-content: center; padding: var(--ovt) 12px var(--ovb); }
 @media (min-width: 640px) { .overlay { align-items: center; } }
-.pop-wrap { width: 100%; max-width: 520px; max-height: calc(100dvh - 24px); display: flex; }
+.pop-wrap { width: 100%; max-width: 520px; max-height: calc(100dvh - var(--ovt) - var(--ovb)); display: flex; }
 /* 修正清單 #329: the popup box takes the keyboard focus when it opens — no focus ring around the whole box (its buttons keep theirs) */
 .pop-wrap:focus { outline: none; }
 .pop-wrap.wide { max-width: 760px; }
-.pop { width: 100%; background: var(--panel); border-radius: 14px; display: flex; flex-direction: column; max-height: calc(100dvh - 24px); overflow: hidden; box-shadow: 0 18px 50px rgba(0, 0, 0, .25); }
+.pop { width: 100%; background: var(--panel); border-radius: 14px; display: flex; flex-direction: column; max-height: calc(100dvh - var(--ovt) - var(--ovb)); overflow: hidden; box-shadow: 0 18px 50px rgba(0, 0, 0, .25); }
 .pop-title { font-family: var(--serif); font-weight: 700; font-size: 1.12rem; padding: 14px 16px 6px; }
 .pop-body { padding: 8px 16px 12px; overflow-y: auto; }
 .pop-text { font-size: 1.02rem; line-height: 1.6; margin: 6px 0 10px; }
@@ -178,7 +180,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .helm.big { display: inline-block; width: 96px; height: 96px; margin: 0; }
 .helm.big .helm-spokes, .helm.big .helm-spokes::before, .helm.big .helm-spokes::after { width: 80px; margin-left: -40px; }
 .helm.big .helm-hub { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
-.nav-sheet { width: 100%; background: var(--ink); border-radius: 16px; padding: 14px; color: #fff; max-height: calc(100dvh - 24px); overflow-y: auto; }
+.nav-sheet { width: 100%; background: var(--ink); border-radius: 16px; padding: 14px; color: #fff; max-height: calc(100dvh - var(--ovt, 12px) - var(--ovb, 12px)); overflow-y: auto; }
 .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .nav-grid2 { margin-top: 12px; padding-top: 12px; border-top: 1px solid #3A4954; }
 .nav-btn { min-height: 64px; padding: 6px; border-radius: 12px; border: 1px solid #3A4954; background: #273541; color: #F2F4F3; font-weight: 600; font-size: .92rem; cursor: pointer; line-height: 1.25; }
@@ -305,7 +307,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tl-check { flex: none; width: 40px; height: 40px; border-radius: 8px; border: 2px solid var(--ink); background: var(--panel); font-weight: 800; font-size: 1.2rem; cursor: pointer; }
 .tl-row.done .tl-check { background: var(--ink); color: #fff; }
 .tl-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-.tl-top { display: flex; align-items: center; gap: 10px; }
+.tl-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; row-gap: 6px; } /* 修正清單 #342 (GPT R48-01): on a narrow screen 「輪迴」 moves to the next line instead of off the screen */
 .tl-day { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; min-width: 3em; }
 .tl-icons { display: inline-flex; gap: 6px; align-items: center; }
 .ico.tl-ic { width: 44px; height: 44px; }
@@ -661,6 +663,13 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .pop-body, .nav-sheet { overscroll-behavior: contain; }
 .overlay { overscroll-behavior: contain; touch-action: none; }
 .overlay .pop-wrap, .overlay .pop-wrap * { touch-action: auto; }
+/* 修正清單 #338 / #340: a choice list in groups (one per story collection) that open and fold */
+.choice-group { display: flex; flex-direction: column; gap: 6px; }
+.choice-group + .choice-group { margin-top: 4px; }
+.choice-group-h { display: flex; align-items: center; gap: 8px; min-height: var(--tap); padding: 6px 10px; border: 0; border-radius: var(--r); background: var(--line-2); color: var(--ink); font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
+.choice-group-arrow { width: 1em; color: var(--ink-2); }
+.choice-group-t { flex: 1; }
+.choice-group-n { color: var(--ink-2); font-weight: 400; font-size: .9rem; }
 
 /* argonauts.css */
 /* argonauts / argo / cargo panels: official icon placements */
@@ -1192,8 +1201,8 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-fill { position: fixed; top: 0; left: 0; right: 0; height: var(--sat); background: #3A0A0E; z-index: 160; pointer-events: none; }
 .save-err.fixed { padding-top: calc(10px + var(--sat)); }
 .save-err.in-bar { padding-top: calc(8px + var(--sat)); }
-.overlay { padding-top: max(12px, calc(var(--sat) + 8px)); }
-.pop-wrap, .pop, .nav-sheet { max-height: calc(100dvh - 24px - var(--sat)); }
+.overlay { --ovt: max(12px, calc(var(--sat) + 8px)); }
+/* (#339: the popup height follows --ovt / --ovb in app.css) */
 .overlay.full { padding-top: 0; }
 .pop-wrap.full { max-height: none; }
 .main-menu { padding-top: calc(24px + var(--sat)); }
