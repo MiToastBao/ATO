@@ -168,6 +168,8 @@ textarea.field { resize: vertical; line-height: 1.5; }
 /* bottom bar + helm (the one bold element) */
 .bbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; align-items: center; gap: 8px;
   padding: 6px 10px calc(6px + env(safe-area-inset-bottom)); background: var(--ink); color: #F2F4F3; box-shadow: 0 -2px 0 var(--cyc); }
+/* 修正清單 #363: a touch screen with the keyboard up (a text box has the focus) — no bottom bar (iOS floats it up the page) */
+@media (pointer: coarse) { html.typing .bbar, html.typing .tl-back-cur { display: none; } }
 .bb-stats { flex: 1; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; justify-content: flex-start; min-width: 0; }
 .bb-stat { display: inline-flex; align-items: center; gap: 4px; font-variant-numeric: tabular-nums; font-weight: 700; font-size: .98rem; }
 .bb-ico { width: 26px; height: 26px; filter: invert(1) brightness(1.1); }
@@ -1276,6 +1278,8 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* 修正清單 #347: a sealed primordial (S 信封) */
 .sc-prim.sc-sealed { border-style: dashed; color: var(--ink-2); }
 .sc-sealed-note { margin: -4px 0 10px; }
+/* 修正清單 #364: the text and 「封回 S 信封」 side by side, the key under the text on a narrow screen (no indent) */
+.sc-opened-note { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 /* 修正清單 #348: a trait's text (烈日角逐) */
 .pc-tx { background: #FBF8F1; border: 1px solid #D9CFBC; border-radius: 10px; padding: 12px 14px; margin: 8px 0 12px; line-height: 1.9; font-family: var(--serif); }
 .pc-tx h3 { margin: 0 0 6px; font-size: 1.1rem; }
