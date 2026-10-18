@@ -109,6 +109,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .seg button.on { background: var(--ink); color: #fff; }
 .seg.wrap { flex-wrap: wrap; }
 .row-between { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.row-between.wake-row { margin-top: 12px; } /* 修正清單 #370: 使用時保持螢幕常亮, under 文字大小 */
 .sect { margin: 10px 0 18px; }
 .sect-h { display: flex; justify-content: space-between; align-items: center; }
 .sect h2, .sub-h { font-family: var(--serif); font-size: 1.04rem; margin: 16px 0 8px; color: var(--ink); }
@@ -1223,6 +1224,9 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-books button { padding: 6px 4px; white-space: nowrap; }
 .sb-books button + button { border-left: 1px solid var(--line); }
 @media (max-width: 429px) { .sc-seg.sb-books.n4 { grid-template-columns: repeat(2, 1fr); } .sb-books.n4 button:nth-child(3) { border-left: 0; } .sb-books.n4 button:nth-child(n+3) { border-top: 1px solid var(--line); } }
+/* 修正清單 #368: the campaign's own book and 「其他故事集」; once the others are open, 「只看…」 under them */
+.sb-books .sb-others { color: var(--ink-2); font-weight: 400; }
+.sb-only { display: flex; justify-content: flex-end; margin: 6px 0 2px; }
 .sb-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 12px; }
 .sb-tab { min-height: var(--tap); padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
 .sb-tab.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
@@ -1290,6 +1294,12 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* 修正清單 #367: the S 信封 on the 存檔 page and in 設置 — the key and its note side by side, under each other when narrow */
 .env-val { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 .env-val .fine { margin: 0; }
+/* 修正清單 #371: 最近讀過 — the top bar key and the list */
+.sb-recent-btn svg { display: block; }
+.sb-recent { display: flex; flex-direction: column; gap: 8px; margin: 0 0 10px; }
+.sb-rc { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; min-height: var(--tap); padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.sb-rc-where { font-size: .82rem; color: var(--ink-2); }
+.sb-rc-name { font-weight: 700; overflow-wrap: anywhere; }
 
 /* storycards.css */
 /* 修正清單 #130: the 劇情卡 / 末日卡 / 駭物 panels (web only) */
