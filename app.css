@@ -1287,6 +1287,9 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-pages { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 12px; }
 .sb-pages .fine { margin: 0; }
 .sb-page { min-height: var(--tap); padding: 0 12px; }
+/* 修正清單 #367: the S 信封 on the 存檔 page and in 設置 — the key and its note side by side, under each other when narrow */
+.env-val { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.env-val .fine { margin: 0; }
 
 /* storycards.css */
 /* 修正清單 #130: the 劇情卡 / 末日卡 / 駭物 panels (web only) */
