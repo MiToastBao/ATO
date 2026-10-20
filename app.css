@@ -1451,6 +1451,60 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tn-own-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .tn-lbl { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; font-weight: 700; }
 .tn-lbl .field { font-weight: 400; }
+/* 修正清單 #380 / #383: the players' trigger conditions — nothing but a small 「＋ 觸發條件」 when there is none */
+.sc-conds { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 8px; }
+.sc-cond { display: flex; align-items: baseline; gap: 2px; width: 100%; min-height: var(--tap); padding: 8px 10px; border: 1px solid var(--line-2); border-left: 4px solid var(--accent); border-radius: 8px; background: var(--accent-soft); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.sc-cond-l { flex: none; font-weight: 700; }
+.sc-cond-t { flex: 1; min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.sc-cond-e { flex: none; margin-left: 6px; color: var(--accent); }
+.sc-cond-add { min-height: 36px; padding: 4px 2px; border: 0; background: none; color: var(--accent); font: inherit; font-size: .92rem; font-weight: 700; cursor: pointer; }
+.sc-cond-in { width: 100%; box-sizing: border-box; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; font: inherit; font-size: 1rem; resize: vertical; }
+/* 修正清單 #384: the inner journey's adventures on the shown face */
+.ij-list { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line-2); scroll-margin-top: calc(var(--tbh, 58px) + 8px); }
+.ij-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin-bottom: 2px; }
+.ij-row { display: flex; align-items: center; gap: 6px; min-height: var(--tap); padding: 2px 8px 2px 2px; border: 1px solid var(--line-2); border-radius: 8px; background: var(--panel); color: var(--ink); }
+.ij-st { flex: none; display: inline-flex; align-items: center; gap: 3px; min-height: 40px; padding: 0 4px; border: 0; border-radius: 6px; background: none; color: inherit; font: inherit; cursor: pointer; }
+.ij-see { display: inline-block; margin-left: 2px; min-height: 0; padding: 6px 2px; border: 0; background: none; color: var(--accent); font: inherit; font-size: .85rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; white-space: nowrap; }
+.ij-mark { flex: none; width: 1.3em; font-size: 1.2rem; text-align: center; color: var(--ink-2); }
+.ij-no { margin-right: 6px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ij-nm { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.ij-row.st1 { background: var(--ground); }
+.ij-row.st1 .ij-mark { color: var(--accent); }
+.ij-row.st1 .ij-nm, .ij-row.st1 .ij-no { color: var(--ink-2); }
+.ij-row.st2 { border-color: var(--bronze-1); background: #F7EDDC; }
+.ij-row.st2 .ij-mark { color: var(--bronze-2); }
+.ij-tag { flex: none; padding: 1px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink-2); font-size: .8rem; font-weight: 700; white-space: nowrap; }
+.ij-row.st1 .ij-tag { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.ij-row.st2 .ij-tag { border-color: var(--bronze-2); background: var(--bronze-2); color: #fff; }
+.sc-hitnote.ij-skip { color: var(--bronze-2); }
+.ij-pend { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.ij-pend li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 8px 10px; border: 1px solid var(--line-2); border-radius: 8px; background: var(--ground); }
+.ij-pend li b { font-size: 1.05rem; }
+/* 修正清單 #390: the face's own text under the picture — 「劇情」 (folded at first) and 「規則」, each folding by itself */
+.sx { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.sx-part { border: 1px solid var(--line-2); border-radius: 8px; background: var(--panel); }
+.sx-part.open { border-color: var(--line); }
+.sx-h { display: flex; align-items: center; gap: 6px; width: 100%; min-height: var(--tap); padding: 6px 10px; border: 0; border-radius: 8px; background: var(--ground); color: var(--ink); font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
+.sx-part.open .sx-h { border-radius: 8px 8px 0 0; }
+.sx-arrow { width: 1em; color: var(--ink-2); }
+.sx-body { padding: 8px 12px 10px; line-height: 1.7; overflow-wrap: anywhere; }
+.sx-body .sb-go { margin: 0 1px; }
+.sx-foot { margin: 0 2px; }
+/* 修正清單 #391: the inner journey's adventure list in a part of its own, folding like 「劇情」「規則」 */
+.ij-part { margin-top: 12px; }
+.ij-part .ij-list { margin-top: 0; padding: 8px 8px 10px; border-top: 0; }
+/* 修正清單 #392 (使用者 2026-10-20 08:23): the counter and the buttons stay under the top bar while the text is read; not on a
+   short screen (a phone held sideways — they would cover nearly all of it) */
+.sc-ctrl { background: var(--panel); }
+/* 修正清單 #393: pinned only while it leaves at least half the room for reading (usePin in storycards.jsx sets .pin) */
+.sc-ctrl.pin { position: sticky; top: var(--tbh, 58px); z-index: 4; margin: 0 -12px; padding: 0 12px 8px; box-shadow: 0 6px 6px -6px rgba(30, 42, 51, .25); }
+.sc-track.hit .sc-ctrl.pin { margin: 0 -11px; padding: 0 11px 8px; }
+/* 使用者 2026-10-20 08:26: 900 px and wider — 劇情 on the left, 規則 on the right (no sideways scrolling either way) */
+.sx-col { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+@media (min-width: 900px) {
+  .sx { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 10px; }
+  .sx-col-story { order: -1; }
+}
 
 /* tech.css */
 /* technology + armory panels: official icons (tech.jsx) */
