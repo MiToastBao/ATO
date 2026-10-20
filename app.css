@@ -1492,6 +1492,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sx-foot { margin: 0 2px; }
 /* 修正清單 #391: the inner journey's adventure list in a part of its own, folding like 「劇情」「規則」 */
 .ij-part { margin-top: 12px; }
+.sx-col > .ij-part { margin-top: 0; } /* 修正清單 #396: in a column of its own, spaced like the other parts */
 .ij-part .ij-list { margin-top: 0; padding: 8px 8px 10px; border-top: 0; }
 /* 修正清單 #392 (使用者 2026-10-20 08:23): the counter and the buttons stay under the top bar while the text is read; not on a
    short screen (a phone held sideways — they would cover nearly all of it) */
@@ -1504,6 +1505,11 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 @media (min-width: 900px) {
   .sx { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 10px; }
   .sx-col-story { order: -1; }
+  /* 修正清單 #396 (使用者 12:06): the inner journey — 規則 over 劇情 on the left, 冒險清單 on the right (spare height goes under 劇情) */
+  .sx.sx-inner { grid-template-areas: "rules adv" "story adv"; grid-template-rows: auto 1fr; }
+  .sx-inner .sx-col-rules { grid-area: rules; }
+  .sx-inner .sx-col-story { grid-area: story; order: 0; }
+  .sx-inner .sx-col-adv { grid-area: adv; }
 }
 
 /* tech.css */
