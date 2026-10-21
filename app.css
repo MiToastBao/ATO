@@ -1265,6 +1265,15 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tts-full .seg button { color: #E8E4DA; border-color: #4A565D; }
 .tts-full .tts-g button.on { background: #E8E4DA; color: #14191D; }
 
+/* 修正清單 #416: 設置 →「朗讀聲音」 — each voice by name with 男聲／女聲 (a tap sets it and says a sentence) (on a phone the buttons go under the name) */
+.tts-now { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; margin: 8px 0; }
+.tts-now p { margin: 0; }
+.tts-vlist { display: flex; flex-direction: column; margin: 0; border-top: 1px solid var(--line); }
+.tts-vrow:last-child { border-bottom: 0; }
+.tts-vrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.tts-vname { flex: 1 1 8em; min-width: 0; overflow-wrap: anywhere; }
+.tts-vbtns { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+
 /* storybook.css */
 /* 修正清單 #343 / #349: 劇情書 (web only) */
 .panel.sb-panel { max-width: 1100px; }
