@@ -339,6 +339,13 @@ textarea.field { resize: vertical; line-height: 1.5; }
 /* 修正清單 #284: events waiting at a round step — tucked under its step card, indented to the step's text */
 .sn-hint { margin: 0 0 4px; font-size: .9rem; line-height: 1.55; }
 .step-wrap { display: flex; flex-direction: column; }
+/* 修正清單 #414: one ▾／▸ on the right of every step, the same button in the same place open or folded (#397); a folded row is as
+   tall as the button, the arrow level with the name either way */
+.step-wrap { position: relative; }
+.step.step-open, .step.mini { padding-right: 52px; }
+.step.mini { min-height: 46px; }
+.step-fold { position: absolute; top: 1px; right: 4px; width: 44px; height: 44px; z-index: 1; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: transparent; color: var(--ink-2); font-size: 1.1rem; cursor: pointer; }
+.step-fold:hover { background: var(--ground); }
 .step-notes { display: flex; flex-direction: column; gap: 4px; margin: 4px 0 0 22px; padding-left: 10px; border-left: 2px solid var(--line); }
 .sn-h { display: flex; align-items: center; gap: 10px; min-height: 36px; padding: 2px 4px; background: none; border: 0; cursor: pointer; text-align: left; font-weight: 700; color: var(--ink); }
 .sn-h-n { flex: 1; }
@@ -1223,6 +1230,41 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tab-blocked > .content { padding-top: calc(16px + var(--sat)); }
 .boot { padding-top: var(--sat); }
 
+/* speech.css */
+/* 修正清單 #410: reading aloud — the 「朗讀」 button next to a title, the bar above the bottom bar while it reads */
+.tts-btn { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; min-height: 36px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-size: .9em; font-weight: 600; cursor: pointer; }
+.tts-btn.on { background: var(--accent, #2E6F6A); border-color: var(--accent, #2E6F6A); color: var(--accent-ink); }
+.tts-ico { width: 18px; height: 18px; flex: 0 0 auto; }
+.tts-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 29; padding: 6px 12px calc(6px + env(safe-area-inset-bottom)); background: var(--panel); border-top: 2px solid var(--accent, #2E6F6A); box-shadow: 0 -4px 10px rgba(30, 42, 51, .18); }
+.app.with-bb .tts-bar { bottom: var(--bbh, 68px); padding-bottom: 6px; }
+.tts-in { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; max-width: 920px; margin: 0 auto; }
+.tts-what { display: flex; align-items: center; gap: 6px; flex: 1 1 220px; min-width: 0; }
+.tts-what b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tts-what small { flex: 0 0 auto; color: var(--ink-2, #5A6670); }
+.tts-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; flex: 0 1 auto; }
+.tts-c { min-width: 44px; min-height: 40px; padding: 0 10px; font-size: 1.05em; }
+.tts-rate { display: inline-flex; align-items: center; gap: 6px; }
+.tts-s { min-width: 40px; min-height: 40px; padding: 0; font-size: 1.2em; }
+.tts-r { min-width: 3.2em; text-align: center; }
+.tts-g button.on { background: var(--accent, #2E6F6A); color: var(--accent-ink); }
+.tts-note { flex: 1 1 100%; }
+.tts-space { height: var(--ttsh, 96px); }
+/* the 劇情段落 section's title row and the 劇情 part of a card: the button at the right end */
+.sb-sec-h .tts-btn { margin-left: auto; }
+.sx-hrow { display: flex; align-items: center; gap: 6px; padding-right: 6px; border-radius: 8px; background: var(--ground); }
+.sx-part.open .sx-hrow { border-radius: 8px 8px 0 0; }
+.sx-hrow .sx-h { flex: 1 1 auto; min-width: 0; background: transparent; }
+.tts-two { display: inline-flex; gap: 6px; flex: 0 0 auto; }
+.sb-sec-h .tts-two { margin-left: auto; }
+/* 全螢幕 (dark): the bar is the last row of the view, not over the text */
+.tts-bar.tts-full, .app.with-bb .tts-bar.tts-full { position: relative; left: auto; right: auto; bottom: auto; flex: 0 0 auto; background: #1E252A; color: #E8E4DA; border-top-color: #4A565D; padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
+.tts-full .btn { background: transparent; color: #E8E4DA; border-color: #4A565D; }
+.tts-full .btn:disabled { opacity: .45; }
+.tts-full .tts-what small { color: #B9B4A8; }
+.tts-full .seg { background: transparent; border-color: #4A565D; }
+.tts-full .seg button { color: #E8E4DA; border-color: #4A565D; }
+.tts-full .tts-g button.on { background: #E8E4DA; color: #14191D; }
+
 /* storybook.css */
 /* 修正清單 #343 / #349: 劇情書 (web only) */
 .panel.sb-panel { max-width: 1100px; }
@@ -1247,8 +1289,10 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-item.sb-grp { font-weight: 700; font-family: var(--serif); font-size: 1.05rem; }
 .sb-grp-h { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 4px 0 8px; }
 .sb-grp-h h2 { margin: 0; font-family: var(--serif); font-size: 1.2rem; }
-.sb-tools { display: flex; gap: 8px; margin: 12px 0 10px; }
-.sb-tools .btn { flex: 1; padding: 0 6px; }
+.sb-tools { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 12px 0 10px; }
+.sb-tools .btn { padding: 0 6px; }
+/* 修正清單 #413: 上一段｜下一段｜查看截圖｜全螢幕 — two rows on a phone held upright (使用者 23:5x) */
+@media (max-width: 600px) { .sb-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* the card: the book's paper colour, the number large in the story collection's colour */
 .sb-sec { background: #FBF8F1; border: 1px solid #D9CFBC; border-radius: 10px; padding: 14px 16px 16px; margin-bottom: 14px; color: #1E2A33;
   scroll-margin-top: calc(var(--tbh, 58px) + 8px); }
