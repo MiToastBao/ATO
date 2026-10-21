@@ -23,6 +23,9 @@
 [data-cycle="0"] { --cyc: #7F4B26; } [data-cycle="1"] { --cyc: #A42206; } [data-cycle="2"] { --cyc: #752A7F; }
 [data-cycle="3"] { --cyc: #8A6F2E; } [data-cycle="4"] { --cyc: #06243D; }
 * { box-sizing: border-box; }
+/* 修正清單 #422 (使用者 2026-10-21 18:54): no page pinch-zoom or double-tap zoom — zoomed in on an iPhone it could not be pinched
+   back (fingers on a button or a picture) and taps missed; the viewer (touch-action: none) still zooms its picture */
+html { touch-action: pan-x pan-y; }
 html, body { margin: 0; height: 100%; background: var(--ground); color: var(--ink); font-family: var(--sans); font-size: 16px; -webkit-text-size-adjust: 100%; }
 body { overscroll-behavior-y: none; }
 button { font: inherit; color: inherit; }
@@ -1360,6 +1363,21 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-rc { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; min-height: var(--tap); padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
 .sb-rc-where { font-size: .82rem; color: var(--ink-2); }
 .sb-rc-name { font-weight: 700; overflow-wrap: anywhere; }
+/* 修正清單 #421: 戰鬥版塊 — one fold per level (folded: nothing shown), the 所需板塊 beside the board when there is room */
+.sb-item.sb-item-bd { font-weight: 700; }
+.sb-boards .sb-sec-h { margin-bottom: 4px; }
+.sb-bd { border: 1px solid var(--line); border-radius: var(--r); margin: 8px 0; background: var(--panel); }
+.sb-bd-h { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 48px; padding: 8px 12px; border: 0; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.sb-bd-arr { width: 1.1em; color: var(--ink-2); }
+.sb-bd-lock { margin-left: auto; }
+.sb-bd-b { padding: 0 10px 10px; }
+.sb-bd-ref { margin: 0 0 8px; }
+.sb-bd-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 900px) { .sb-bd-grid { grid-template-columns: minmax(180px, 26%) 1fr; align-items: start; } .sb-bd-grid.one { grid-template-columns: 1fr; } }
+.sb-bd-img { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.sb-bd-img img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.sb-bd-img.req img { max-width: 360px; background: #fff; }
+@media (min-width: 900px) { .sb-bd-img.req img { max-width: none; } }
 
 /* storycards.css */
 /* 修正清單 #130: the 劇情卡 / 末日卡 / 駭物 panels (web only) */
