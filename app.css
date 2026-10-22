@@ -1344,6 +1344,10 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-full-where { flex: 1 1 200px; color: #AEB7BC; font-size: 1.05rem; }
 .sb-full-bar .btn { background: transparent; color: #E8E4DA; border-color: #4A565D; }
 .sb-full-bar .btn:disabled { opacity: .45; }
+/* 修正清單 #433: 收起工具列 — one thin row on top (展開 at the left, 結束全螢幕 at the right), the reading bar on one row */
+.sb-full.min .sb-full-bar { justify-content: space-between; padding-top: calc(4px + env(safe-area-inset-top)); padding-bottom: 4px; }
+.sb-full-bar .sb-full-ico { min-width: 40px; padding: 0 8px; font-size: 1.1em; }
+@media (min-width: 480px) { .sb-full.min .tts-what { flex: 0 0 auto; } .sb-full.min .tts-in, .sb-full.min .tts-ctl { flex-wrap: nowrap; } }
 .sb-full-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 18px calc(16px + env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left)); }
 .sb-sec.big { max-width: 1320px; margin: 0 auto; background: transparent; border: 0; padding: 0 2vw; color: #E8E4DA; }
 .sb-sec.big .sb-no { font-size: clamp(2.6rem, 6vw, 4.5rem); color: #D9A25E; }
@@ -1393,6 +1397,11 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-bd-img img { display: block; width: 100%; height: auto; border-radius: 6px; }
 .sb-bd-img.req img { max-width: 360px; background: #fff; }
 @media (min-width: 900px) { .sb-bd-img.req img { max-width: none; } }
+/* 修正清單 #434: the 所需板塊 as text above the pictures — one per line, two columns when there is room */
+.sb-bd-rq { margin: 2px 0 10px; }
+.sb-bd-rq > b { display: block; margin-bottom: 4px; }
+.sb-bd-rq ul { margin: 0; padding-left: 1.3em; columns: 2 12em; column-gap: 1.5em; max-width: 30em; }
+.sb-bd-rq li { break-inside: avoid; line-height: 1.5; }
 
 /* storycards.css */
 /* 修正清單 #130: the 劇情卡 / 末日卡 / 駭物 panels (web only) */
