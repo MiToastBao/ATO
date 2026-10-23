@@ -1032,12 +1032,27 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kw-li::before { content: '•'; display: inline-block; width: 1.1em; text-indent: 0; }
 .kw-label { color: var(--ink-2); font-size: .92rem; }
 .kw-ico { height: 1.2em; width: auto; vertical-align: -0.25em; margin: 0 1px; }
-.kw-fig { float: right; margin: 2px 0 4px 10px; width: 76px; text-align: center; }
-.kw-fig img { width: 76px; height: auto; }
+/* 修正清單 #480: the small pictures of a version together beside the text, in the book's order (left to right); two tokens side by
+   side, a card and a token one above the other — the text keeps most of the width on a phone */
+.kw-figs { float: right; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 8px; max-width: 172px; margin: 2px 0 4px 10px; }
+.kw-fig { width: 76px; margin: 0; text-align: center; }
+.kw-fig > img { width: 76px; height: auto; }
 .kw-fig figcaption { font-size: .7rem; color: var(--ink-2); }
-/* 修正清單 #476: a wide picture (an example, a map, a book's screenshot) under the text at its own size, never wider than the panel */
+/* 修正清單 #476 / #480: an example under the text, folded at first — its caption is the line to tap; open, the picture at its own
+   size, never wider than the panel */
 .kw-fig.wide { float: none; clear: both; width: auto; max-width: min(100%, 480px); margin: 8px 0 6px; text-align: left; }
-.kw-fig.wide img { width: auto; max-width: 100%; border-radius: 4px; background: #fff; }
+.kw-fig.wide > summary { display: flex; align-items: flex-start; gap: 6px; cursor: pointer; list-style: none; font-size: .85rem; color: var(--ink-2); line-height: 1.5; padding: 4px 0; }
+.kw-fig.wide > summary::-webkit-details-marker { display: none; }
+.kw-fig.wide > summary::before { content: '▸'; flex: none; color: var(--accent); transition: transform .15s; }
+.kw-fig.wide[open] > summary::before { transform: rotate(90deg); }
+.kw-fig-tag { flex: none; font-size: .72rem; font-weight: 700; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 0 4px; line-height: 1.5; margin-top: 1px; }
+.kw-fig.wide > img { display: block; width: auto; max-width: 100%; border-radius: 4px; background: #fff; margin-top: 4px; }
+/* a card: a little bigger than a token so the card can be made out; tokens with their names: small, under the text */
+.kw-fig.card { width: 104px; }
+.kw-fig.card > img { width: 104px; }
+.kw-fig.set { float: none; clear: both; width: auto; max-width: min(100%, 280px); margin: 8px 0 6px; }
+.kw-fig.set > img { width: 100%; border-radius: 4px; background: #fff; }
+@media (prefers-reduced-motion: reduce) { .kw-fig.wide > summary::before { transition: none; } }
 .kw-src.b { background: transparent; color: var(--ink); border: 1px solid var(--ink); border-radius: 4px 0 4px 0; }
 .kw-src.n { background: transparent; color: var(--ink); border: 1px dotted var(--ink); }
 .kw-ver.multi { margin: 6px 0; padding: 6px 10px; border-left: 3px solid var(--accent); background: var(--panel); border-radius: 0 8px 8px 0; overflow: hidden; }
@@ -1259,6 +1274,12 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pack-screen { padding-top: calc(20px + var(--sat)); }
 .tab-blocked > .content { padding-top: calc(16px + var(--sat)); }
 .boot { padding-top: var(--sat); }
+/* 修正清單 #487: the popups and the status bar's strip keep to the part of the screen that can be seen (iPhone, keyboard up: the
+   page is pushed up — they are not; --vvt / --vvh from app.jsx, the whole window when the browser does not say) */
+.overlay { top: var(--vvt, 0px); bottom: auto; height: var(--vvh, 100%); }
+.sb-fill { top: var(--vvt, 0px); }
+.pop-wrap, .pop { max-height: calc(var(--vvh, 100dvh) - var(--ovt) - var(--ovb)); }
+.pop-wrap.full { max-height: none; }
 
 /* side.css */
 /* 修正清單 #468: 並排查閱 — the read-only pane beside the main screen (tablets and computers, a wide window only). The main screen
@@ -1266,9 +1287,12 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .app.side-open { --sidew: clamp(320px, 33vw, 420px); padding-right: var(--sidew); }
 .side-pane { position: fixed; top: 0; right: 0; bottom: 0; width: var(--sidew); z-index: 31; display: flex; flex-direction: column; box-sizing: border-box;
   padding-top: env(safe-area-inset-top); background: var(--ground); border-left: 2px solid var(--line); box-shadow: -4px 0 10px rgba(30, 42, 51, .12); }
-.side-head { flex: none; display: flex; align-items: center; gap: 6px; padding: 8px 8px 8px 10px; background: var(--panel); border-bottom: 1px solid var(--line); }
-.side-tabs { flex: 1; min-width: 0; display: flex; }
-.side-tabs button { flex: 1; min-width: 0; padding: 4px 6px; font-size: .9rem; white-space: nowrap; }
+/* 修正清單 #483: 「並排查閱」, 清空 and × on the first row, the three tabs on a row of their own (the whole width of the pane); a label
+   that still does not fit (a very large text size) goes onto two lines on its button, never under the next one */
+.side-head { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 6px 8px 8px 10px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.side-title { flex: 1; min-width: 0; font-weight: 700; color: var(--ink-2); font-size: .9rem; }
+.side-tabs { flex: 1 1 100%; min-width: 0; display: flex; }
+.side-tabs button { flex: 1; min-width: 0; padding: 4px 6px; font-size: .9rem; white-space: normal; overflow-wrap: anywhere; line-height: 1.25; }
 .side-tabs button.on { background: var(--accent, #2E6F6A); color: #fff; font-weight: 700; }
 .side-clear { flex: none; min-height: 40px; padding: 4px 10px; font-size: .9rem; }
 .side-x { flex: none; font-size: 1.6rem; line-height: 1; width: 40px; height: 40px; }
@@ -1329,6 +1353,10 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tts-vrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
 .tts-vname { flex: 1 1 8em; min-width: 0; overflow-wrap: anywhere; }
 .tts-vbtns { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+/* 修正清單 #477: the sentence being read — a background colour and an underline on its words (no bold, no italic); its own colours
+   on the cream page (dark text on amber, about 10:1) and on the black 全螢幕 (light text on deep amber, about 7:1) */
+::highlight(tts) { background-color: #FFD24D; color: #1E2A33; text-decoration: underline; text-decoration-color: #8A5A00; text-decoration-thickness: 2px; }
+::highlight(tts-dark) { background-color: #6B5410; color: #FFF6E0; text-decoration: underline; text-decoration-color: #F2C14E; text-decoration-thickness: 2px; }
 
 /* storybook.css */
 /* 修正清單 #343 / #349: 劇情書 (web only) */
