@@ -846,6 +846,12 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* 「參見第 N 頁」 that opens the page: underlined like a link */
 .pg-link { color: var(--accent-strong, var(--accent)); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 
+/* 修正清單 #478: the keywords the page names, gathered once at its top (folded); the text itself has no keyword links */
+.bt-kws { margin: 0 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.bt-kws > summary { cursor: pointer; padding: 8px 12px; font-size: .9rem; font-weight: 700; color: var(--ink-2); min-height: 24px; }
+.bt-kws[open] > summary { border-bottom: 1px solid var(--line-2); }
+.bt-kws-list { display: flex; flex-wrap: wrap; gap: 6px 8px; padding: 8px 12px 10px; }
+.bt-kw { font: inherit; font-size: .95rem; padding: 4px 10px; min-height: 36px; border: 1px solid var(--line); border-radius: 999px; background: var(--ground); color: var(--ink); text-decoration: none; }
 
 /* cryptic.css */
 /* ===== cryptic languages (修正清單 #63) =====
@@ -1029,6 +1035,11 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kw-fig { float: right; margin: 2px 0 4px 10px; width: 76px; text-align: center; }
 .kw-fig img { width: 76px; height: auto; }
 .kw-fig figcaption { font-size: .7rem; color: var(--ink-2); }
+/* 修正清單 #476: a wide picture (an example, a map, a book's screenshot) under the text at its own size, never wider than the panel */
+.kw-fig.wide { float: none; clear: both; width: auto; max-width: min(100%, 480px); margin: 8px 0 6px; text-align: left; }
+.kw-fig.wide img { width: auto; max-width: 100%; border-radius: 4px; background: #fff; }
+.kw-src.b { background: transparent; color: var(--ink); border: 1px solid var(--ink); border-radius: 4px 0 4px 0; }
+.kw-src.n { background: transparent; color: var(--ink); border: 1px dotted var(--ink); }
 .kw-ver.multi { margin: 6px 0; padding: 6px 10px; border-left: 3px solid var(--accent); background: var(--panel); border-radius: 0 8px 8px 0; overflow: hidden; }
 .kw-ver-h { font-size: .8rem; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
 /* 修正清單 #245: the source of each version (官方彙整 filled, 國外玩家彙整 outlined) and the old name under the name */
@@ -1040,6 +1051,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kw-ver.multi.src-f { border-left-color: var(--line); }
 /* 修正清單 #354: 大陸群友彙整 — a dashed tag, unlike the other two */
 .kw-src.c { background: transparent; color: var(--ink-2); border: 1px dashed var(--ink-2); }
+.kw-src.r { background: transparent; color: var(--ink); border: 1px solid var(--ink); } /* 修正清單 #460: 規則書 */
 .kw-ver.multi.src-c { border-left-color: var(--ink-2); border-left-style: dashed; }
 .kw-alias { margin: -2px 0 4px; font-size: .8rem; color: var(--ink-2); }
 /* 修正清單 #255: a keyword inside a card text — dotted underline, tap for its entry */
@@ -1248,6 +1260,32 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tab-blocked > .content { padding-top: calc(16px + var(--sat)); }
 .boot { padding-top: var(--sat); }
 
+/* side.css */
+/* 修正清單 #468: 並排查閱 — the read-only pane beside the main screen (tablets and computers, a wide window only). The main screen
+   keeps about 2/3 of the width; the fixed bars of the main screen stop where the pane begins. */
+.app.side-open { --sidew: clamp(320px, 33vw, 420px); padding-right: var(--sidew); }
+.side-pane { position: fixed; top: 0; right: 0; bottom: 0; width: var(--sidew); z-index: 31; display: flex; flex-direction: column; box-sizing: border-box;
+  padding-top: env(safe-area-inset-top); background: var(--ground); border-left: 2px solid var(--line); box-shadow: -4px 0 10px rgba(30, 42, 51, .12); }
+.side-head { flex: none; display: flex; align-items: center; gap: 6px; padding: 8px 8px 8px 10px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.side-tabs { flex: 1; min-width: 0; display: flex; }
+.side-tabs button { flex: 1; min-width: 0; padding: 4px 6px; font-size: .9rem; white-space: nowrap; }
+.side-tabs button.on { background: var(--accent, #2E6F6A); color: #fff; font-weight: 700; }
+.side-clear { flex: none; min-height: 40px; padding: 4px 10px; font-size: .9rem; }
+.side-x { flex: none; font-size: 1.6rem; line-height: 1; width: 40px; height: 40px; }
+.side-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.side-body .panel { max-width: none; }
+.side-body .kw-bar, .side-body .cx-bar { top: 0; }
+.side-body .content { padding-bottom: 32px; }
+.app.side-open .bbar, .app.side-open .tts-bar, .app.side-open .save-err.fixed { right: var(--sidew); }
+.app.side-open .upd-bar { right: calc(var(--sidew) + 8px); }
+.app.side-open .toast { left: calc((100% - var(--sidew)) / 2); max-width: min(60vw, 480px); }
+.app.side-open .tl-back-cur { right: calc(var(--sidew) + 92px); }
+/* the button in the top bar: a page with a narrower page beside it */
+.side-btn .side-btn-ico { display: inline-block; width: 22px; height: 16px; border: 2px solid currentColor; border-radius: 3px; box-sizing: border-box; position: relative; }
+.side-btn .side-btn-ico::after { content: ''; position: absolute; top: 0; bottom: 0; right: 6px; border-left: 2px solid currentColor; }
+.side-btn.on { background: color-mix(in srgb, var(--accent, #2E6F6A) 22%, transparent); border-radius: 8px; }
+.side-btn.off { opacity: .45; }
+
 /* speech.css */
 /* 修正清單 #410: reading aloud — the 「朗讀」 button next to a title, the bar above the bottom bar while it reads */
 .tts-btn { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; min-height: 36px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-size: .9em; font-weight: 600; cursor: pointer; }
@@ -1360,7 +1398,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-sec.big .sb-go { color: #8FD0C8; }
 .sb-sec.big .sb-note { background: #2A3338; color: #E8E4DA; }
 .sb-sec.big .lt { filter: none; } /* the white symbols stay white on the dark page */
-.sb-sec.big img.ri:not(.lt) { filter: invert(1); }
+.sb-sec.big img.ri:not(.lt):not(.xc) { filter: invert(1); } /* 修正清單 #455: a coloured icon (.xc) keeps its colour */
 /* 修正清單 #347: a sealed primordial (S 信封) */
 .sc-prim.sc-sealed { border-style: dashed; color: var(--ink-2); }
 .sc-sealed-note { margin: -4px 0 10px; }
