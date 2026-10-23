@@ -1046,7 +1046,9 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kw-fig.wide > summary::before { content: '▸'; flex: none; color: var(--accent); transition: transform .15s; }
 .kw-fig.wide[open] > summary::before { transform: rotate(90deg); }
 .kw-fig-tag { flex: none; font-size: .72rem; font-weight: 700; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 0 4px; line-height: 1.5; margin-top: 1px; }
-.kw-fig.wide > img { display: block; width: auto; max-width: 100%; border-radius: 4px; background: #fff; margin-top: 4px; }
+.kw-fig-zoom { display: block; padding: 0; margin: 4px 0 0; border: 0; background: none; font: inherit; color: inherit; text-align: right; cursor: zoom-in; max-width: 100%; }
+.kw-fig-zoom > img { display: block; width: auto; max-width: 100%; border-radius: 4px; background: #fff; }
+.kw-fig-hint { display: block; font-size: .72rem; color: var(--ink-2); margin-top: 2px; } /* 修正清單 #500 */
 /* a card: a little bigger than a token so the card can be made out; tokens with their names: small, under the text */
 .kw-fig.card { width: 104px; }
 .kw-fig.card > img { width: 104px; }
@@ -1074,6 +1076,8 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kw-link:hover, .kw-link:focus-visible { background: color-mix(in srgb, var(--accent) 14%, transparent); outline: none; }
 .kw-pop { max-height: 60vh; overflow-y: auto; }
 .kw-pop .kw-entry { border-bottom: 0; padding-top: 0; }
+/* 修正清單 #495: a caption of two paragraphs (規則書第 39 頁 之字形示例 + its 「注意…」) keeps its line break */
+.kw-fig-cap, .kw-fig > figcaption { white-space: pre-line; }
 
 /* map.css */
 /* map panel: official map icons (map.jsx) */
@@ -1132,6 +1136,19 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tsq:not(.pic) .tid { font-size: min(.95rem, calc(var(--tile) * .22)); line-height: 1.15; }
 .tsq.pic .tbar.top { max-width: none; left: auto; right: auto; }
 .tsq.pic .mk { box-sizing: border-box; }
+/* 修正清單 #501 (GPT 複查 v1.0.73 R73-07): a phone held sideways (568×320, 文字 130%) — the title, the 地圖／備註 tabs and the
+   探索／板塊信息 row left the map about 53 px. On a short screen (max-height 500px, as the 科技 search bar and the 神諭 keyboard):
+   the tabs scroll away with the page, the row is one low line (the explanations under 探索／揭露 not shown: the buttons keep their
+   names) right on the bottom bar, its right end clear of the helm. */
+@media (max-height: 500px) {
+  .map-panel > .tabs { position: static; }
+  .map-actions { bottom: var(--bbh, 0px); padding: 3px 84px 3px 12px; gap: 6px; }
+  .map-actions .btn.act { flex-direction: row; gap: 6px; min-height: 38px; padding-top: 2px; padding-bottom: 2px; } /* 探索 and the tiles it goes to on one line */
+  .map-actions .btn.act small { display: none; }
+  .map-actions .goto { margin-top: 0; }
+  /* a tile brought into view (選取、前往板塊) is centred in the part left between the title bar and the row, not under them */
+  html:has(.map-actions) { scroll-padding-top: var(--tbh, 58px); scroll-padding-bottom: calc(var(--bbh, 0px) + 46px); }
+}
 
 /* menu-save-nav.css */
 /* main menu, host game, new campaign, save panel, bottom bar, navigation sheet (official icons) */
@@ -1954,3 +1971,5 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .x-tag-r { background: #8E2A22; }
 .x-tag-k { background: #222; }
 .x-tag-g { background: #5A5A5A; }
+/* 修正清單 #492: a note's number above the line (前行之旅 「海馬¹」) — small, and the line keeps its height */
+.sb-sec sup, .x-text sup, .sb-sec sub, .x-text sub { font-size: .68em; line-height: 0; }
