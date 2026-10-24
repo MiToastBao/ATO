@@ -1787,6 +1787,26 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .prod-ready { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .82rem; font-weight: 700; }
 .slot-note { flex: none; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .78rem; font-weight: 700; white-space: nowrap; }
 .slot-h .slot-name, .slot-h .slot-n { white-space: nowrap; }
+/* 修正清單 #506 / #507 (使用者 2026-10-24): the 出戰 loadout and 「結束戰鬥」 — on the 阿爾戈英雄 page, and in the 軍械庫's 配置 */
+.arg-battle, .lo-battle { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 10px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.arg-battle.on, .lo-battle.on { border-color: var(--accent); }
+.arg-battle-t, .lo-battle-t { flex: 1 1 12em; min-width: 0; font-size: .9rem; color: var(--ink-2); overflow-wrap: anywhere; }
+.arg-battle.on .arg-battle-t, .lo-battle.on .lo-battle-t { color: var(--ink); }
+.arg-endbattle, .lo-endbattle { flex: none; white-space: nowrap; }
+.arg-pilot { display: flex; align-items: center; gap: 8px; }
+.arg-pilot-l { flex: none; font-size: .88rem; color: var(--ink-2); }
+.arg-pilot-s { flex: 1; min-width: 0; }
+.lo-go { flex: none; white-space: nowrap; min-height: 36px; padding: 4px 10px; }
+.lo-go.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+/* 修正清單 #509: the 體育館牌庫 on the titans page's second tab */
+.gym-grp, .gym-lost { margin-top: 14px; }
+.gym-form { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; padding: 8px 10px; margin: 6px 0; border: 1px solid var(--accent); border-radius: 10px; }
+.gym-form > span { flex: 1 1 12em; min-width: 0; }
+.gym-acts { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.gym-src { color: var(--ink-2); font-weight: 400; margin-left: 4px; }
+.gym-pick { display: flex; flex-direction: column; gap: 2px; max-height: 60vh; overflow: auto; }
+.gym-manual { margin-top: 14px; line-height: 1.9; }
+.gym-manual .btn { margin-left: 6px; }
 
 /* trackers.css */
 /* trackers: official icons in timeline, mnestis, diplomacy, adventures, titans, godforms, notes, matrix, fated */
