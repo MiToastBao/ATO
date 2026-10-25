@@ -343,7 +343,6 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .step-mini-n { font-size: .82rem; color: var(--accent); font-weight: 700; white-space: nowrap; }
 .step.mini .slot-arr { width: 1.2em; text-align: center; color: var(--ink-2); }
 /* 修正清單 #284: events waiting at a round step — tucked under its step card, indented to the step's text */
-.sn-hint { margin: 0 0 4px; font-size: .9rem; line-height: 1.55; }
 .step-wrap { display: flex; flex-direction: column; }
 /* 修正清單 #414: one ▾／▸ on the right of every step, the same button in the same place open or folded (#397); a folded row is as
    tall as the button, the arrow level with the name either way */
@@ -764,6 +763,12 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .btn-ico.remains { display: inline-flex; align-items: center; gap: 4px; padding: 0 6px; border: 1px solid var(--line); }
 .remains-cyc { font-family: var(--serif); font-weight: 700; }
 .tri-btn:disabled { opacity: .25; cursor: default; } /* 修正清單 #88 */
+/* 修正清單 #536: 怒氣／命運／兇險 written upright, left of the icon */
+.tri-lbl { display: flex; flex-direction: column; align-items: center; align-self: center; font-size: .66rem; line-height: 1.05; color: var(--ink-2); font-weight: 600; }
+.tri-lbl > span { display: block; }
+.tri-lbl.en { display: block; writing-mode: vertical-rl; transform: rotate(180deg); font-size: .56rem; line-height: 1; }
+.tri-val { gap: 2px; } /* #536: the label, the icon and the number closer, so the three values stand apart */
+@container main (max-width: 360px) { .tri-val { font-size: 1.15rem; } .tri-val .tri-ico { width: 21px; height: 21px; } }
 
 /* codex.css */
 /* 修正清單 #232 / #238: 孤本聖典 — a contents page of every title, then one page with 「返回目錄」 */
@@ -1298,7 +1303,12 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* 修正清單 #109: opened from the home screen, iPhone draws the status bar (white clock / battery) over the top of the page.
    That strip is painted dark crimson so the white text stays readable, and nothing of the app is placed under it. */
 :root { --sat: env(safe-area-inset-top, 0px); }
-.sb-fill { position: fixed; top: 0; left: 0; right: 0; height: var(--sat); background: #3A0A0E; z-index: 160; pointer-events: none; }
+.sb-fill { position: fixed; top: 0; left: 0; right: 0; height: var(--sat); background: #3A0A0E; z-index: 160; }
+/* 修正清單 #529 (使用者 2026-10-25, iPhone／iPad iOS 27.0.1 opened from the home screen): iOS 26 and later blur the top of the page
+   (about 40 pt) unless the point 4 px down the middle of the top edge lands on a fixed／sticky full-width box of one solid colour.
+   This strip is that box — with pointer-events: none iOS retried the test honouring pointer-events, fell through it and blurred the
+   status bar and the top bar. It takes taps now: it only covers the status bar (nothing to tap there), and the content it covers
+   while the keyboard is up (#487) is hidden behind it anyway. */
 .save-err.fixed { padding-top: calc(10px + var(--sat)); }
 .save-err.in-bar { padding-top: calc(8px + var(--sat)); }
 .overlay { --ovt: max(12px, calc(var(--sat) + 8px)); }
@@ -1495,7 +1505,7 @@ html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-selec
 .env-val { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 .env-val .fine { margin: 0; }
 /* 修正清單 #371: 最近讀過 — the top bar key and the list */
-.sb-recent-btn svg { display: block; }
+.sb-recent-btn svg, .sb-full-btn svg { display: block; } /* #525: 全螢幕 in the top bar */
 .sb-recent { display: flex; flex-direction: column; gap: 8px; margin: 0 0 10px; }
 .sb-rc { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; min-height: var(--tap); padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
 .sb-rc-where { font-size: .82rem; color: var(--ink-2); }
