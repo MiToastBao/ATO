@@ -31,6 +31,9 @@ body { overscroll-behavior-y: none; }
 button { font: inherit; color: inherit; }
 button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .app { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+/* 修正清單 #521: the page lays itself out by its own width (the 並排查閱 pane beside it takes part of the window): the width rules of the
+   pages are container queries on `main` — the main screen, and the pane's own box for what is shown in it */
+.screen { container: main / inline-size; }
 .screen { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 .panel { flex: 1; display: flex; flex-direction: column; min-height: 0; width: 100%; max-width: 920px; margin: 0 auto; }
 .content { flex: 1; padding: 12px 16px 24px; }
@@ -91,11 +94,11 @@ hr { border: 0; border-top: 1px solid var(--line-2); margin: 10px 0; }
 /* 修正清單 #301: how many booked production options can be paid, beside 「生產」 */
 .tab-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 1.35em; height: 1.35em; margin-left: 4px; padding: 0 4px; border-radius: 999px; background: var(--accent); color: #fff; font-size: .78rem; font-weight: 800; line-height: 1; vertical-align: 1px; }
 /* 修正清單 #241: on a narrow phone the tabs share the width and a long name takes two lines — none is pushed off the screen */
-@media (max-width: 360px) { .tab { flex: 1 1 0; min-width: 0; white-space: normal; padding: 6px 4px; line-height: 1.25; overflow-wrap: anywhere; } }
+@container main (max-width: 360px) { .tab { flex: 1 1 0; min-width: 0; white-space: normal; padding: 6px 4px; line-height: 1.25; overflow-wrap: anywhere; } }
 /* 修正清單 #297 (使用者 16:55): on a narrow screen the argonauts page's 「清零」 keeps only its icon, so the title fits on one line */
-@media (max-width: 360px) { .arg-reset .btn-txt { display: none; } .arg-reset { padding-left: 10px; padding-right: 10px; } }
+@container main (max-width: 360px) { .arg-reset .btn-txt { display: none; } .arg-reset { padding-left: 10px; padding-right: 10px; } }
 /* 修正清單 #292 / #293: a short and a long tab name (泰坦｜獨佔裝備／樣式卡牌) share the row by their length */
-@media (max-width: 360px) { .tabs.fit .tab { flex: 1 1 auto; } }
+@container main (max-width: 360px) { .tabs.fit .tab { flex: 1 1 auto; } }
 
 /* fields */
 .field { width: 100%; min-height: var(--tap); padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); color: var(--ink); font: inherit; }
@@ -255,7 +258,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 
 /* argonauts */
 .arg-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-@media (min-width: 680px) { .arg-grid { grid-template-columns: 1fr 1fr; } }
+@container main (min-width: 680px) { .arg-grid { grid-template-columns: 1fr 1fr; } }
 .arg-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
 .arg-card.empty { min-height: 180px; align-items: center; justify-content: center; border-style: dashed; color: var(--ink-2); cursor: pointer; font-size: 1rem; }
 .roman-big { font-family: var(--serif); font-size: 2.6rem; color: var(--line); }
@@ -326,7 +329,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .ico.acc-arrow { width: 28px; height: 18px; object-fit: contain; }
 .tl-note { font-size: .92rem; }
 .tl-end { margin: 18px 0; padding: 14px; text-align: center; border: 1px dashed var(--line); border-radius: var(--r); }
-.steps { display: flex; flex-direction: column; gap: 8px; }
+.steps { display: flex; flex-direction: column; gap: 8px; padding-bottom: 64px; } /* 修正清單 #512: room under the last step for 「回到目前步驟」 */
 .step { display: grid; grid-template-columns: 28px 1fr; gap: 4px 10px; text-align: left; padding: 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); cursor: pointer; }
 .step-dot { grid-row: span 2; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--ink); margin-top: 2px; }
 .step.on { border-color: var(--cyc); box-shadow: inset 4px 0 0 var(--cyc); }
@@ -441,13 +444,13 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .mcell.on { background: #444444; color: #fff; border-color: #444444; }
 .mcell.sel { outline: 3px solid var(--cyc); outline-offset: 0; position: relative; z-index: 1; }
 .mcell.has-note { box-shadow: inset 0 -3px 0 var(--accent); }
-@media (min-width: 640px) { .mcell { font-size: .78rem; min-height: 40px; } }
+@container main (min-width: 640px) { .mcell { font-size: .78rem; min-height: 40px; } }
 /* 修正清單 #93: labels must fit a 1/12-width cell at any text size — the font is capped by the cell width
    (cell content ≈ (row − 33px) / 12 − 2px; measured: 3 characters ≈ 2.0em, 4 characters or M10/W10 ≈ 2.65em) */
 .mrow { container-type: inline-size; }
 .mcell { font-size: min(.64rem, max(9px, calc(3.9cqw - 2.4px))); line-height: 1.05; }
 .mcell.l4 { font-size: min(.64rem, max(9px, calc(2.95cqw - 1.8px))); letter-spacing: -.02em; }
-@media (min-width: 640px) { .mcell { font-size: min(.78rem, max(9px, calc(3.9cqw - 2.4px))); } .mcell.l4 { font-size: min(.78rem, max(9px, calc(2.95cqw - 1.8px))); } }
+@container main (min-width: 640px) { .mcell { font-size: min(.78rem, max(9px, calc(3.9cqw - 2.4px))); } .mcell.l4 { font-size: min(.78rem, max(9px, calc(2.95cqw - 1.8px))); } }
 /* 修正清單 #318 (最後檢查, 320 px): below a 343 px row the long labels (W10, M10, AA10 …) no longer fit on one line even at 9 px;
    they broke wherever the browser chose (only the W ones did), so every long label now takes two lines: letters, then the number */
 @container (max-width: 343px) { .mcell.l4 .mc-r, .mcell.l4 .mc-n { display: block; } .mcell.l4 { letter-spacing: 0; } }
@@ -467,7 +470,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .map-panel { max-width: none; }
 .map-scroll { overflow: auto; -webkit-overflow-scrolling: touch; }
 .map-grid { display: grid; gap: 4px; width: max-content; margin: 0 auto; padding: 4px; }
-@media (min-width: 900px) { .map-panel { --tile: 74px; } }
+@container main (min-width: 900px) { .map-panel { --tile: 74px; } }
 .tsq { position: relative; width: var(--tile); height: var(--tile); border-radius: 8px; border: 2px solid var(--line); background: var(--panel); padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .tsq.hidden { visibility: hidden; cursor: default; }
 .tsq.down { background: #DDE2E3; border-style: dashed; border-color: #9AA5AB; }
@@ -627,7 +630,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .arg-top { display: flex; align-items: center; gap: 10px; }
 .arg-top .arg-head { flex: 1; min-width: 0; }
 /* 修正清單 #429: 「已進行回合」 at the card's top right — unmarked a faint dashed outline, marked filled; 「重置回合」 in a row above */
-.arg-turn { align-self: flex-start; flex: none; display: inline-flex; align-items: center; gap: 4px; min-height: 36px; padding: 3px 9px 3px 6px;
+.arg-turn { flex: none; display: inline-flex; align-items: center; gap: 4px; min-height: 36px; padding: 3px 9px 3px 6px;
   border-radius: 999px; border: 1px dashed var(--line); background: transparent; color: var(--ink-2); font: inherit; font-size: .8rem; line-height: 1.1;
   cursor: pointer; }
 .arg-turn-t { white-space: nowrap; }
@@ -636,8 +639,23 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .arg-turn.on { border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); font-weight: 600; }
 .arg-turn.on .arg-turn-mk { border-color: var(--accent-ink); background: var(--accent-ink); color: var(--accent); }
 /* a phone: two lines (the name keeps its room); 360 px or less: a row of its own above, still at the top right */
-@media (max-width: 480px) { .arg-turn-t > span { display: block; } .arg-turn { padding-right: 8px; border-radius: 14px; } }
-@media (max-width: 360px) { .arg-card { position: relative; } .arg-top { padding-top: 40px; } .arg-top .arg-turn { position: absolute; top: 10px; right: 10px; } .arg-turn-t > span { display: inline; } .arg-turn { border-radius: 999px; } }
+/* 修正清單 #515 (使用者 16:56: 小一點、看得出來就好，或卡片變色): 「首要目標」 a small round button with the official icon beside
+   「已進行回合」; held: the icon in full colour in a red ring, and the whole card framed and tinted red; not held: the icon faded */
+.arg-marks { align-self: flex-start; flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+/* the round button under 「已進行回合」 (which stays at the card's top right, #429; the name keeps the room it had: 赫拉克萊提斯 on one
+   line, t_r7700); side by side, before it, where the card is wide */
+.arg-marks .arg-pt { order: 2; }
+@container main (min-width: 520px) and (max-width: 679px) { .arg-marks { flex-direction: row; align-items: center; } .arg-marks .arg-pt { order: 0; } }
+@container main (min-width: 1100px) { .arg-marks { flex-direction: row; align-items: center; } .arg-marks .arg-pt { order: 0; } }
+.arg-pt { flex: none; width: 36px; height: 36px; padding: 0; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%; border: 1px dashed var(--line); background: transparent; cursor: pointer; }
+.arg-pt-ico { width: 22px; height: 22px; opacity: .35; filter: grayscale(1); }
+.arg-pt-fb { color: var(--ink-2); }
+.arg-pt.on { border: 2px solid var(--alert); background: #FFFFFF; }
+.arg-pt.on .arg-pt-ico { opacity: 1; filter: none; }
+.arg-card.pt-on { border: 2px solid var(--alert); background: #FBEDEC; padding: 11px; }
+@container main (max-width: 480px) { .arg-turn-t > span { display: block; } .arg-turn { padding-right: 8px; border-radius: 14px; } }
+@container main (max-width: 360px) { .arg-card { position: relative; } .arg-top { padding-top: 40px; } .arg-top .arg-marks { position: absolute; top: 10px; right: 10px; flex-direction: row; align-items: center; } .arg-marks .arg-pt { order: 0; } .arg-turn-t > span { display: inline; } .arg-turn { border-radius: 999px; } }
 .arg-turnbar { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin: 0 0 10px; }
 .arg-turn-n { color: var(--ink-2); font-size: .9rem; }
 .arg-turns { white-space: nowrap; }
@@ -791,7 +809,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .bt-grid { display: grid; gap: 6px 16px; margin: .3em 0 .9em; }
 .bt-c1 { grid-template-columns: 1fr; }
 .bt-c2, .bt-c3, .bt-c4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 560px) { .bt-c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .bt-c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@container main (min-width: 560px) { .bt-c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .bt-c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .bt-gi { line-height: 1.4; }
 .bt-gi .bt-ico { height: 1.8em; max-width: 3em; vertical-align: middle; margin-right: .35em; }
 .bt-tw { overflow-x: auto; margin: .3em 0 1em; }
@@ -820,7 +838,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* phones: the two titles cut to 2 or 3 characters say nothing (320 px: 「‹ 發…」「發展… ›」), so 「返回目錄」 shares the first row
    with this page's title (as before) and the titles before and after get a row of their own, half each (使用者 20:39: if it is
    too crowded, the titles go on a second row under 返回目錄) */
-@media (max-width: 600px) {
+@container main (max-width: 600px) {
   .cx-nav { display: contents; }
   /* rows spaced by the items' own margins (the empty break line between them then adds nothing) */
   .cx-bar { row-gap: 0; padding-top: 4px; padding-bottom: 4px; }
@@ -1301,7 +1319,9 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* side.css */
 /* 修正清單 #468: 並排查閱 — the read-only pane beside the main screen (tablets and computers, a wide window only). The main screen
    keeps about 2/3 of the width; the fixed bars of the main screen stop where the pane begins. */
-.app.side-open { --sidew: clamp(320px, 33vw, 420px); padding-right: var(--sidew); }
+/* 修正清單 #521: by default half the window (使用者 2026-10-24: 一樣寬); the line between them dragged changes --sider (the pane's share),
+   never narrower than 320 px, the main screen never narrower than 400 px (sidestate.js clampRatio does the same) */
+.app.side-open { --sidew: clamp(320px, calc(var(--sider, .5) * 100vw), calc(100vw - 400px)); padding-right: var(--sidew); }
 .side-pane { position: fixed; top: 0; right: 0; bottom: 0; width: var(--sidew); z-index: 31; display: flex; flex-direction: column; box-sizing: border-box;
   padding-top: env(safe-area-inset-top); background: var(--ground); border-left: 2px solid var(--line); box-shadow: -4px 0 10px rgba(30, 42, 51, .12); }
 /* 修正清單 #483: 「並排查閱」, 清空 and × on the first row, the three tabs on a row of their own (the whole width of the pane); a label
@@ -1310,10 +1330,13 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .side-title { flex: 1; min-width: 0; font-weight: 700; color: var(--ink-2); font-size: .9rem; }
 .side-tabs { flex: 1 1 100%; min-width: 0; display: flex; }
 .side-tabs button { flex: 1; min-width: 0; padding: 4px 6px; font-size: .9rem; white-space: normal; overflow-wrap: anywhere; line-height: 1.25; }
+/* 修正清單 #520 / #521: four tabs; a narrow pane (the line dragged, 320–420 px) takes smaller words so each stays on one line */
+.side-pane { container: side / inline-size; }
+@container side (max-width: 440px) { .side-tabs button { font-size: .8rem; padding: 4px 2px; letter-spacing: 0; } }
 .side-tabs button.on { background: var(--accent, #2E6F6A); color: #fff; font-weight: 700; }
 .side-clear { flex: none; min-height: 40px; padding: 4px 10px; font-size: .9rem; }
 .side-x { flex: none; font-size: 1.6rem; line-height: 1; width: 40px; height: 40px; }
-.side-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.side-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; container: main / inline-size; }
 .side-body .panel { max-width: none; }
 .side-body .kw-bar, .side-body .cx-bar { top: 0; }
 .side-body .content { padding-bottom: 32px; }
@@ -1326,6 +1349,16 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .side-btn .side-btn-ico::after { content: ''; position: absolute; top: 0; bottom: 0; right: 6px; border-left: 2px solid currentColor; }
 .side-btn.on { background: color-mix(in srgb, var(--accent, #2E6F6A) 22%, transparent); border-radius: 8px; }
 .side-btn.off { opacity: .45; }
+/* 修正清單 #521: the line to drag — wide enough for a finger (24 px, half over the main screen's edge), a grip in the middle */
+.side-drag { position: absolute; top: 0; bottom: 0; left: -13px; width: 24px; z-index: 2; cursor: col-resize; touch-action: none; display: flex; align-items: center; justify-content: center; }
+.side-drag:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.side-grip { width: 8px; height: 56px; border-radius: 4px; background: var(--panel); border: 2px solid var(--line); box-shadow: 0 1px 3px rgba(30, 42, 51, .25); }
+.side-drag:hover .side-grip, .side-drag.dragging .side-grip { border-color: var(--accent); background: var(--accent-soft); }
+html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-select: none; cursor: col-resize; }
+/* 修正清單 #520: 劇情段落 in the pane — its book on a thin row of its own (with 最近讀過), the page's own 全螢幕 not here */
+.sb-side-h { display: flex; align-items: center; gap: 8px; padding: 6px 12px 0; }
+.sb-side-where { flex: 1; min-width: 0; font-weight: 700; color: var(--ink-2); font-size: .9rem; }
+.side-body .sb-side .content { padding-top: 6px; }
 
 /* speech.css */
 /* 修正清單 #410: reading aloud — the 「朗讀」 button next to a title, the bar above the bottom bar while it reads */
@@ -1382,7 +1415,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sc-seg.sb-books { display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); width: 100%; }
 .sb-books button { padding: 6px 4px; white-space: nowrap; }
 .sb-books button + button { border-left: 1px solid var(--line); }
-@media (max-width: 429px) { .sc-seg.sb-books.n4 { grid-template-columns: repeat(2, 1fr); } .sb-books.n4 button:nth-child(3) { border-left: 0; } .sb-books.n4 button:nth-child(n+3) { border-top: 1px solid var(--line); } }
+@container main (max-width: 429px) { .sc-seg.sb-books.n4 { grid-template-columns: repeat(2, 1fr); } .sb-books.n4 button:nth-child(3) { border-left: 0; } .sb-books.n4 button:nth-child(n+3) { border-top: 1px solid var(--line); } }
 /* 修正清單 #368: the campaign's own book and 「其他故事集」; once the others are open, 「只看…」 under them */
 .sb-books .sb-others { color: var(--ink-2); font-weight: 400; }
 .sb-only { display: flex; justify-content: flex-end; margin: 6px 0 2px; }
@@ -1401,8 +1434,10 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-grp-h h2 { margin: 0; font-family: var(--serif); font-size: 1.2rem; }
 .sb-tools { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 12px 0 10px; }
 .sb-tools .btn { padding: 0 6px; }
+.sb-tools.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } /* 修正清單 #520: the pane has no 全螢幕 */
 /* 修正清單 #413: 上一段｜下一段｜查看截圖｜全螢幕 — two rows on a phone held upright (使用者 23:5x) */
-@media (max-width: 600px) { .sb-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container main (max-width: 600px) { .sb-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sb-tools.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container main (max-width: 380px) { .sb-tools.n3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* the card: the book's paper colour, the number large in the story collection's colour */
 .sb-sec { background: #FBF8F1; border: 1px solid #D9CFBC; border-radius: 10px; padding: 14px 16px 16px; margin-bottom: 14px; color: #1E2A33;
   scroll-margin-top: calc(var(--tbh, 58px) + 8px); }
@@ -1475,11 +1510,11 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sb-bd-b { padding: 0 10px 10px; }
 .sb-bd-ref { margin: 0 0 8px; }
 .sb-bd-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-@media (min-width: 900px) { .sb-bd-grid { grid-template-columns: minmax(180px, 26%) 1fr; align-items: start; } .sb-bd-grid.one { grid-template-columns: 1fr; } }
+@container main (min-width: 900px) { .sb-bd-grid { grid-template-columns: minmax(180px, 26%) 1fr; align-items: start; } .sb-bd-grid.one { grid-template-columns: 1fr; } }
 .sb-bd-img { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .sb-bd-img img { display: block; width: 100%; height: auto; border-radius: 6px; }
 .sb-bd-img.req img { max-width: 360px; background: #fff; }
-@media (min-width: 900px) { .sb-bd-img.req img { max-width: none; } }
+@container main (min-width: 900px) { .sb-bd-img.req img { max-width: none; } }
 /* 修正清單 #434: the 所需板塊 as text above the pictures — one per line, two columns when there is room */
 .sb-bd-rq { margin: 2px 0 10px; }
 .sb-bd-rq > b { display: block; margin-bottom: 4px; }
@@ -1530,7 +1565,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* a whole board fits on one screen (tablet / TV): as wide as the screen allows, but never taller than the space left */
 /* 修正清單 #133: never narrower than 360px (a phone held sideways): then the page scrolls, and a tap still opens it full screen */
 .prim-panel .sc-board .sc-img { width: max(min(100%, 360px), min(100%, calc((100dvh - var(--bbh, 68px) - 225px) * var(--ar, 1.45)))); margin: 0 auto; } /* first paint; FitBoard then measures (修正清單 #141) */
-@media (max-width: 600px) { .prim-panel .sc-board .sc-img { width: 100%; } }
+@container main (max-width: 600px) { .prim-panel .sc-board .sc-img { width: 100%; } }
 .sc-stepper { display: inline-flex; align-items: center; gap: 8px; flex: none; }
 .sc-know { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-2); }
 .sc-know.hit { margin: 10px -6px 0; padding: 10px 6px 8px; border: 2px solid var(--alert); border-radius: 10px; background: #FBEDEC; }
@@ -1601,7 +1636,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pc-checks input { width: 22px; height: 22px; accent-color: var(--accent); }
 /* 修正清單 #373: the terrain of a primordial fight — under the card buttons; beside the board on a tablet held sideways */
 .sc-fight { display: block; }
-@media (min-width: 900px) and (orientation: landscape) { .prim-panel .sc-fight { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 14px; align-items: start; } .prim-panel .sc-fight .tn-box { margin-top: 0; } }
+@media (orientation: landscape) { @container main (min-width: 900px) { .prim-panel .sc-fight { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 14px; align-items: start; } .prim-panel .sc-fight .tn-box { margin-top: 0; } } }
 .tn-box { margin: 8px 0 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
 .tn-head { display: block; width: 100%; min-height: var(--tap); padding: 8px 12px; border: 0; background: none; color: var(--ink); font: inherit; font-weight: 700; text-align: left; cursor: pointer; border-radius: 12px; }
 .tn-box.open .tn-head { border-bottom: 1px solid var(--line); border-radius: 12px 12px 0 0; }
@@ -1680,7 +1715,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .sc-track.hit .sc-ctrl.pin { margin: 0 -11px; padding: 0 11px 8px; }
 /* 使用者 2026-10-20 08:26: 900 px and wider — 劇情 on the left, 規則 on the right (no sideways scrolling either way) */
 .sx-col { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-@media (min-width: 900px) {
+@container main (min-width: 900px) {
   .sx { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 10px; }
   .sx-col-story { order: -1; }
   /* 修正清單 #396 (使用者 12:06): the inner journey — 規則 over 劇情 on the left, 冒險清單 on the right (spare height goes under 劇情) */
@@ -1766,7 +1801,7 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 @media (max-height: 500px) { .search-bar { position: static; } }
 /* 修正清單 #260 (使用者 22:4x 決定保留): on a phone the search box takes the whole first line and the buttons (排序、顯示篩選項) the second, so
    none of them is squeezed into a tall column of single characters */
-@media (max-width: 520px) {
+@container main (max-width: 520px) {
   .search-bar .sb-row { flex-wrap: wrap; }
   .search-bar .sb-row .sb-input { flex: 1 1 100%; }
   .search-bar .sb-row > .btn { flex: 1 1 0; min-height: 40px; white-space: nowrap; }
@@ -1779,7 +1814,7 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .prod-row.has-tools .prod-target-row, .prod-row.has-tools .prod-item > .tn-front:first-child { padding-right: 150px; }
 .prod-tools { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; }
 .prod-tools .btn { min-height: 36px; padding: 4px 10px; font-size: .9rem; white-space: nowrap; }
-@media (max-width: 440px) {
+@container main (max-width: 440px) {
   .prod-row.has-tools .prod-target-row, .prod-row.has-tools .prod-item > .tn-front:first-child { padding-right: 0; }
   .prod-tools { position: static; justify-content: flex-end; padding: 0 10px 10px; margin-top: -4px; }
 }
