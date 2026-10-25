@@ -769,6 +769,13 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tri-lbl.en { display: block; writing-mode: vertical-rl; transform: rotate(180deg); font-size: .56rem; line-height: 1; }
 .tri-val { gap: 2px; } /* #536: the label, the icon and the number closer, so the three values stand apart */
 @container main (max-width: 360px) { .tri-val { font-size: 1.15rem; } .tri-val .tri-ico { width: 21px; height: 21px; } }
+/* 修正清單 #542 (GPT 複查 v1.0.77 R77-03): English skill names (Courage, Cunning, Endurance…) ran into each other on a narrow card or
+   with bigger text — they wrap inside their own column (hyphenated where the browser can), every name the same height so the
+   numbers stay on one line */
+.skillbar.en .sk { min-width: 0; }
+.skillbar.en .sk-name { white-space: normal; overflow-wrap: anywhere; -webkit-hyphens: auto; hyphens: auto; text-align: center; max-width: 100%;
+  min-height: 2.2em; flex: 1 1 auto; display: flex; align-items: center; justify-content: center; }
+.skillbar.en { align-items: stretch; } /* every column as tall as the tallest name: the numbers stay on one line */
 
 /* codex.css */
 /* 修正清單 #232 / #238: 孤本聖典 — a contents page of every title, then one page with 「返回目錄」 */

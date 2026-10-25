@@ -1,6 +1,6 @@
 // Offline cache for the app shell. Data lives in IndexedDB, not here.
-const CACHE = 'ato-web-1.0.78-158e4d8e';
-const SHELL = ['./', './index.html', './app.js?v=1.0.78-158e4d8e', './app.css?v=1.0.78-158e4d8e', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-512.png', './icon-maskable-512.png'];
+const CACHE = 'ato-web-1.0.79-d9c53cf7';
+const SHELL = ['./', './index.html', './app.js?v=1.0.79-d9c53cf7', './app.css?v=1.0.79-d9c53cf7', './manifest.webmanifest', './icon.svg', './icon-180.png', './icon-512.png', './icon-maskable-512.png'];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
 });
@@ -13,7 +13,9 @@ self.addEventListener('fetch', (e) => {
   if (new URL(req.url).searchParams.has('check')) return; // update check (修正清單 #64): always the network, never cached
   if (req.mode === 'navigate') {
     // network first for the page so updates arrive; fall back to cache offline
-    e.respondWith(fetch(req).then((r) => { const cp = r.clone(); caches.open(CACHE).then((c) => c.put('./index.html', cp)); return r; })
+    // 修正清單 #545: past the browser's own copy too (cache: 'no-cache' asks the server, which answers 304 when nothing changed) — a page
+    // added to the home screen right after an update must be the new one, its settings are read only then
+    e.respondWith(fetch(req.url, { cache: 'no-cache' }).then((r) => { if (r.ok) { const cp = r.clone(); caches.open(CACHE).then((c) => c.put('./index.html', cp)); } return r; })
       .catch(() => caches.match('./index.html')));
     return;
   }
