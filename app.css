@@ -30,7 +30,7 @@ html, body { margin: 0; height: 100%; background: var(--ground); color: var(--in
 body { overscroll-behavior-y: none; }
 button { font: inherit; color: inherit; }
 button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.app { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+.app { min-height: 100%; /* 修正清單 #538: not 100vh／100dvh — a home-screen app with the status bar outside the page reads them too tall on iOS 26 (WebKit 316008) */ display: flex; flex-direction: column; }
 /* 修正清單 #521: the page lays itself out by its own width (the 並排查閱 pane beside it takes part of the window): the width rules of the
    pages are container queries on `main` — the main screen, and the pane's own box for what is shown in it */
 .screen { container: main / inline-size; }
@@ -152,11 +152,11 @@ textarea.field { resize: vertical; line-height: 1.5; }
    it used to be 100dvh − 24px, which is taller than that room on an iPhone, so a long list pushed its title off the top */
 .overlay { --ovt: 12px; --ovb: calc(12px + env(safe-area-inset-bottom)); position: fixed; inset: 0; z-index: 100; background: rgba(20, 30, 36, .48); display: flex; align-items: flex-end; justify-content: center; padding: var(--ovt) 12px var(--ovb); }
 @media (min-width: 640px) { .overlay { align-items: center; } }
-.pop-wrap { width: 100%; max-width: 520px; max-height: calc(100dvh - var(--ovt) - var(--ovb)); display: flex; }
+.pop-wrap { width: 100%; max-width: 520px; max-height: calc(var(--vvh, 100dvh) - var(--ovt) - var(--ovb)); display: flex; }
 /* 修正清單 #329: the popup box takes the keyboard focus when it opens — no focus ring around the whole box (its buttons keep theirs) */
 .pop-wrap:focus { outline: none; }
 .pop-wrap.wide { max-width: 760px; }
-.pop { width: 100%; background: var(--panel); border-radius: 14px; display: flex; flex-direction: column; max-height: calc(100dvh - var(--ovt) - var(--ovb)); overflow: hidden; box-shadow: 0 18px 50px rgba(0, 0, 0, .25); }
+.pop { width: 100%; background: var(--panel); border-radius: 14px; display: flex; flex-direction: column; max-height: calc(var(--vvh, 100dvh) - var(--ovt) - var(--ovb)); overflow: hidden; box-shadow: 0 18px 50px rgba(0, 0, 0, .25); }
 .pop-title { font-family: var(--serif); font-weight: 700; font-size: 1.12rem; padding: 14px 16px 6px; }
 .pop-body { padding: 8px 16px 12px; overflow-y: auto; }
 .pop-text { font-size: 1.02rem; line-height: 1.6; margin: 6px 0 10px; }
@@ -189,7 +189,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .helm.big { display: inline-block; width: 96px; height: 96px; margin: 0; }
 .helm.big .helm-spokes, .helm.big .helm-spokes::before, .helm.big .helm-spokes::after { width: 80px; margin-left: -40px; }
 .helm.big .helm-hub { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
-.nav-sheet { width: 100%; background: var(--ink); border-radius: 16px; padding: 14px; color: #fff; max-height: calc(100dvh - var(--ovt, 12px) - var(--ovb, 12px)); overflow-y: auto; }
+.nav-sheet { width: 100%; background: var(--ink); border-radius: 16px; padding: 14px; color: #fff; max-height: calc(var(--vvh, 100dvh) - var(--ovt, 12px) - var(--ovb, 12px)); overflow-y: auto; }
 .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .nav-grid2 { margin-top: 12px; padding-top: 12px; border-top: 1px solid #3A4954; }
 .nav-btn { min-height: 64px; padding: 6px; border-radius: 12px; border: 1px solid #3A4954; background: #273541; color: #F2F4F3; font-weight: 600; font-size: .92rem; cursor: pointer; line-height: 1.25; }
@@ -1254,7 +1254,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .ph-thumb.add { align-self: start; }
 
 .overlay.full { padding: 0; background: #000; align-items: stretch; }
-.pop-wrap.full { max-width: none; max-height: none; height: 100dvh; }
+.pop-wrap.full { max-width: none; max-height: none; height: var(--vvh, 100dvh); }
 .pv { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; background: #000; color: #fff; }
 .pv-top { display: flex; align-items: center; gap: 8px; padding: calc(6px + env(safe-area-inset-top)) calc(8px + env(safe-area-inset-right)) 6px calc(16px + env(safe-area-inset-left)); background: rgba(0, 0, 0, .6); z-index: 2; }
 /* 修正清單 #326: the title and the upload time break onto more lines when they do not fit (320 px cut the time off) */
@@ -1304,6 +1304,15 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
    That strip is painted dark crimson so the white text stays readable, and nothing of the app is placed under it. */
 :root { --sat: env(safe-area-inset-top, 0px); }
 .sb-fill { position: fixed; top: 0; left: 0; right: 0; height: var(--sat); background: #3A0A0E; z-index: 160; }
+/* 修正清單 #538 (使用者 2026-10-25 19:29: #529 did not help, iPhone／iPad iOS 27.0.1 from the home screen). iOS 26 and later draw a
+   blur over the top of a home-screen web app unless they can colour the status bar band from the page: one hit test at the middle
+   of the top edge, 4 px down, must land on a fixed／sticky box at least 90 % wide and more than 10 px tall — its background-color
+   (read from the style, not from the pixels) becomes the band's colour. And this only works when the status bar is outside the
+   page: with apple-mobile-web-app-status-bar-style black-translucent (until v1.0.77) the band is never made and the blur always
+   stays — that meta is gone (index.html). This box is what the test lands on: fixed, full width, 11 px, above everything, the
+   theme colour as its background-color but painting nothing (background-clip: text with no text), taking no taps. */
+.edge-probe { position: fixed; top: 0; left: 0; right: 0; height: 11px; z-index: 2147483647; pointer-events: none;
+  background-color: #3A0A0E; -webkit-background-clip: text; background-clip: text; color: transparent; }
 /* 修正清單 #529 (使用者 2026-10-25, iPhone／iPad iOS 27.0.1 opened from the home screen): iOS 26 and later blur the top of the page
    (about 40 pt) unless the point 4 px down the middle of the top edge lands on a fixed／sticky full-width box of one solid colour.
    This strip is that box — with pointer-events: none iOS retried the test honouring pointer-events, fell through it and blurred the
