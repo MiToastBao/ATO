@@ -115,6 +115,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .seg button.on { background: var(--ink); color: #fff; }
 .seg.wrap { flex-wrap: wrap; }
 .row-between { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.row-between + .row-between { margin-top: 10px; } /* 修正清單 #607 (使用者 2026-10-30 17:20): 語言 and 文字大小 — two rows of keys one under the other were 1 px apart */
 .row-between.wake-row { margin-top: 12px; } /* 修正清單 #370: 使用時保持螢幕常亮, under 文字大小 */
 .sect { margin: 10px 0 18px; }
 .sect-h { display: flex; justify-content: space-between; align-items: center; }
@@ -1447,7 +1448,7 @@ html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-selec
 @container main (max-width: 429px) { .sc-seg.sb-books.n4 { grid-template-columns: repeat(2, 1fr); } .sb-books.n4 button:nth-child(3) { border-left: 0; } .sb-books.n4 button:nth-child(n+3) { border-top: 1px solid var(--line); } }
 /* 修正清單 #368: the campaign's own book and 「其他故事集」; once the others are open, 「只看…」 under them */
 .sb-books .sb-others { color: var(--ink-2); font-weight: 400; }
-.sb-only { display: flex; justify-content: flex-end; margin: 6px 0 2px; }
+.sb-only { display: flex; justify-content: flex-end; margin: 6px 0 8px; } /* 修正清單 #607: was 2 px above the row of kinds */
 .sb-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 12px; }
 .sb-tab { min-height: var(--tap); padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
 .sb-tab.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
@@ -1512,7 +1513,7 @@ html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-selec
 .sc-prim.sc-sealed { border-style: dashed; color: var(--ink-2); }
 .sc-sealed-note { margin: -4px 0 10px; }
 /* 修正清單 #364: the text and 「封回 S 信封」 side by side, the key under the text on a narrow screen (no indent) */
-.sc-opened-note { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.sc-opened-note { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 8px; } /* 修正清單 #607: its 「封回」 key touched the row of 駭物 keys above (the note's -4 px is for a line of text) */
 /* 修正清單 #348: a trait's text (烈日角逐) */
 .pc-tx { background: #FBF8F1; border: 1px solid #D9CFBC; border-radius: 10px; padding: 12px 14px; margin: 8px 0 12px; line-height: 1.9; font-family: var(--serif); }
 .pc-tx h3 { margin: 0 0 6px; font-size: 1.1rem; }
