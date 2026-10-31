@@ -1340,6 +1340,9 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* 修正清單 #487: the popups and the status bar's strip keep to the part of the screen that can be seen (iPhone, keyboard up: the
    page is pushed up — they are not; --vvt / --vvh from app.jsx, the whole window when the browser does not say) */
 .overlay { top: var(--vvt, 0px); bottom: auto; height: var(--vvh, 100%); }
+/* 修正清單 #612: keyboard up (or zoomed) — the popup is placed on the page at the top of the seen part (--vvpt = visualViewport.pageTop),
+   not on where iOS keeps fixed boxes (#611 still lost it off the top on the iPhone) */
+.vv-lifted .overlay { position: absolute; top: var(--vvpt, 0px); }
 .sb-fill { top: var(--vvt, 0px); }
 .pop-wrap, .pop { max-height: calc(var(--vvh, 100dvh) - var(--ovt) - var(--ovb)); }
 .pop-wrap.full { max-height: none; }
