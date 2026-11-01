@@ -517,6 +517,8 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tn-front { font-weight: 700; overflow-wrap: anywhere; }
 .tn-back { font-size: .86rem; color: var(--ink-2); }
 .tn-meta { font-size: .76rem; color: var(--ink-2); }
+/* 修正清單 #616: a project whose requirements are surely not met — a small mark after its kind */
+.req-unmet { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--alert); border-radius: 999px; color: var(--alert); font-size: .68rem; line-height: 1.45; white-space: nowrap; vertical-align: 1px; }
 .secret { color: var(--alert); font-size: .8rem; }
 .deck-tg { min-width: 64px; min-height: 40px; border-radius: 20px; border: 1px solid var(--line); background: var(--ground); cursor: pointer; font-size: .82rem; font-weight: 700; }
 .deck-tg.on { background: var(--accent); color: #fff; border-color: var(--accent); }
@@ -1340,9 +1342,12 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* 修正清單 #487: the popups and the status bar's strip keep to the part of the screen that can be seen (iPhone, keyboard up: the
    page is pushed up — they are not; --vvt / --vvh from app.jsx, the whole window when the browser does not say) */
 .overlay { top: var(--vvt, 0px); bottom: auto; height: var(--vvh, 100%); }
-/* 修正清單 #612: keyboard up (or zoomed) — the popup is placed on the page at the top of the seen part (--vvpt = visualViewport.pageTop),
-   not on where iOS keeps fixed boxes (#611 still lost it off the top on the iPhone) */
-.vv-lifted .overlay { position: absolute; top: var(--vvpt, 0px); }
+/* 修正清單 #613 (使用者 2026-11-01 00:28, choosing 「從畫面上方出現」): on a touch screen a popup with a text box opens at the top of the
+   screen — the box stays above the keyboard, so iOS does not scroll the page to show it (#611／#612 moved the popup after that
+   scroll and iOS followed the box again: worse each time). Popups without a text box stay at the bottom. */
+@media (pointer: coarse) {
+  .overlay:has(.pop-wrap input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]):not([type=button]):not([type=hidden]), .pop-wrap textarea) { align-items: flex-start; }
+}
 .sb-fill { top: var(--vvt, 0px); }
 .pop-wrap, .pop { max-height: calc(var(--vvh, 100dvh) - var(--ovt) - var(--ovb)); }
 .pop-wrap.full { max-height: none; }
