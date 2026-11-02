@@ -1353,6 +1353,22 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pop-wrap.full { max-height: none; }
 /* 修正清單 #548: the lock events under 「程式已在另一個分頁開啟」 (diagnosis, to be removed) */
 .lock-log { margin: 10px 0 0; padding: 8px; max-height: 30vh; overflow: auto; font-size: .7rem; line-height: 1.35; color: var(--ink-2); background: var(--ground); border-radius: 6px; white-space: pre-wrap; word-break: break-all; }
+/* 修正清單 #620: the small box at the top of a phone screen for a text box low in a popup (lowfield.js); only ever opened on a phone */
+.overlay.lowedit-ov { z-index: 300; align-items: flex-start; }
+.lowedit-h { display: flex; align-items: center; gap: 8px; padding: 10px 12px 8px 0; }
+.lowedit-t { flex: 1 1 auto; min-width: 0; padding: 4px 12px 4px 16px; font-size: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lowedit-h .btn { flex: 0 0 auto; }
+.field.lowedit-in { display: block; width: auto; margin: 0 16px 14px; font-size: 16px; }
+textarea.field.lowedit-in { min-height: 6em; resize: none; }
+/* a phone sideways: only about 110 px are left above the keyboard (使用者's screenshot) — one row: the box, then 取消 and 完成 */
+@media (orientation: landscape) and (max-height: 500px) {
+  .overlay.lowedit-ov { padding-top: 6px; }
+  .pop.lowedit { flex-direction: row; align-items: center; }
+  .lowedit .lowedit-t { display: none; }
+  .lowedit .lowedit-h { order: 2; padding: 6px 10px 6px 0; }
+  .field.lowedit-in { order: 1; flex: 1 1 auto; margin: 6px 0 6px 10px; }
+  textarea.field.lowedit-in { min-height: 0; height: 4.2em; }
+}
 
 /* side.css */
 /* 修正清單 #468: 並排查閱 — the read-only pane beside the main screen (tablets and computers, a wide window only). The main screen
