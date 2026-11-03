@@ -1070,45 +1070,63 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kc-tile-sel input:focus-visible + span { outline: 3px solid #FFD54A; outline-offset: 2px; }
 .kc-tile-cap { font-size: .86rem; line-height: 1.35; overflow-wrap: anywhere; }
 .kc-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .8em; color: var(--ink-2); }
-/* the bar for 並排看: stays at the bottom while cards are ticked */
-/* above the bottom bar (and the helm standing over it), like 地圖's buttons (修正清單 #101) */
-.kc-selbar { position: sticky; bottom: max(calc(84px + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + 24px)); z-index: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 12px; border-radius: var(--r); background: var(--ink); color: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, .25); }
-.kc-selbar span { flex: 1 1 auto; font-weight: 700; }
-.kc-selbar .btn:not(.primary) { background: #fff; color: var(--ink); }
-.kc-selbar .btn.primary { border-color: #fff; }
+/* 修正清單 #634: the bar while cards are ticked — stays at the bottom, above the bottom bar (and the helm standing over it), like
+   地圖's buttons (修正清單 #101) */
+.kc-selbar { position: sticky; bottom: max(calc(84px + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + 24px)); z-index: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 14px; padding: 8px 10px; border-radius: var(--r); background: var(--ink); color: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, .25); }
+.kc-selhead { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: none; }
+.kc-selhead .kc-seln { margin-right: auto; }
+.kc-seln { font-weight: 700; white-space: nowrap; }
+.kc-selacts { display: flex; flex-wrap: wrap; gap: 8px; flex: 1 1 auto; justify-content: flex-end; }
+.kc-selbar .btn { background: #fff; color: var(--ink); border-color: #fff; font-weight: 700; white-space: nowrap; flex: none; }
+.kc-selbar .btn.danger { background: var(--alert); color: #fff; border-color: #fff; }
+.kc-selbar .btn.kc-unsel { background: transparent; color: #fff; }
+.kc-tolbl { align-self: center; font-weight: 700; white-space: nowrap; }
+/* 修正清單 #636 (使用者 2026-11-03 09:25): a phone upright — the count and 取消勾選 on top, the keys under them (short labels after
+   「移到：」: one row, two when there are many) */
+@media (max-width: 599px) {
+  .kc-selbar { flex-direction: column; align-items: stretch; gap: 6px; }
+  .kc-selhead, .kc-selacts { gap: 6px; }
+  .kc-selacts { justify-content: flex-start; }
+  .kc-selbar .btn { min-height: 40px; padding: 4px 9px; }
+}
+@media (max-width: 359px) { /* (320 wide: the top row still one row — 「2 張」 without 「已勾選」) */
+  .kc-selbar { padding: 8px; }
+  .kc-selbar .btn { padding: 4px 7px; }
+  .kc-selw { display: none; }
+}
+/* a phone turned sideways: little height — one row, sliding */
+@media (orientation: landscape) and (max-height: 500px) {
+  .kc-selbar { flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; padding: 6px 8px; margin-top: 8px; bottom: max(calc(60px + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + 6px)); }
+  .kc-selhead { flex-wrap: nowrap; }
+  .kc-selacts { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; justify-content: flex-start; min-width: 0; }
+  .kc-selbar .btn { min-height: 40px; padding: 4px 12px; }
+}
+/* tick boxes (the list rows and 全選) */
+.kc-tick, .kc-alltick { position: relative; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.kc-tick { flex: none; width: 44px; min-height: var(--tap); justify-content: center; }
+.kc-tick input, .kc-alltick input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.kc-box { width: 26px; height: 26px; flex: none; border-radius: 6px; border: 2px solid var(--ink-2); background: var(--panel); color: #fff; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; pointer-events: none; }
+.kc-tick input:checked + .kc-box, .kc-alltick input:checked + .kc-box { background: var(--accent); border-color: var(--accent); }
+.kc-tick input:focus-visible + .kc-box, .kc-alltick input:focus-visible + .kc-box { outline: 3px solid #FFD54A; outline-offset: 2px; }
+.kc-alltick { min-height: var(--tap); padding: 0 10px 0 9px; margin: 0 0 4px; font-weight: 700; }
+.kc-pickdeck { display: flex; flex-wrap: wrap; gap: 8px; }
+.pv-bar .btn.kc-act.kc-next { background: var(--accent); border-color: #fff; color: #fff; }
 /* the buttons under the big picture: solid, never over the picture (使用者 21:24) */
 .kc-acts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 .pv-bar .btn.kc-act { min-height: 48px; padding: 6px 16px; border: 2px solid #fff; background: #fff; color: var(--ink); font-weight: 800; font-size: 1rem; }
 .pv-bar .btn.kc-act.danger { background: var(--alert); color: #fff; }
-/* 並排看 */
-.kc-sbs-grid { flex: 1; min-height: 0; overflow: auto; display: grid; gap: 10px; padding: 10px calc(10px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left)); align-content: start; justify-content: center; }
-.kc-sbs-grid { grid-template-columns: minmax(0, 520px); }
-@media (min-width: 480px) and (orientation: landscape) {
-  .kc-sbs-grid { overflow: hidden; height: 100%; grid-auto-rows: minmax(0, 1fr); align-content: stretch; }
-  .kc-sbs-grid.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .kc-sbs-grid.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .kc-sbs-grid.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .kc-sbs-card { min-height: 0; }
-  .kc-sbs-card button { flex: 1; min-height: 0; }
-  .kc-sbs-card .kc-pic { width: auto; height: 100%; max-width: 100%; object-fit: contain; margin: 0 auto; }
+/* a phone turned sideways (修正清單 #636): the keys in one row, so the picture keeps the height */
+@media (orientation: landscape) and (max-height: 500px) {
+  .pv-bar .btn.kc-act { min-height: 40px; padding: 4px 12px; font-size: .95rem; }
 }
-@media (min-width: 700px) and (orientation: portrait) {
-  .kc-sbs-grid.n2, .kc-sbs-grid.n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .kc-sbs-grid.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-.kc-sbs-card { margin: 0; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.kc-sbs-card button { padding: 0; border: 0; background: none; cursor: zoom-in; display: flex; justify-content: center; }
-.kc-sbs-card figcaption { color: #E3E7E9; font-size: .85rem; text-align: center; overflow-wrap: anywhere; }
-.kc-sbs-card figcaption, .kc-sbs-card .kc-code { color: #E3E7E9; }
 /* 探索卡: places listed by name */
 .kc-list { list-style: none; margin: 0; padding: 0; }
-.kc-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 6px 0; border-bottom: 1px solid var(--line-2); }
-.kc-row-main { flex: 1 1 14em; min-width: 0; min-height: var(--tap); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 6px 8px; border: 1px solid var(--line-2); border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.kc-row { display: flex; align-items: center; gap: 4px; padding: 4px 0; border-bottom: 1px solid var(--line-2); }
+.kc-row.sel .kc-row-main { border-color: var(--accent); background: var(--accent-soft); }
+.kc-row-main { flex: 1 1 auto; min-width: 0; min-height: var(--tap); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 6px 8px; border: 1px solid var(--line-2); border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
 .kc-row-main .kc-nm { font-weight: 700; overflow-wrap: anywhere; }
-.kc-row-acts { display: flex; flex-wrap: wrap; gap: 6px; }
 .kc-row-btn { min-height: 40px; padding: 4px 10px; font-size: .9rem; }
 .kc-row-btn.danger { background: var(--panel); color: var(--alert); border-color: var(--alert); }
-.kc-row-btn.hl { border-color: var(--accent); color: var(--accent); font-weight: 700; }
 .kc-circ { display: inline-flex; align-items: center; justify-content: center; min-width: 1.6em; height: 1.6em; padding: 0 4px; border-radius: 999px; background: var(--ink); color: #fff; font-size: .78rem; font-weight: 700; }
 .kc-sabmark { padding: 1px 6px; border-radius: 4px; background: #F3E2DF; color: var(--alert); font-weight: 700; }
 .kc-in, .kc-sub { color: var(--ink-2); font-size: .8rem; }
@@ -1116,9 +1134,6 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kc-stack small { font-weight: 400; color: var(--ink-2); margin-left: 4px; }
 .kc-stack.end { color: var(--alert); }
 .kc-temp-msg { margin: 4px 0 6px; padding: 8px 10px; border-left: 4px solid var(--alert); background: #FBEDEC; font-weight: 700; }
-.kc-temp-note p { margin: 0 0 4px; }
-.kc-hold { border-color: var(--accent); background: var(--accent-soft); }
-.kc-hold p { margin: 0 0 6px; }
 /* 新增 */
 .kc-q { width: 100%; }
 .kc-to { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 10px 0; }
