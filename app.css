@@ -1112,14 +1112,13 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kc-pickdeck { display: flex; flex-wrap: wrap; gap: 8px; }
 .pv-bar .btn.kc-act.kc-next { background: var(--accent); border-color: #fff; color: #fff; }
 /* the buttons under the big picture: solid, never over the picture (使用者 21:24) */
-.kc-acts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.kc-acts { display: contents; } /* (修正清單 #646: its keys and the viewer's 「關閉」 wrap together — 關閉 no longer on a row of its own) */
 .pv-bar:has(.kc-acts) .pv-hint { display: none; } /* (the empty hint took a row of its own on a phone) */
 .pv-bar .btn.kc-act { min-height: 48px; padding: 6px 16px; border: 2px solid #fff; background: #fff; color: var(--ink); font-weight: 800; font-size: 1rem; }
 .pv-bar .btn.kc-act.danger { background: var(--alert); color: #fff; }
 /* a phone turned sideways (修正清單 #636): the keys in one row, so the picture keeps the height */
 @media (orientation: landscape) and (max-height: 500px) {
   .pv-bar .btn.kc-act { min-height: 40px; padding: 4px 9px; font-size: .9rem; }
-  .kc-acts { gap: 6px; }
 }
 /* 探索卡: places listed by name */
 .kc-list { list-style: none; margin: 0; padding: 0; }
@@ -1402,15 +1401,27 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pv-title { flex: 1; font-weight: 700; min-width: 0; overflow-wrap: anywhere; line-height: 1.3; }
 .pv-cap { display: block; font-weight: 400; font-size: .8rem; color: #D7DCDF; overflow-wrap: anywhere; }
 /* 修正清單 #139: a large, clearly visible close button */
-.pv-close { flex: none; min-width: calc(var(--tap) + 40px); height: var(--tap); padding: 0 16px; border: 0; border-radius: 999px; background: #fff; color: #1E2A33; font: inherit; font-size: 1.05rem; font-weight: 800; cursor: pointer; box-shadow: 0 0 0 2px rgba(0, 0, 0, .35); }
-.pv-close span { font-size: 1.15rem; margin-right: 2px; }
+/* 修正清單 #646: 「關閉」 under the picture (the last key of the bar), solid and plain on the black — every viewer */
+.pv-bar .btn.pv-close { flex: none; min-width: calc(var(--tap) + 24px); min-height: 48px; padding: 6px 16px; border: 2px solid #fff; background: #fff; color: #1E2A33; font: inherit; font-size: 1rem; font-weight: 800; cursor: pointer; }
+@media (max-width: 639px) { .pv-bar .pv-hint:empty { display: none; } } /* (it only kept the keys to the right; empty, it took a row of its own) */
+@media (orientation: landscape) and (max-height: 500px) {
+  .pv-bar .btn.pv-close { min-height: 40px; padding: 4px 12px; font-size: .9rem; }
+  .pv-nav { flex-basis: 7em; min-height: 40px; padding: 0 10px; font-size: .9rem; }
+  .pv-bar { padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
+}
+/* a narrow phone (320): smaller keys, so they take two rows, not four (使用者 12:36: scaled down with the screen) */
+@media (max-width: 359px) {
+  .pv-bar .btn.pv-close, .pv-bar .btn.kc-act { min-height: 44px; padding: 4px 8px; font-size: .9rem; }
+  .pv-bar { gap: 6px; }
+}
 .pv-box { flex: 1; min-height: 0; overflow: hidden; touch-action: none; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
 .pv-box img { max-width: 100%; max-height: 100%; object-fit: contain; transform-origin: center center; will-change: transform; pointer-events: none; }
 /* 修正清單 #375: ‹ › in their own row under the picture (they used to float on it and hid the card's fine print) */
 .pv-pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px calc(12px + env(safe-area-inset-right)) 2px calc(12px + env(safe-area-inset-left)); background: rgba(0, 0, 0, .6); z-index: 2; }
 .pv-nav { flex: 0 1 9.5em; min-height: var(--tap); padding: 0 14px; border: 1px solid rgba(255, 255, 255, .45); border-radius: 999px; background: rgba(255, 255, 255, .12); color: #fff; font: inherit; font-size: 1rem; font-weight: 700; line-height: 1.2; cursor: pointer; white-space: nowrap; }
 .pv-foot { flex: none; display: flex; flex-direction: column; z-index: 2; }
-@media (min-width: 640px) { .pv-foot { flex-direction: row; align-items: center; background: rgba(0, 0, 0, .6); } .pv-foot .pv-pager { flex: none; padding-bottom: calc(6px + env(safe-area-inset-bottom)); padding-right: 0; gap: 10px; background: none; } .pv-foot .pv-bar { flex: 1; min-width: 0; background: none; } }
+/* 修正清單 #646 (使用者 12:36): a phone turned sideways too — ‹ › and the keys share one row, so the picture keeps the height */
+@media (min-width: 640px), (orientation: landscape) and (max-height: 500px) { .pv-foot { flex-direction: row; align-items: center; background: rgba(0, 0, 0, .6); } .pv-foot .pv-pager { flex: none; padding-bottom: calc(6px + env(safe-area-inset-bottom)); padding-right: 0; gap: 10px; background: none; } .pv-foot .pv-bar { flex: 1; min-width: 0; background: none; } }
 .pv-nav span { font-size: 1.35rem; line-height: 1; vertical-align: -1px; }
 .pv-nav:disabled { opacity: .3; cursor: default; }
 /* #376: loading / could not be read — centred on the picture area, never catching a touch except 「重試」 */
@@ -1418,7 +1429,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pv-state .btn { pointer-events: auto; background: #fff; color: var(--ink); }
 .pv-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding: 8px calc(12px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left)); background: rgba(0, 0, 0, .6); z-index: 2; }
 .pv-hint { flex: 1 1 100%; font-size: .78rem; color: #C9CFD2; }
-@media (min-width: 640px) { .pv-hint { flex: 1; } }
+@media (min-width: 640px), (orientation: landscape) and (max-height: 500px) { .pv-hint { flex: 1; } }
 .pv-bar .btn { background: #fff; color: var(--ink); }
 /* 修正清單 #144 ⑨: a focus ring that shows on the black viewer */
 .pv button:focus-visible { outline: 3px solid #FFD54A; outline-offset: 2px; }
