@@ -1044,6 +1044,106 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* official help pictures (Tutorial Page5_2 / Page5_3) */
 .tut-pic { display: block; max-width: min(100%, 420px); height: auto; margin: 8px auto 14px; border: 1px solid var(--line); }
 
+/* kcards.css */
+/* 修正清單 #621 / #624: 線索卡 and 探索卡 */
+.kc-tabs { display: flex; flex-wrap: wrap; margin: 4px 0 10px; }
+.kc-tabs button { flex: 1 1 auto; min-height: var(--tap); font-weight: 700; color: var(--ink); }
+.kc-tabs button.on { background: var(--ink); color: #fff; }
+.kc-tabs button.kc-has:not(.on) { color: var(--alert); }
+.kc-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 12px; }
+.kc-tools .kc-filter { flex: 1 1 12em; min-width: 0; }
+.kc-tools .kc-draw { min-width: 8em; font-size: 1.05rem; font-weight: 800; }
+.kc-empty { margin: 16px 0; }
+/* the picture of a card */
+.kc-pic { display: block; width: 100%; height: auto; border-radius: 8px; background: #E9ECEB; }
+.kc-pic.wait, .kc-pic.missing { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 120px; color: var(--ink-2); font-size: .85rem; text-align: center; padding: 8px; aspect-ratio: 720 / 1116; }
+.kc-pic.missing small { font-size: .75rem; }
+/* 持有牌庫／棄置牌庫: pictures in a grid — 2 across on a phone, 4–5 on a tablet or computer */
+.kc-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px 10px; grid-template-columns: repeat(auto-fill, minmax(clamp(128px, 22vw, 196px), 1fr)); }
+.kc-tile { position: relative; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.kc-tile-pic { padding: 0; border: 2px solid transparent; border-radius: 10px; background: none; cursor: pointer; display: block; }
+.kc-tile.sel .kc-tile-pic { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.kc-tile-sel { position: absolute; top: 4px; right: 4px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.kc-tile-sel input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.kc-tile-sel span { width: 28px; height: 28px; border-radius: 6px; border: 2px solid #fff; background: rgba(30, 42, 51, .55); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 1px rgba(0, 0, 0, .35); pointer-events: none; }
+.kc-tile.sel .kc-tile-sel span { background: var(--accent); }
+.kc-tile-sel input:focus-visible + span { outline: 3px solid #FFD54A; outline-offset: 2px; }
+.kc-tile-cap { font-size: .86rem; line-height: 1.35; overflow-wrap: anywhere; }
+.kc-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .8em; color: var(--ink-2); }
+/* the bar for 並排看: stays at the bottom while cards are ticked */
+/* above the bottom bar (and the helm standing over it), like 地圖's buttons (修正清單 #101) */
+.kc-selbar { position: sticky; bottom: max(calc(84px + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + 24px)); z-index: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 12px; border-radius: var(--r); background: var(--ink); color: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, .25); }
+.kc-selbar span { flex: 1 1 auto; font-weight: 700; }
+.kc-selbar .btn:not(.primary) { background: #fff; color: var(--ink); }
+.kc-selbar .btn.primary { border-color: #fff; }
+/* the buttons under the big picture: solid, never over the picture (使用者 21:24) */
+.kc-acts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.pv-bar .btn.kc-act { min-height: 48px; padding: 6px 16px; border: 2px solid #fff; background: #fff; color: var(--ink); font-weight: 800; font-size: 1rem; }
+.pv-bar .btn.kc-act.danger { background: var(--alert); color: #fff; }
+/* 並排看 */
+.kc-sbs-grid { flex: 1; min-height: 0; overflow: auto; display: grid; gap: 10px; padding: 10px calc(10px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left)); align-content: start; justify-content: center; }
+.kc-sbs-grid { grid-template-columns: minmax(0, 520px); }
+@media (min-width: 480px) and (orientation: landscape) {
+  .kc-sbs-grid { overflow: hidden; height: 100%; grid-auto-rows: minmax(0, 1fr); align-content: stretch; }
+  .kc-sbs-grid.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kc-sbs-grid.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kc-sbs-grid.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .kc-sbs-card { min-height: 0; }
+  .kc-sbs-card button { flex: 1; min-height: 0; }
+  .kc-sbs-card .kc-pic { width: auto; height: 100%; max-width: 100%; object-fit: contain; margin: 0 auto; }
+}
+@media (min-width: 700px) and (orientation: portrait) {
+  .kc-sbs-grid.n2, .kc-sbs-grid.n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kc-sbs-grid.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.kc-sbs-card { margin: 0; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.kc-sbs-card button { padding: 0; border: 0; background: none; cursor: zoom-in; display: flex; justify-content: center; }
+.kc-sbs-card figcaption { color: #E3E7E9; font-size: .85rem; text-align: center; overflow-wrap: anywhere; }
+.kc-sbs-card figcaption, .kc-sbs-card .kc-code { color: #E3E7E9; }
+/* 探索卡: places listed by name */
+.kc-list { list-style: none; margin: 0; padding: 0; }
+.kc-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 6px 0; border-bottom: 1px solid var(--line-2); }
+.kc-row-main { flex: 1 1 14em; min-width: 0; min-height: var(--tap); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 6px 8px; border: 1px solid var(--line-2); border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.kc-row-main .kc-nm { font-weight: 700; overflow-wrap: anywhere; }
+.kc-row-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.kc-row-btn { min-height: 40px; padding: 4px 10px; font-size: .9rem; }
+.kc-row-btn.danger { background: var(--panel); color: var(--alert); border-color: var(--alert); }
+.kc-row-btn.hl { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.kc-circ { display: inline-flex; align-items: center; justify-content: center; min-width: 1.6em; height: 1.6em; padding: 0 4px; border-radius: 999px; background: var(--ink); color: #fff; font-size: .78rem; font-weight: 700; }
+.kc-sabmark { padding: 1px 6px; border-radius: 4px; background: #F3E2DF; color: var(--alert); font-weight: 700; }
+.kc-in, .kc-sub { color: var(--ink-2); font-size: .8rem; }
+.kc-stack { margin: 4px 0 6px; font-weight: 700; color: var(--accent); }
+.kc-stack small { font-weight: 400; color: var(--ink-2); margin-left: 4px; }
+.kc-stack.end { color: var(--alert); }
+.kc-temp-msg { margin: 4px 0 6px; padding: 8px 10px; border-left: 4px solid var(--alert); background: #FBEDEC; font-weight: 700; }
+.kc-temp-note p { margin: 0 0 4px; }
+.kc-hold { border-color: var(--accent); background: var(--accent-soft); }
+.kc-hold p { margin: 0 0 6px; }
+/* 新增 */
+.kc-q { width: 100%; }
+.kc-to { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 10px 0; }
+.kc-to .seg { display: flex; flex-wrap: wrap; }
+.kc-to .seg button.on { background: var(--ink); color: #fff; }
+.kc-hits { list-style: none; margin: 6px 0 0; padding: 0; max-height: 46vh; overflow: auto; }
+.kc-hits li button { width: 100%; min-height: var(--tap); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 6px 8px; border: 0; border-bottom: 1px solid var(--line-2); background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.kc-hits .kc-nm { font-weight: 700; }
+.kc-tag { color: var(--accent); font-size: .82rem; font-weight: 700; }
+.kc-pickview { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.kc-pick-h { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.kc-now { margin: 0; color: var(--alert); font-weight: 700; }
+.kc-pickpic { padding: 0; border: 0; background: none; cursor: zoom-in; width: min(240px, 60vw); }
+/* 自訂牌庫 */
+.kc-newdeck { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+.kc-newdeck .field { flex: 1 1 auto; min-width: 0; }
+.kc-newdeck .btn { flex: none; }
+.kc-decks { list-style: none; margin: 0; padding: 0; }
+.kc-deck { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 8px 0; border-top: 1px solid var(--line-2); }
+.kc-deck .field { flex: 1 1 7em; min-width: 0; } /* (a phone: the name, 張, 改名 and 刪除 on one row — 10em put 刪除 on a row of its own, #627 截圖) */
+.kc-deck-n { color: var(--ink-2); font-size: .85rem; white-space: nowrap; }
+.kc-deck .btn { flex: none; }
+.kc-home { color: var(--accent); font-size: .78rem; font-weight: 700; }
+.kc-tabs button.kc-own:not(.on) { color: var(--accent); }
+
 /* keywords.css */
 /* 修正清單 #154 / #157: 關鍵詞 (web only) */
 .kw-bar { position: sticky; top: var(--tbh, 58px); z-index: 17; background: var(--ground); padding: 8px 16px 6px; border-bottom: 1px solid var(--line-2); }
