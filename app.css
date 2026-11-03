@@ -1113,11 +1113,13 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pv-bar .btn.kc-act.kc-next { background: var(--accent); border-color: #fff; color: #fff; }
 /* the buttons under the big picture: solid, never over the picture (使用者 21:24) */
 .kc-acts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.pv-bar:has(.kc-acts) .pv-hint { display: none; } /* (the empty hint took a row of its own on a phone) */
 .pv-bar .btn.kc-act { min-height: 48px; padding: 6px 16px; border: 2px solid #fff; background: #fff; color: var(--ink); font-weight: 800; font-size: 1rem; }
 .pv-bar .btn.kc-act.danger { background: var(--alert); color: #fff; }
 /* a phone turned sideways (修正清單 #636): the keys in one row, so the picture keeps the height */
 @media (orientation: landscape) and (max-height: 500px) {
-  .pv-bar .btn.kc-act { min-height: 40px; padding: 4px 12px; font-size: .95rem; }
+  .pv-bar .btn.kc-act { min-height: 40px; padding: 4px 9px; font-size: .9rem; }
+  .kc-acts { gap: 6px; }
 }
 /* 探索卡: places listed by name */
 .kc-list { list-style: none; margin: 0; padding: 0; }
@@ -1136,11 +1138,14 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kc-temp-msg { margin: 4px 0 6px; padding: 8px 10px; border-left: 4px solid var(--alert); background: #FBEDEC; font-weight: 700; }
 /* 新增 */
 .kc-q { width: 100%; }
+.kc-q:focus::placeholder { color: transparent; } /* (修正清單 #645: the example goes when the box is tapped) */
 .kc-to { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 10px 0; }
 .kc-to .seg { display: flex; flex-wrap: wrap; }
 .kc-to .seg button.on { background: var(--ink); color: #fff; }
 .kc-hits { list-style: none; margin: 6px 0 0; padding: 0; max-height: 46vh; overflow: auto; }
-.kc-hits li button { width: 100%; min-height: var(--tap); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 6px 8px; border: 0; border-bottom: 1px solid var(--line-2); background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.kc-hits li { display: flex; align-items: center; border-bottom: 1px solid var(--line-2); }
+.kc-hits li.sel { background: var(--accent-soft); }
+.kc-hits li button { flex: 1 1 auto; min-width: 0; width: auto; min-height: var(--tap); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 6px 8px 6px 2px; border: 0; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
 .kc-hits .kc-nm { font-weight: 700; }
 .kc-tag { color: var(--accent); font-size: .82rem; font-weight: 700; }
 .kc-pickview { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -1158,6 +1163,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kc-deck .btn { flex: none; }
 .kc-home { color: var(--accent); font-size: .78rem; font-weight: 700; }
 .kc-tabs button.kc-own:not(.on) { color: var(--accent); }
+.kc-many { margin: 6px 0 2px; }
 
 /* keywords.css */
 /* 修正清單 #154 / #157: 關鍵詞 (web only) */
