@@ -1060,6 +1060,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kc-pic.missing small { font-size: .75rem; }
 /* 持有牌庫／棄置牌庫: pictures in a grid — 2 across on a phone, 4–5 on a tablet or computer */
 .kc-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px 10px; grid-template-columns: repeat(auto-fill, minmax(clamp(128px, 22vw, 196px), 1fr)); }
+.kc-grid { grid-template-columns: repeat(auto-fill, minmax(clamp(128px, 22cqw, 196px), 1fr)); } /* 修正清單 #655: the page's own width (a browser without cqw keeps the line above) */
 .kc-tile { position: relative; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .kc-tile-pic { padding: 0; border: 2px solid transparent; border-radius: 10px; background: none; cursor: pointer; display: block; }
 .kc-tile.sel .kc-tile-pic { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
@@ -1083,13 +1084,14 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kc-tolbl { align-self: center; font-weight: 700; white-space: nowrap; }
 /* 修正清單 #636 (使用者 2026-11-03 09:25): a phone upright — the count and 取消勾選 on top, the keys under them (short labels after
    「移到：」: one row, two when there are many) */
-@media (max-width: 599px) {
+/* 修正清單 #655: by the width of the page's own space (the main screen, or the 並排查閱 pane), not the window's */
+@container main (max-width: 599px) {
   .kc-selbar { flex-direction: column; align-items: stretch; gap: 6px; }
   .kc-selhead, .kc-selacts { gap: 6px; }
   .kc-selacts { justify-content: flex-start; }
   .kc-selbar .btn { min-height: 40px; padding: 4px 9px; }
 }
-@media (max-width: 359px) { /* (320 wide: the top row still one row — 「2 張」 without 「已勾選」) */
+@container main (max-width: 359px) { /* (320 wide: the top row still one row — 「2 張」 without 「已勾選」) */
   .kc-selbar { padding: 8px; }
   .kc-selbar .btn { padding: 4px 7px; }
   .kc-selw { display: none; }
@@ -1151,6 +1153,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .kc-pick-h { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
 .kc-now { margin: 0; color: var(--alert); font-weight: 700; }
 .kc-pickpic { padding: 0; border: 0; background: none; cursor: zoom-in; width: min(240px, 60vw); }
+.kc-pickpic { width: min(240px, 60cqw); } /* 修正清單 #655 */
 /* 自訂牌庫 */
 .kc-newdeck { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
 .kc-newdeck .field { flex: 1 1 auto; min-width: 0; }
@@ -1395,6 +1398,8 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 
 .overlay.full { padding: 0; background: #000; align-items: stretch; }
 .pop-wrap.full { max-width: none; max-height: none; height: var(--vvh, 100dvh); }
+/* 修正清單 #655: the viewer's layout follows its own width — the whole screen, or the 並排查閱 pane it opened in */
+.pop-wrap.full { container: pv / inline-size; }
 .pv { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; background: #000; color: #fff; }
 .pv-top { display: flex; align-items: center; gap: 8px; padding: calc(6px + env(safe-area-inset-top)) calc(8px + env(safe-area-inset-right)) 6px calc(16px + env(safe-area-inset-left)); background: rgba(0, 0, 0, .6); z-index: 2; }
 /* 修正清單 #326: the title and the upload time break onto more lines when they do not fit (320 px cut the time off) */
@@ -1403,14 +1408,14 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 /* 修正清單 #139: a large, clearly visible close button */
 /* 修正清單 #646: 「關閉」 under the picture (the last key of the bar), solid and plain on the black — every viewer */
 .pv-bar .btn.pv-close { flex: none; min-width: calc(var(--tap) + 24px); min-height: 48px; padding: 6px 16px; border: 2px solid #fff; background: #fff; color: #1E2A33; font: inherit; font-size: 1rem; font-weight: 800; cursor: pointer; }
-@media (max-width: 639px) { .pv-bar .pv-hint:empty { display: none; } } /* (it only kept the keys to the right; empty, it took a row of its own) */
+@container pv (max-width: 639px) { .pv-bar .pv-hint:empty { display: none; } } /* (it only kept the keys to the right; empty, it took a row of its own) */
 @media (orientation: landscape) and (max-height: 500px) {
   .pv-bar .btn.pv-close { min-height: 40px; padding: 4px 12px; font-size: .9rem; }
   .pv-nav { flex-basis: 7em; min-height: 40px; padding: 0 10px; font-size: .9rem; }
   .pv-bar { padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
 }
 /* a narrow phone (320): smaller keys, so they take two rows, not four (使用者 12:36: scaled down with the screen) */
-@media (max-width: 359px) {
+@container pv (max-width: 359px) {
   .pv-bar .btn.pv-close, .pv-bar .btn.kc-act { min-height: 44px; padding: 4px 8px; font-size: .9rem; }
   .pv-bar { gap: 6px; }
 }
@@ -1421,7 +1426,8 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pv-nav { flex: 0 1 9.5em; min-height: var(--tap); padding: 0 14px; border: 1px solid rgba(255, 255, 255, .45); border-radius: 999px; background: rgba(255, 255, 255, .12); color: #fff; font: inherit; font-size: 1rem; font-weight: 700; line-height: 1.2; cursor: pointer; white-space: nowrap; }
 .pv-foot { flex: none; display: flex; flex-direction: column; z-index: 2; }
 /* 修正清單 #646 (使用者 12:36): a phone turned sideways too — ‹ › and the keys share one row, so the picture keeps the height */
-@media (min-width: 640px), (orientation: landscape) and (max-height: 500px) { .pv-foot { flex-direction: row; align-items: center; background: rgba(0, 0, 0, .6); } .pv-foot .pv-pager { flex: none; padding-bottom: calc(6px + env(safe-area-inset-bottom)); padding-right: 0; gap: 10px; background: none; } .pv-foot .pv-bar { flex: 1; min-width: 0; background: none; } }
+@container pv (min-width: 640px) { .pv-foot { flex-direction: row; align-items: center; background: rgba(0, 0, 0, .6); } .pv-foot .pv-pager { flex: none; padding-bottom: calc(6px + env(safe-area-inset-bottom)); padding-right: 0; gap: 10px; background: none; } .pv-foot .pv-bar { flex: 1; min-width: 0; background: none; } }
+@media (orientation: landscape) and (max-height: 500px) { .pv-foot { flex-direction: row; align-items: center; background: rgba(0, 0, 0, .6); } .pv-foot .pv-pager { flex: none; padding-bottom: calc(6px + env(safe-area-inset-bottom)); padding-right: 0; gap: 10px; background: none; } .pv-foot .pv-bar { flex: 1; min-width: 0; background: none; } }
 .pv-nav span { font-size: 1.35rem; line-height: 1; vertical-align: -1px; }
 .pv-nav:disabled { opacity: .3; cursor: default; }
 /* #376: loading / could not be read — centred on the picture area, never catching a touch except 「重試」 */
@@ -1429,7 +1435,8 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .pv-state .btn { pointer-events: auto; background: #fff; color: var(--ink); }
 .pv-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding: 8px calc(12px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left)); background: rgba(0, 0, 0, .6); z-index: 2; }
 .pv-hint { flex: 1 1 100%; font-size: .78rem; color: #C9CFD2; }
-@media (min-width: 640px), (orientation: landscape) and (max-height: 500px) { .pv-hint { flex: 1; } }
+@container pv (min-width: 640px) { .pv-hint { flex: 1; } }
+@media (orientation: landscape) and (max-height: 500px) { .pv-hint { flex: 1; } }
 .pv-bar .btn { background: #fff; color: var(--ink); }
 /* 修正清單 #144 ⑨: a focus ring that shows on the black viewer */
 .pv button:focus-visible { outline: 3px solid #FFD54A; outline-offset: 2px; }
@@ -1545,7 +1552,7 @@ textarea.field.lowedit-in { min-height: 6em; resize: none; }
 .side-btn.on { background: color-mix(in srgb, var(--accent, #2E6F6A) 22%, transparent); border-radius: 8px; }
 .side-btn.off { opacity: .45; }
 /* 修正清單 #521: the line to drag — wide enough for a finger (24 px, half over the main screen's edge), a grip in the middle */
-.side-drag { position: absolute; top: 0; bottom: 0; left: -13px; width: 24px; z-index: 2; cursor: col-resize; touch-action: none; display: flex; align-items: center; justify-content: center; }
+.side-drag { position: absolute; top: 0; bottom: 0; left: -13px; width: 24px; z-index: 41; cursor: col-resize; touch-action: none; display: flex; align-items: center; justify-content: center; }
 .side-drag:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .side-grip { width: 8px; height: 56px; border-radius: 4px; background: var(--panel); border: 2px solid var(--line); box-shadow: 0 1px 3px rgba(30, 42, 51, .25); }
 .side-drag:hover .side-grip, .side-drag.dragging .side-grip { border-color: var(--accent); background: var(--accent-soft); }
@@ -1554,6 +1561,50 @@ html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-selec
 .sb-side-h { display: flex; align-items: center; gap: 8px; padding: 6px 12px 0; }
 .sb-side-where { flex: 1; min-width: 0; font-weight: 700; color: var(--ink-2); font-size: .9rem; }
 .side-body .sb-side .content { padding-top: 6px; }
+
+/* 修正清單 #655 (使用者 2026-11-04 17:53～18:4x): 12 tabs — the key 「〈分頁〉 ▾」 in the top row opens a panel of them in two groups
+   (查閱、戰役); the one the main screen shows is grey and cannot be chosen */
+.side-pick { flex: 0 1 auto; min-width: 0; min-height: 40px; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; font-weight: 700; font-size: 1rem; }
+.side-pick-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.side-pick-a { flex: none; font-size: .85rem; color: var(--ink-2); }
+.side-pick.open { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.side-gap { flex: 1; }
+.side-menu { flex: 1 1 100%; min-width: 0; display: flex; flex-direction: column; gap: 6px; padding: 4px 0 2px; }
+.side-menu-h { font-size: .8rem; font-weight: 700; color: var(--ink-2); margin-top: 2px; }
+.side-menu .side-tabs { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.6em, 1fr)); gap: 6px; flex: none; width: 100%; }
+.side-menu .side-tabs button { flex: none; min-width: 0; min-height: 44px; padding: 6px 8px; font-size: .95rem; letter-spacing: 0; white-space: nowrap; line-height: 1.25; }
+.side-menu .side-tabs button.on { background: var(--accent, #2E6F6A); border-color: var(--accent, #2E6F6A); color: #fff; font-weight: 700; }
+.side-menu .side-tabs button:disabled { opacity: .4; cursor: default; }
+.side-body.under-menu { opacity: .45; }
+/* the pages of the campaign in the pane: no top bar (the tab says which); the sub-title on a line of its own */
+.side-body .side-page .content { padding-top: 8px; }
+.side-body { --tbh: 0px; } /* (no top bar in the pane: what stays at the top of a page — its tabs — stays at the pane's top) */
+/* the picture's keys a little narrower in the pane, so a row holds them all (「關閉」 not on a row of its own) */
+@container pv (max-width: 760px) { .side-ov .pv-bar .btn.kc-act, .side-ov .pv-bar .btn.pv-close { padding-left: 10px; padding-right: 10px; } }
+.side-sub { margin: 0 0 6px; font-weight: 700; color: var(--ink-2); font-size: .9rem; }
+.side-body .kc-selbar { bottom: calc(8px + env(safe-area-inset-bottom)); }
+.arg-side-bar { display: flex; justify-content: flex-end; margin: 0 0 10px; }
+.arg-side-bar .btn { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; }
+.arg-side-bar .btn .bi { width: 20px; height: 20px; }
+.photo.still, .arg-card.empty.still { cursor: default; }
+/* the pane's own popups (the big picture, a question, 新增 …): over the pane only — the main screen stays usable */
+.side-pane > .overlay.side-ov { position: absolute; inset: 0; top: 0; bottom: 0; height: auto; z-index: 40; } /* (over the page's own floating keys, e.g. 回到目前天數 z 29) */
+.side-ov .pop-wrap.full { height: 100%; max-height: none; }
+.app.side-open .toast.in-side { left: calc(100% - var(--sidew) / 2); max-width: calc(var(--sidew) - 24px); bottom: calc(24px + env(safe-area-inset-bottom)); }
+/* the page's own row in the pane (what its top bar held besides the title: a sub-title, its keys — 下個步驟, 其他故事集的資源 …) */
+.side-acts { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 6px 8px; padding: 8px 12px 6px; background: var(--ground); }
+.side-acts-t { flex: 1 1 auto; min-width: 0; font-weight: 700; color: var(--ink-2); font-size: .9rem; }
+.side-acts-sub { font-weight: 700; color: var(--alert); }
+.side-acts-btns { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.side-acts .btn { min-height: 40px; }
+.side-acts .btn-ico { min-width: 44px; min-height: 44px; width: auto; padding: 0 6px; }
+/* 時間線 in the pane: 「回到目前天數／目前步驟」 at the pane's bottom right */
+.app.side-open .side-body .tl-back-cur { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); }
+/* 修正清單 #656: 劇情段落's 全螢幕 in the pane — its reading bar inside it (not shifted by the main screen's rule above) */
+.app.side-open .side-pane .tts-bar.tts-full { right: auto; left: auto; }
+/* 修正清單 #657 (使用者 2026-11-04 19:23): beside the open pane, the main screen's popups (big picture, 全螢幕, questions, the menu of
+   pages) cover the main screen only; the pane stays usable */
+.app.side-open > .overlay { right: var(--sidew); }
 
 /* speech.css */
 /* 修正清單 #410: reading aloud — the 「朗讀」 button next to a title, the bar above the bottom bar while it reads */
