@@ -248,6 +248,7 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .stat-list, .skill-list { display: flex; flex-direction: column; }
 .stat-row, .skill-row, .res-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line-2); flex-wrap: wrap; }
 .stat-ico, .res-ico { width: 30px; height: 30px; }
+.stat-row .stat-ico.lt { filter: invert(.733); } /* 修正清單 #660: a white icon (ico_tech_abil) in the grey of the Argo_* icons (#444) */
 .stat-name, .res-name, .skill-name { flex: 1 1 8em; font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
 .stat-break { color: var(--alert); font-size: .86rem; font-weight: 700; }
 .exp-btn { min-width: 40px; min-height: 40px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); cursor: pointer; }
@@ -1558,7 +1559,8 @@ textarea.field.lowedit-in { min-height: 6em; resize: none; }
 .side-drag:hover .side-grip, .side-drag.dragging .side-grip { border-color: var(--accent); background: var(--accent-soft); }
 html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-select: none; cursor: col-resize; }
 /* 修正清單 #520: 劇情段落 in the pane — its book on a thin row of its own (with 最近讀過), the page's own 全螢幕 not here */
-.sb-side-h { display: flex; align-items: center; gap: 8px; padding: 6px 12px 0; }
+.sb-side-h { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px; background: var(--ground); } /* 修正清單 #659: kept on top of the pane (全螢幕 always there) */
+.sb-side-h .btn-ico { min-width: 44px; min-height: 44px; }
 .sb-side-where { flex: 1; min-width: 0; font-weight: 700; color: var(--ink-2); font-size: .9rem; }
 .side-body .sb-side .content { padding-top: 6px; }
 
