@@ -13,7 +13,9 @@
   --bronze-1: #B88A4A;
   --bronze-2: #7A5527;
   --cyc: #2E6B66;
-  --serif: "Songti TC", "Noto Serif TC", "Source Han Serif TC", "PMingLiU", "MingLiU", serif;
+  /* 修正清單 #665 (使用者 2026-11-05 10:47): a computer without 宋體／思源宋體 shows 微軟正黑體 (as the white boxes), not 新細明體 — thin
+     and blurred on a screen, beside the boxes' 正黑體 it looked untidy */
+  --serif: "Songti TC", "Noto Serif TC", "Source Han Serif TC", "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
   --sans: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Heiti TC", system-ui, sans-serif;
   --r: 10px;
   --tap: 44px;
@@ -1607,6 +1609,8 @@ html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-selec
 /* 修正清單 #657 (使用者 2026-11-04 19:23): beside the open pane, the main screen's popups (big picture, 全螢幕, questions, the menu of
    pages) cover the main screen only; the pane stays usable */
 .app.side-open > .overlay { right: var(--sidew); }
+/* 修正清單 #666 (使用者 2026-11-05): read in the pane — the reading bar is a row of its own at the pane's bottom (not over the main screen) */
+.app.side-open .side-pane > .tts-bar, .app.with-bb .side-pane > .tts-bar { position: relative; left: auto; right: auto; bottom: auto; flex: none; padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
 
 /* speech.css */
 /* 修正清單 #410: reading aloud — the 「朗讀」 button next to a title, the bar above the bottom bar while it reads */
@@ -1655,6 +1659,16 @@ html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-selec
    on the cream page (dark text on amber, about 10:1) and on the black 全螢幕 (light text on deep amber, about 7:1) */
 ::highlight(tts) { background-color: #FFD24D; color: #1E2A33; text-decoration: underline; text-decoration-color: #8A5A00; text-decoration-thickness: 2px; }
 ::highlight(tts-dark) { background-color: #6B5410; color: #FFF6E0; text-decoration: underline; text-decoration-color: #F2C14E; text-decoration-thickness: 2px; }
+/* 修正清單 #666 (使用者 2026-11-05 10:5x): the reading bar over the main screen — the main screen's floating keys go up above it, not
+   under it (the pane's own keys are not under it: .screen only) */
+.app.tts-main .screen .tl-back-cur { bottom: calc(var(--bbh, 64px) + var(--ttsh, 96px) + 12px); }
+.app.tts-main .screen .kc-selbar { bottom: max(calc(84px + var(--ttsh, 96px) + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + var(--ttsh, 96px) + 24px)); }
+.app.tts-main .screen .map-actions { bottom: max(calc(80px + var(--ttsh, 96px) + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + var(--ttsh, 96px) + 20px)); }
+.app.tts-main .screen .crkb { bottom: calc(var(--bbh, 76px) + var(--ttsh, 96px)); }
+@media (orientation: landscape) and (max-height: 500px) {
+  .app.tts-main .screen .kc-selbar { bottom: max(calc(60px + var(--ttsh, 96px) + env(safe-area-inset-bottom)), calc(var(--bbh, 0px) + var(--ttsh, 96px) + 6px)); }
+}
+@media (max-height: 500px) { .app.tts-main .screen .map-actions { bottom: calc(var(--bbh, 0px) + var(--ttsh, 96px)); } }
 
 /* storybook.css */
 /* 修正清單 #343 / #349: 劇情書 (web only) */
