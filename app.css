@@ -1898,7 +1898,14 @@ html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-selec
 .pc-checks input { width: 22px; height: 22px; accent-color: var(--accent); }
 /* 修正清單 #373: the terrain of a primordial fight — under the card buttons; beside the board on a tablet held sideways */
 .sc-fight { display: block; }
-@media (orientation: landscape) { @container main (min-width: 900px) { .prim-panel .sc-fight { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 14px; align-items: start; } .prim-panel .sc-fight .tn-box { margin-top: 0; } } }
+/* 修正清單 #670: board and card buttons one above the other — the terrain is the key 「地形（N）」 (a popup), not a bar in between; beside
+   the board (the wide rule below) the bar, and no key */
+.prim-panel .sc-fight > .tn-box { display: none; }
+.pc-kind.pc-terrain.has { border-color: var(--accent, #2f6f68); }
+.tn-pop .tn-list { margin: 0; padding: 0; }
+.tn-pop .tn-btns { margin: 12px 0 0; padding: 0; }
+.tn-pop .tn-none, .tn-pop > .fine { margin: 4px 0; }
+@media (orientation: landscape) { @container main (min-width: 900px) { .prim-panel .sc-fight > .tn-box { display: block; } .prim-panel .pc-kind.pc-terrain { display: none; } .prim-panel .sc-fight { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 14px; align-items: start; } .prim-panel .sc-fight .tn-box { margin-top: 0; } } }
 .tn-box { margin: 8px 0 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
 .tn-head { display: block; width: 100%; min-height: var(--tap); padding: 8px 12px; border: 0; background: none; color: var(--ink); font: inherit; font-weight: 700; text-align: left; cursor: pointer; border-radius: 12px; }
 .tn-box.open .tn-head { border-bottom: 1px solid var(--line); border-radius: 12px 12px 0 0; }
