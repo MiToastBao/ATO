@@ -744,6 +744,15 @@ textarea.field { resize: vertical; line-height: 1.5; }
 /* 修正清單 #680: 戰役備註 has four tabs — up to 480 px wide they share the row and a long name takes two lines (as #241 below 360 px),
    so none is cut off at the edge or needs scrolling sideways */
 @container main (max-width: 480px) { .tabs.wrap .tab { flex: 1 1 0; min-width: 0; white-space: normal; padding: 6px 4px; line-height: 1.25; overflow-wrap: anywhere; } }
+/* 修正清單 #681: the name row folds / unfolds the argonaut's notes (the photo still opens his page); a folded card is only its head */
+.hn-toggle { flex: 1; min-width: 0; min-height: var(--tap); display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 2px 4px 2px 0; background: none; border: 0; color: inherit; text-align: left; cursor: pointer; font: inherit; }
+.hn-chev { flex: none; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: rgba(255, 255, 255, .6); border: 1px solid rgba(30, 42, 51, .18); font-size: 1.1rem; color: var(--ink); }
+.hn-card.shut .hn-head { margin-bottom: 0; }
+/* 修正清單 #682: the head as on the argonaut's page — picture, name, player, then the six skills in a row of their own; in 2×2 the two
+   cards of a row keep one height (a folded one is only shorter when both in its row are folded) */
+.hn-head { flex-wrap: wrap; row-gap: 6px; }
+.hn-skills { padding-top: 6px; border-top-color: rgba(30, 42, 51, .15); }
+.hn-count { align-self: flex-start; margin-top: 3px; padding: 1px 8px; border-radius: 999px; background: rgba(255, 255, 255, .7); border: 1px solid rgba(30, 42, 51, .2); font-size: .82rem; font-weight: 600; white-space: nowrap; color: var(--ink); }
 
 /* argonauts.css */
 /* argonauts / argo / cargo panels: official icon placements */
