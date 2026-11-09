@@ -722,6 +722,28 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .choice-group-arrow { width: 1em; color: var(--ink-2); }
 .choice-group-t { flex: 1; }
 .choice-group-n { color: var(--ink-2); font-weight: 400; font-size: .9rem; }
+/* 修正清單 #680: 戰役備註 › 英雄備註 — one sticky note per argonaut slot (I–IV), one column narrow, 2×2 wide (as .arg-grid) */
+.hn-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@container main (min-width: 680px) { .hn-grid { grid-template-columns: 1fr 1fr; } }
+.hn-card { border-radius: 4px 4px 14px 4px; padding: 10px 12px 12px; border: 1px solid rgba(30, 42, 51, .18); border-top-width: 6px; box-shadow: 0 2px 6px rgba(30, 42, 51, .12); color: var(--ink); min-width: 0; }
+.hn-s0 { background: #FFF6C9; border-top-color: #D9B425; }
+.hn-s1 { background: #FDE4E6; border-top-color: #D9707C; }
+.hn-s2 { background: #DFEEFB; border-top-color: #4F8CC4; }
+.hn-s3 { background: #E3F2DF; border-top-color: #5E9E55; }
+.hn-head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.hn-roman { font-family: var(--serif, serif); font-weight: 700; font-size: 1.15rem; min-width: 1.6em; text-align: center; color: var(--ink-2); }
+.hn-name { display: flex; flex-direction: column; min-width: 0; }
+.hn-name b { font-size: 1.05rem; overflow-wrap: anywhere; }
+.hn-card .add-row { background: rgba(255, 255, 255, .55); margin: 6px 0 8px; }
+.hn-card .note { margin-bottom: 6px; }
+.hn-empty { min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: #ECEEEE; border-style: dashed; border-top-width: 1px; box-shadow: none; color: var(--ink-2); }
+.hn-fallen { margin-top: 16px; }
+.hn-fallen-t { width: 100%; min-height: var(--tap); text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 0 12px; font-weight: 600; color: var(--ink); cursor: pointer; margin-bottom: 10px; }
+.hn-gone { background: #F1F1EF; border-top-color: #9AA3A8; }
+.hn-none { margin: 4px 0 0; }
+/* 修正清單 #680: 戰役備註 has four tabs — up to 480 px wide they share the row and a long name takes two lines (as #241 below 360 px),
+   so none is cut off at the edge or needs scrolling sideways */
+@container main (max-width: 480px) { .tabs.wrap .tab { flex: 1 1 0; min-width: 0; white-space: normal; padding: 6px 4px; line-height: 1.25; overflow-wrap: anywhere; } }
 
 /* argonauts.css */
 /* argonauts / argo / cargo panels: official icon placements */
