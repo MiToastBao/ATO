@@ -2029,6 +2029,9 @@ html.side-dragging, html.side-dragging * { user-select: none; -webkit-user-selec
   .sx-inner .sx-col-story { grid-area: story; order: 0; }
   .sx-inner .sx-col-adv { grid-area: adv; }
 }
+/* 修正清單 #685: 「−5 個末日標記」 over the counter after the doom card turned taking its 觸發數量 off (the 三曲盤's note, #684) */
+.sc-tokens { position: relative; }
+.sc-fb.below { bottom: auto; top: calc(100% + 6px); }
 
 /* tech.css */
 /* technology + armory panels: official icons (tech.jsx) */
