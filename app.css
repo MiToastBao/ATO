@@ -766,6 +766,23 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tri-fb.side { bottom: auto; top: 50%; left: calc(100% + 3px); transform: translateY(-50%); padding: 4px 7px; font-size: .8rem; animation-name: tri-fb-side; }
 .tri-fb.side.left { left: auto; right: calc(100% + 4px); }
 @keyframes tri-fb-side { from { opacity: 0; transform: translate(0, -40%); } to { opacity: 1; transform: translate(0, -50%); } }
+/* 修正清單 #712 / #713 (v1.0.113): an earlier playthrough's tile — face up at 40 % behind a dashed edge in the collection's colour,
+   the latest playthrough's Roman number top right, the earlier marks at full strength; 「前周目」 turns them off */
+.map-top { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; }
+.map-top .map-zoom { margin: 0 0 0 auto; }
+.prev-toggle { min-height: 44px; padding: 0 12px; gap: 6px; font-weight: 700; }
+.prev-toggle .pt-dot { width: 16px; height: 16px; border-radius: 4px; border: 2px dashed var(--ink-2); background: transparent; flex: 0 0 auto; }
+.prev-toggle.on { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.prev-toggle.on .pt-dot { border-color: currentColor; background: rgba(255, 255, 255, .35); }
+.prev-runs { margin: 4px 0; }
+.prev-run-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 6px 0; border-top: 1px solid var(--line); }
+.prev-mark { display: inline-flex; align-items: center; gap: 4px; }
+.reset-finish .btn.big { width: 100%; margin-top: 8px; }
+.reset-finish .link-btn { width: 100%; margin-top: 12px; font-weight: 600; }
+.run-start .choice { flex-direction: column; align-items: flex-start; text-align: left; }
+.run-start .choice .why { font-weight: 400; font-size: .8rem; opacity: .85; margin-top: 2px; }
+.run-start .choice.dimmed { opacity: .55; }
+.tm-reset { margin: 24px 0 8px; display: flex; justify-content: center; }
 
 /* argonauts.css */
 /* argonauts / argo / cargo panels: official icon placements */
@@ -1353,6 +1370,17 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
   /* a tile brought into view (選取、前往板塊) is centred in the part left between the title bar and the row, not under them */
   html:has(.map-actions) { scroll-padding-top: var(--tbh, 58px); scroll-padding-bottom: calc(var(--bbh, 0px) + 46px); }
 }
+
+/* 修正清單 #712 / #713 (v1.0.113): an earlier playthrough's tile (after the rules above: .tsq has no border here) — a dashed edge in
+   the collection's colour, the face at 40 % behind, the tile number and the marks on top at full strength (no playthrough number:
+   使用者 23:50) */
+.tsq.ghost { border: 2px dashed var(--cyc); box-shadow: none; background: #F3F4F2; overflow: hidden; }
+.tsq.ghost.far { cursor: default; }
+.ghost-pic { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; opacity: .4; pointer-events: none; }
+.tsq.ghost > .tbar, .tsq.ghost > .tid { position: relative; z-index: 1; }
+.tsq.ghost .tid { background: rgba(255, 255, 255, .9); border-radius: 5px; padding: 0 3px; }
+.tsq.ghost .tbar.top { justify-content: flex-end; }
+.tsq.ghost .mk { background: rgba(255, 255, 255, .92); border-radius: 50%; padding: 1px; }
 
 /* menu-save-nav.css */
 /* main menu, host game, new campaign, save panel, bottom bar, navigation sheet (official icons) */
