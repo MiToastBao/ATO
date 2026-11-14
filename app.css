@@ -757,7 +757,11 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .tri-fb { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); z-index: 5; white-space: nowrap; padding: 5px 12px; border-radius: 999px; background: #1E2A33; color: #fff; font-weight: 700; font-size: 1rem; box-shadow: 0 3px 10px rgba(0, 0, 0, .25); pointer-events: none; animation: tri-fb-in .12s ease-out; }
 @keyframes tri-fb-in { from { opacity: 0; transform: translate(-50%, 4px); } to { opacity: 1; transform: translate(-50%, 0); } }
 @media (prefers-reduced-motion: reduce) { .tri-fb { animation: none; } }
-.tri-fb.below { bottom: auto; top: calc(100% + 6px); }
+.tri-fb.below { bottom: auto; top: calc(100% + 6px); animation-name: tri-fb-below; }
+/* 修正清單 #701 (GPT 複查 v1.0.111 O111-01): below the dial it comes in from the dial's side (4 px up) and settles down into its place —
+   coming in from 4 px down went toward the bottom bar: at 568×320 (100%) its box lay ~1 px over the bar for the first ~50 ms. It now never
+   goes past where it settles (placed inside the room), and 2 px stays between it and the dial at the start */
+@keyframes tri-fb-below { from { opacity: 0; transform: translate(-50%, -4px); } to { opacity: 1; transform: translate(-50%, 0); } }
 /* 修正清單 #691 (使用者 2026-11-11 20:28 選乙): no room above or below (a phone held sideways) — beside the dial, at its number, a little smaller */
 .tri-fb.side { bottom: auto; top: 50%; left: calc(100% + 3px); transform: translateY(-50%); padding: 4px 7px; font-size: .8rem; animation-name: tri-fb-side; }
 .tri-fb.side.left { left: auto; right: calc(100% + 4px); }
