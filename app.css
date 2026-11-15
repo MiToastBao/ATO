@@ -777,6 +777,10 @@ textarea.field { resize: vertical; line-height: 1.5; }
 .prev-runs { margin: 4px 0; }
 .prev-run-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 6px 0; border-top: 1px solid var(--line); }
 .prev-mark { display: inline-flex; align-items: center; gap: 4px; }
+/* 修正清單 #717: the earlier playthroughs' notes in 板塊信息 (前周目), each text once */
+.prev-notes { padding: 6px 0; border-top: 1px solid var(--line); }
+.prev-notes .prev-note { margin: 4px 0 0; padding: 6px 8px; background: var(--ground); border: 1px solid var(--line); border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.prev-none { margin: 6px 0; padding-top: 6px; border-top: 1px solid var(--line); }
 .reset-finish .btn.big { width: 100%; margin-top: 8px; }
 .reset-finish .link-btn { width: 100%; margin-top: 12px; font-weight: 600; }
 .run-start .choice { flex-direction: column; align-items: flex-start; text-align: left; }
@@ -1381,6 +1385,13 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .tsq.ghost .tid { background: rgba(255, 255, 255, .9); border-radius: 5px; padding: 0 3px; }
 .tsq.ghost .tbar.top { justify-content: flex-end; }
 .tsq.ghost .mk { background: rgba(255, 255, 255, .92); border-radius: 50%; padding: 1px; }
+/* 修正清單 #717: a reachable tile of the earlier playthroughs — a third, narrow button 「前周目」 (icon over the word) */
+.map-actions.three { grid-template-columns: 1fr 1fr auto; }
+.map-actions .btn.act.prev-act { padding: 4px 10px; gap: 2px; }
+.map-actions .btn.act.prev-act .act-ico { position: static; transform: none; width: 22px; height: 22px; }
+.map-actions .btn.act.prev-act b { font-size: .82rem; white-space: nowrap; }
+@media (max-width: 599px) and (min-height: 501px) { .map-actions.three .btn.act small { display: none; } .map-actions.three { gap: 6px; padding-left: 12px; padding-right: 12px; } } /* (a phone upright: the three keep one line each) */
+
 
 /* menu-save-nav.css */
 /* main menu, host game, new campaign, save panel, bottom bar, navigation sheet (official icons) */
