@@ -1367,8 +1367,8 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
    names) right on the bottom bar, its right end clear of the helm. */
 @media (max-height: 500px) {
   .map-panel > .tabs { position: static; }
-  .map-actions { bottom: var(--bbh, 0px); padding: 3px 84px 3px 12px; gap: 6px; }
-  .map-actions .btn.act { flex-direction: row; gap: 6px; min-height: 38px; padding-top: 2px; padding-bottom: 2px; } /* 探索 and the tiles it goes to on one line */
+  .map-actions { bottom: var(--bbh, 0px); padding: 2px 84px 2px 12px; gap: 6px; } /* (#728: 2 px above and below, was 3 — the 40 px buttons take no room from the map: LP:t_r8700, 568×320 文字 130% 大, keeps a 136 px tile whole) */
+  .map-actions .btn.act { flex-direction: row; gap: 6px; min-height: 40px; padding-top: 2px; padding-bottom: 2px; } /* (#728, GPT S114-01: 40 px, was 38) */ /* 探索 and the tiles it goes to on one line */
   .map-actions .btn.act small { display: none; }
   .map-actions .goto { margin-top: 0; }
   /* a tile brought into view (選取、前往板塊) is centred in the part left between the title bar and the row, not under them */
