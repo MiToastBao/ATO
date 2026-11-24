@@ -858,14 +858,27 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .hero-gear-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); align-items: start; gap: 12px; margin: 8px 0; }
 .hero-gear-card { min-width: 0; display: grid; gap: 8px; padding: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); }
 .hero-gear-body { min-width: 0; overflow-wrap: anywhere; }
-.hero-gear-art { display: grid; gap: 8px; }
+.hero-gear-art { display: grid; min-width: 0; gap: 8px; }
 .hero-gear-picture { display: grid; place-items: center; position: relative; width: 100%; min-height: var(--tap); padding: 0; overflow: hidden;
   aspect-ratio: var(--face-ratio); border: 1px solid var(--line); border-radius: 6px; background: var(--ground); color: var(--ink); cursor: pointer; }
 .hero-gear-picture img { position: absolute; display: block; width: 100%; height: 100%; object-fit: contain; }
 .hero-gear-picture.turned { aspect-ratio: var(--face-inverse); }
 .hero-gear-picture.turned img { top: 50%; left: 50%; width: calc(100% * var(--face-ratio)); height: calc(100% * var(--face-inverse));
   transform: translate(-50%, -50%) rotate(90deg); }
-.battle-card-discarded { flex-basis: 100%; color: var(--ink-2); font-size: .88rem; }
+
+/* #763: compact cards keep the controls in a separate, wrapping column. */
+.hero-gear-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
+.hero-combat-tabs.tabs { position: static; flex: 1 1 180px; max-width: 320px; padding: 0; z-index: auto; }
+.hero-gear-size { display: flex; gap: 6px; }
+.hero-gear-size .btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.hero-gear-compact .hero-gear-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr)); }
+.hero-gear-compact .hero-gear-card { grid-template-columns: 76px minmax(0, 1fr); align-items: start; }
+.hero-gear-compact .hero-gear-art { grid-row: 1; grid-column: 1; }
+.hero-gear-compact .hero-gear-body { grid-row: 1; grid-column: 2; }
+.hero-gear-compact .battle-card-mark { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+/* #767: Keep equipment rows within the main pane while reading side by side. */
+.app.side-open .hero-combat .hero-gear-grid { grid-template-columns: minmax(0, 1fr); }
+.app.side-open .hero-gear-large .hero-gear-card { max-width: 520px; }
 
 /* codex.css */
 /* 修正清單 #232 / #238: 孤本聖典 — a contents page of every title, then one page with 「返回目錄」 */
