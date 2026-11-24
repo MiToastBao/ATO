@@ -849,6 +849,24 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
   min-height: 2.2em; flex: 1 1 auto; display: flex; align-items: center; justify-content: center; }
 .skillbar.en { align-items: stretch; } /* every column as tall as the tallest name: the numbers stay on one line */
 
+/* Hero equipment and temporary battle card markers (#754) */
+.battle-card-tools { display: flex; justify-content: flex-end; margin: 8px 0; }
+.battle-card-tools .btn, .battle-card-mark { min-height: var(--tap); }
+.battle-card-marks { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0; }
+.x-fold > .battle-card-marks { padding: 0 10px 8px; }
+.battle-card-mark.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.hero-gear-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); align-items: start; gap: 12px; margin: 8px 0; }
+.hero-gear-card { min-width: 0; display: grid; gap: 8px; padding: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); }
+.hero-gear-body { min-width: 0; overflow-wrap: anywhere; }
+.hero-gear-art { display: grid; gap: 8px; }
+.hero-gear-picture { display: grid; place-items: center; position: relative; width: 100%; min-height: var(--tap); padding: 0; overflow: hidden;
+  aspect-ratio: var(--face-ratio); border: 1px solid var(--line); border-radius: 6px; background: var(--ground); color: var(--ink); cursor: pointer; }
+.hero-gear-picture img { position: absolute; display: block; width: 100%; height: 100%; object-fit: contain; }
+.hero-gear-picture.turned { aspect-ratio: var(--face-inverse); }
+.hero-gear-picture.turned img { top: 50%; left: 50%; width: calc(100% * var(--face-ratio)); height: calc(100% * var(--face-inverse));
+  transform: translate(-50%, -50%) rotate(90deg); }
+.battle-card-discarded { flex-basis: 100%; color: var(--ink-2); font-size: .88rem; }
+
 /* codex.css */
 /* 修正清單 #232 / #238: 孤本聖典 — a contents page of every title, then one page with 「返回目錄」 */
 .cx-toc-h { font-family: var(--serif); font-size: 1.15rem; margin: 4px 0 10px; }
