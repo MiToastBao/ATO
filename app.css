@@ -895,12 +895,25 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .hero-name-editor { width: 100%; min-width: 0; display: grid; gap: 4px; }
 .hero-official-name { display: block; overflow-wrap: anywhere; }
 .arg-name, .stone-name, .hero-display-name { overflow-wrap: anywhere; }
-.hero-name-reset.btn { justify-self: start; max-width: 100%; white-space: normal; padding-inline: 8px; }
+.hero-name-reset.btn { justify-self: start; max-width: 100%; white-space: nowrap; padding-inline: 8px; }
 .browse-main .hero-name-reset { justify-self: center; }
 .edit-wrap { display: grid; min-width: 0; }
 .edit-wrap > .field { grid-area: 1 / 1; box-sizing: border-box; min-width: 0; line-height: 1.3; white-space: pre-wrap; overflow-wrap: anywhere; }
 .edit-wrap > span { visibility: hidden; pointer-events: none; }
 .edit-wrap > textarea { display: block; min-height: 100%; resize: none; overflow: hidden; }
+
+/* Use the main pane width, including when a wide device is in split view. */
+@container (max-width: 479px) {
+  .hero-info-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; }
+  .hero-info-head .hero-prev { grid-row: 1; grid-column: 1; }
+  .hero-info-head > .photo { grid-row: 1; grid-column: 2; justify-self: center; }
+  .hero-info-head .hero-next { grid-row: 1; grid-column: 3; }
+  .hero-info-head .info-main, .hero-info-head .info-name-row { display: contents; }
+  .hero-info-head .likely { grid-row: 1; grid-column: 2; justify-self: end; }
+  .hero-info-head .hero-name-editor { grid-row: 2; grid-column: 1 / -1; }
+  .hero-info-head .info-main > .link { grid-row: 3; grid-column: 1 / -1; justify-self: start; }
+  .hero-info-head .info-skills { grid-row: 4; grid-column: 1 / -1; }
+}
 
 /* codex.css */
 /* 修正清單 #232 / #238: 孤本聖典 — a contents page of every title, then one page with 「返回目錄」 */
@@ -2250,6 +2263,15 @@ button.lo-title { background: none; border: 0; padding: 8px 4px; text-align: lef
 .gym-pick { display: flex; flex-direction: column; gap: 2px; max-height: 60vh; overflow: auto; }
 .gym-manual { margin-top: 14px; line-height: 1.9; }
 .gym-manual .btn { margin-left: 6px; }
+
+/* Add technology: labels and deck locations wrap within each search result. */
+.tech-add-search { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
+.tech-add-search > .field { flex: 1 1 190px; min-width: 0; }
+.tech-add-search > .check { flex: 0 0 auto; }
+.tech-add-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 224px), 1fr)); gap: 6px; }
+.tech-add-option.btn { display: grid; align-content: start; justify-content: stretch; justify-items: start; gap: 4px; min-width: 0; text-align: left; white-space: normal; overflow-wrap: anywhere; }
+.tech-add-names { display: grid; gap: 2px; }
+.tech-add-meta { font-weight: normal; }
 
 /* trackers.css */
 /* trackers: official icons in timeline, mnestis, diplomacy, adventures, titans, godforms, notes, matrix, fated */
