@@ -31,7 +31,9 @@ html { touch-action: pan-x pan-y; }
 html, body { margin: 0; height: 100%; background: var(--ground); color: var(--ink); font-family: var(--sans); font-size: 16px; -webkit-text-size-adjust: 100%; }
 body { overscroll-behavior-y: none; }
 button { font: inherit; color: inherit; }
-button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible,
+select[data-select-return]:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+[data-focus-host]:focus { outline: none; box-shadow: none; }
 .app { min-height: 100%; /* 修正清單 #538: not 100vh／100dvh — a home-screen app with the status bar outside the page reads them too tall on iOS 26 (WebKit 316008) */ display: flex; flex-direction: column; }
 /* 修正清單 #521: the page lays itself out by its own width (the 並排查閱 pane beside it takes part of the window): the width rules of the
    pages are container queries on `main` — the main screen, and the pane's own box for what is shown in it */
@@ -888,6 +890,17 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .hero-gear-small .hero-gear-art { grid-row: 1; grid-column: 1; margin-top: 0; }
 .hero-gear-small .hero-gear-body { grid-row: 1; grid-column: 2; }
 .hero-gear-card .battle-card-mark { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+
+/* #775: keep the active name and the official subtitle in the same wrapping column. */
+.hero-name-editor { width: 100%; min-width: 0; display: grid; gap: 4px; }
+.hero-official-name { display: block; overflow-wrap: anywhere; }
+.arg-name, .stone-name, .hero-display-name { overflow-wrap: anywhere; }
+.hero-name-reset.btn { justify-self: start; max-width: 100%; white-space: normal; padding-inline: 8px; }
+.browse-main .hero-name-reset { justify-self: center; }
+.edit-wrap { display: grid; min-width: 0; }
+.edit-wrap > .field { grid-area: 1 / 1; box-sizing: border-box; min-width: 0; line-height: 1.3; white-space: pre-wrap; overflow-wrap: anywhere; }
+.edit-wrap > span { visibility: hidden; pointer-events: none; }
+.edit-wrap > textarea { display: block; min-height: 100%; resize: none; overflow: hidden; }
 
 /* codex.css */
 /* 修正清單 #232 / #238: 孤本聖典 — a contents page of every title, then one page with 「返回目錄」 */
