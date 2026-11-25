@@ -856,29 +856,38 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .x-fold > .battle-card-marks { padding: 0 10px 8px; }
 .battle-card-mark.on { background: var(--accent); border-color: var(--accent); color: #fff; }
 .hero-gear-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); align-items: start; gap: 12px; margin: 8px 0; }
-.hero-gear-card { min-width: 0; display: grid; gap: 8px; padding: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); }
+.hero-gear-card { min-width: 0; padding: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); }
 .hero-gear-body { min-width: 0; overflow-wrap: anywhere; }
-.hero-gear-art { display: grid; min-width: 0; gap: 8px; }
-.hero-gear-picture { display: grid; place-items: center; position: relative; width: 100%; min-height: var(--tap); padding: 0; overflow: hidden;
-  aspect-ratio: var(--face-ratio); border: 1px solid var(--line); border-radius: 6px; background: var(--ground); color: var(--ink); cursor: pointer; }
-.hero-gear-picture img { position: absolute; display: block; width: 100%; height: 100%; object-fit: contain; }
-.hero-gear-picture.turned { aspect-ratio: var(--face-inverse); }
-.hero-gear-picture.turned img { top: 50%; left: 50%; width: calc(100% * var(--face-ratio)); height: calc(100% * var(--face-inverse));
-  transform: translate(-50%, -50%) rotate(90deg); }
+.hero-gear-art { margin-top: 8px; min-width: 0; }
+.hero-gear-picture + .hero-gear-picture { margin-top: 8px; }
+.hero-gear-picture { position: relative; width: 100%; min-height: var(--tap);
+  border: 1px solid var(--line); border-radius: 6px; background: var(--ground); color: var(--ink); }
+.hero-gear-open { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; border-radius: inherit; background: transparent; cursor: pointer; }
+.hero-gear-open:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.hero-gear-face { display: block; position: relative; border-radius: inherit; }
+.hero-gear-face img { display: block; width: 100%; height: auto; border-radius: inherit; }
 
-/* #763: compact cards keep the controls in a separate, wrapping column. */
-.hero-gear-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
-.hero-combat-tabs.tabs { position: static; flex: 1 1 180px; max-width: 320px; padding: 0; z-index: auto; }
-.hero-gear-size { display: flex; gap: 6px; }
+/* #768: keep the frame in the normal flow even though the turned image is positioned. */
+.hero-gear-face.turned { padding-top: var(--turned-size); }
+.hero-gear-face.turned img { position: absolute; top: 50%; left: 50%; width: var(--turned-size);
+  transform: translate(-50%, -50%) rotate(90deg); }
+.hero-gear-wait { display: grid; place-items: center; position: absolute; inset: 0; }
+.hero-gear-face:not(.turned):has(.hero-gear-wait) { padding-top: var(--portrait-height); }
+
+.hero-combat-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.hero-combat-tabs.tabs { position: static; flex: 1 0 min(100%, 168px); min-width: 0; padding: 0; z-index: auto; }
+.hero-combat-tabs .tab { flex: 1 1 0; min-width: 0; padding-inline: 6px; text-align: center; white-space: normal; overflow-wrap: anywhere; }
+.hero-combat-toolbar .battle-card-tools { margin: 0 0 0 auto; }
+.hero-gear-size { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .hero-gear-size .btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
-.hero-gear-compact .hero-gear-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr)); }
-.hero-gear-compact .hero-gear-card { grid-template-columns: 76px minmax(0, 1fr); align-items: start; }
-.hero-gear-compact .hero-gear-art { grid-row: 1; grid-column: 1; }
-.hero-gear-compact .hero-gear-body { grid-row: 1; grid-column: 2; }
-.hero-gear-compact .battle-card-mark { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
-/* #767: Keep equipment rows within the main pane while reading side by side. */
-.app.side-open .hero-combat .hero-gear-grid { grid-template-columns: minmax(0, 1fr); }
-.app.side-open .hero-gear-large .hero-gear-card { max-width: 520px; }
+
+.hero-gear-medium .hero-gear-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 282px), 1fr)); }
+.hero-gear-medium .hero-gear-card { max-width: 324px; }
+.hero-gear-small .hero-gear-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr)); }
+.hero-gear-small .hero-gear-card { display: grid; gap: 8px; grid-template-columns: 76px minmax(0, 1fr); align-items: start; }
+.hero-gear-small .hero-gear-art { grid-row: 1; grid-column: 1; margin-top: 0; }
+.hero-gear-small .hero-gear-body { grid-row: 1; grid-column: 2; }
+.hero-gear-card .battle-card-mark { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
 
 /* codex.css */
 /* 修正清單 #232 / #238: 孤本聖典 — a contents page of every title, then one page with 「返回目錄」 */
