@@ -876,6 +876,14 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .hero-gear-wait { display: grid; place-items: center; position: absolute; inset: 0; }
 .hero-gear-face:not(.turned):has(.hero-gear-wait) { padding-top: var(--portrait-height); }
 
+/* #798: the shortcut lives inside the existing sticky tab row, clear of the card content and the bottom bar. */
+.hero-detail-tabs { position: sticky; top: var(--tbh, 58px); z-index: 19; display: flex; align-items: center; gap: 6px;
+  background: var(--ground); border-bottom: 1px solid var(--line); }
+.hero-detail-tabs > .tabs { position: static; z-index: auto; flex: 1; min-width: 0; border-bottom: 0; }
+.hero-detail-tabs:has(.hero-combat-switch) > .tabs { padding-inline: 2px; }
+.hero-detail-tabs:has(.hero-combat-switch) .tab { flex: 1 1 0; min-width: 0; padding-inline: 2px; white-space: normal; overflow-wrap: anywhere; }
+.hero-combat-switch.btn { flex: none; margin: 2px 4px 2px 0; min-height: max(40px, var(--tap)); padding: 4px 10px;
+  border-radius: 999px; font-size: .85rem; font-weight: 700; white-space: nowrap; }
 .hero-combat-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
 .hero-combat-tabs.tabs { position: static; flex: 1 0 min(100%, 168px); min-width: 0; padding: 0; z-index: auto; }
 .hero-combat-tabs .tab { flex: 1 1 0; min-width: 0; padding-inline: 6px; text-align: center; white-space: normal; overflow-wrap: anywhere; }
