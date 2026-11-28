@@ -884,6 +884,7 @@ span.stat-ico, span.res-ico { display: inline-block; flex: none; }
 .hero-detail-tabs:has(.hero-combat-switch) .tab { flex: 1 1 0; min-width: 0; padding-inline: 2px; white-space: normal; overflow-wrap: anywhere; }
 .hero-combat-switch.btn { flex: none; margin: 2px 4px 2px 0; min-height: max(40px, var(--tap)); padding: 4px 10px;
   border-radius: 999px; font-size: .85rem; font-weight: 700; white-space: nowrap; }
+.hero-combat { overflow-anchor: none; }
 .hero-combat-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
 .hero-combat-tabs.tabs { position: static; flex: 1 0 min(100%, 168px); min-width: 0; padding: 0; z-index: auto; }
 .hero-combat-tabs .tab { flex: 1 1 0; min-width: 0; padding-inline: 6px; text-align: center; white-space: normal; overflow-wrap: anywhere; }
